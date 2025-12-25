@@ -4,31 +4,31 @@ import Button from "@/components/ui/Button";
 
 const HeroSection = () => {
   return (
-    <section className="relative py-20 md:py-5 overflow-hidden">
+    <section className="relative py-20 md:py-5 overflow-hidden bg-gradient-to-br from-gray-50 via-white to-primary-50">
       {/* Modern Minimal Background Effects */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         {/* Gradient Mesh */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-blue-500/5" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-dark-100/20" />
         
         {/* Animated Orbs - Subtle and Slow */}
         <div 
-          className="absolute top-[20%] left-[15%] w-[500px] h-[500px] bg-primary/8 rounded-full blur-[100px] animate-float-slow"
+          className="absolute top-[20%] left-[15%] w-[500px] h-[500px] bg-primary/15 rounded-full blur-[120px] animate-float-slow"
           style={{ animationDuration: "20s" }}
         />
         <div 
-          className="absolute bottom-[15%] right-[10%] w-[400px] h-[400px] bg-blue-500/6 rounded-full blur-[100px] animate-float-slow"
+          className="absolute bottom-[15%] right-[10%] w-[400px] h-[400px] bg-dark-200/20 rounded-full blur-[120px] animate-float-slow"
           style={{ animationDuration: "25s", animationDelay: "5s" }}
         />
         <div 
-          className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-purple-500/4 rounded-full blur-[80px] animate-float-slow"
+          className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-primary-100/30 rounded-full blur-[100px] animate-float-slow"
           style={{ animationDuration: "30s", animationDelay: "10s" }}
         />
         
         {/* Subtle Grid Pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(31,72,98,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(31,72,98,0.03)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]" />
         
         {/* Radial Gradient Overlay */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,transparent_0%,rgba(0,0,0,0.3)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,transparent_0%,rgba(255,255,255,0.5)_100%)]" />
       </div>
 
       <div className="container-custom">
@@ -36,7 +36,7 @@ const HeroSection = () => {
           {/* Left Content */}
           <div className="text-center lg:text-left">
             {/* Badge */}
-            <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-primary/20 to-blue-500/20 border border-primary/30 text-primary text-xs font-semibold mb-6 animate-fade-in backdrop-blur-sm">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-primary/10 to-dark-100/10 border border-primary/30 text-primary text-xs font-semibold mb-6 animate-fade-in backdrop-blur-sm">
               <Award className="w-3.5 h-3.5" />
               <span>🎉 Join 50,000+ Successful Learners</span>
             </div>
@@ -49,7 +49,7 @@ const HeroSection = () => {
 
             {/* Subheading */}
             <p
-              className="text-lg md:text-xl text-zinc-400 mb-8 max-w-xl mx-auto lg:mx-0 animate-slide-up leading-relaxed"
+              className="text-lg md:text-xl text-gray-600 mb-8 max-w-xl mx-auto lg:mx-0 animate-slide-up leading-relaxed"
               style={{ animationDelay: "0.1s" }}
             >
               Master in-demand skills through interactive lessons, real-world projects, and personalized mentorship. Start learning today and land your dream job.
@@ -60,15 +60,15 @@ const HeroSection = () => {
               className="flex flex-wrap gap-4 mb-8 justify-center lg:justify-start animate-slide-up"
               style={{ animationDelay: "0.2s" }}
             >
-              <div className="flex items-center gap-2 text-sm text-zinc-300">
+              <div className="flex items-center gap-2 text-sm text-gray-700">
                 <CheckCircle className="w-5 h-5 text-primary" />
                 <span>Lifetime Access</span>
               </div>
-              <div className="flex items-center gap-2 text-sm text-zinc-300">
+              <div className="flex items-center gap-2 text-sm text-gray-700">
                 <CheckCircle className="w-5 h-5 text-primary" />
                 <span>Certificate of Completion</span>
               </div>
-              <div className="flex items-center gap-2 text-sm text-zinc-300">
+              <div className="flex items-center gap-2 text-sm text-gray-700">
                 <CheckCircle className="w-5 h-5 text-primary" />
                 <span>Expert Support</span>
               </div>
@@ -100,11 +100,11 @@ const HeroSection = () => {
             >
               <div className="flex items-center">
                 <div className="flex -space-x-3">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-yellow-400 border-2 border-dark flex items-center justify-center text-xs font-bold">A</div>
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 border-2 border-dark flex items-center justify-center text-xs font-bold">B</div>
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-500 to-teal-500 border-2 border-dark flex items-center justify-center text-xs font-bold">C</div>
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-500 to-red-500 border-2 border-dark flex items-center justify-center text-xs font-bold">D</div>
-                  <div className="w-10 h-10 rounded-full bg-zinc-800 border-2 border-dark flex items-center justify-center text-xs font-semibold text-primary">+5k</div>
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-yellow-400 border-2 border-white flex items-center justify-center text-xs font-bold text-white shadow-md">A</div>
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-dark-600 to-dark-800 border-2 border-white flex items-center justify-center text-xs font-bold text-white shadow-md">B</div>
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-500 to-teal-500 border-2 border-white flex items-center justify-center text-xs font-bold text-white shadow-md">C</div>
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-500 to-primary border-2 border-white flex items-center justify-center text-xs font-bold text-white shadow-md">D</div>
+                  <div className="w-10 h-10 rounded-full bg-gray-100 border-2 border-white flex items-center justify-center text-xs font-semibold text-primary shadow-md">+5k</div>
                 </div>
               </div>
               <div className="text-left">
@@ -112,9 +112,9 @@ const HeroSection = () => {
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="w-4 h-4 text-primary fill-current" />
                   ))}
-                  <span className="text-sm font-bold text-white ml-1">4.9</span>
+                  <span className="text-sm font-bold text-dark-900 ml-1">4.9</span>
                 </div>
-                <p className="text-xs text-zinc-400">from 12,000+ reviews</p>
+                <p className="text-xs text-gray-500">from 12,000+ reviews</p>
               </div>
             </div>
           </div>
@@ -122,7 +122,7 @@ const HeroSection = () => {
           {/* Right Content - Stats & Preview */}
           <div className="relative animate-slide-up" style={{ animationDelay: "0.2s" }}>
             {/* Image Preview Card */}
-            <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-zinc-900 to-zinc-800 border border-zinc-700 shadow-2xl group hover:border-primary/50 transition-all duration-300">
+            <div className="relative rounded-2xl overflow-hidden bg-white border border-gray-200 shadow-xl group hover:border-primary/50 transition-all duration-300">
               <div className="aspect-video relative overflow-hidden">
                 {/* App Mockup Image */}
                 <img 
@@ -133,41 +133,41 @@ const HeroSection = () => {
               </div>
               
               {/* Course Info Overlay */}
-              <div className="p-4 bg-dark-50/80 backdrop-blur-sm border-t border-zinc-700">
+              <div className="p-4 bg-gray-50/90 backdrop-blur-sm border-t border-gray-200">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                   </div>
                   <div className="flex items-center gap-2">
                     <BookOpen className="w-4 h-4 text-primary" />
-                    <span className="text-sm font-medium">150+ Courses</span>
+                    <span className="text-sm font-medium text-gray-900">150+ Courses</span>
                     <Clock className="w-4 h-4 text-primary" />
-                    <span className="text-sm font-medium">500+ Hours</span>
+                    <span className="text-sm font-medium text-gray-900">500+ Hours</span>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Floating Stats Cards */}
-            <div className="absolute -bottom-4 -left-4 bg-dark-50 border border-zinc-700 rounded-lg p-2 shadow-lg backdrop-blur-sm animate-float hidden md:block">
+            <div className="absolute -bottom-4 -left-4 bg-white border border-gray-200 rounded-lg p-2 shadow-lg backdrop-blur-sm animate-float hidden md:block">
               <div className="flex items-center gap-1.5">
-                <div className="w-7 h-7 rounded-md bg-blue-200 flex items-center justify-center">
-                  <TrendingUp className="w-4 h-4 text-dark" />
+                <div className="w-7 h-7 rounded-md bg-primary flex items-center justify-center">
+                  <TrendingUp className="w-4 h-4 text-white" />
                 </div>
                 <div>
-                  <p className="text-base font-bold text-white">95%</p>
-                  <p className="text-[10px] text-zinc-400">Success Rate</p>
+                  <p className="text-base font-bold text-dark-900">95%</p>
+                  <p className="text-[10px] text-gray-500">Success Rate</p>
                 </div>
               </div>
             </div>
 
-            <div className="absolute -top-4 -right-4 bg-dark-50 border border-zinc-700 rounded-lg p-2 shadow-lg backdrop-blur-sm animate-float hidden md:block" style={{ animationDelay: "0.5s" }}>
+            <div className="absolute -top-4 -right-4 bg-white border border-gray-200 rounded-lg p-2 shadow-lg backdrop-blur-sm animate-float hidden md:block" style={{ animationDelay: "0.5s" }}>
               <div className="flex items-center gap-1.5">
-                <div className="w-7 h-7 rounded-md bg-blue-200 flex items-center justify-center">
-                  <Users className="w-4 h-4 text-dark" />
+                <div className="w-7 h-7 rounded-md bg-dark-900 flex items-center justify-center">
+                  <Users className="w-4 h-4 text-white" />
                 </div>
                 <div>
-                  <p className="text-base font-bold text-white">50k+</p>
-                  <p className="text-[10px] text-zinc-400">Active Students</p>
+                  <p className="text-base font-bold text-dark-900">50k+</p>
+                  <p className="text-[10px] text-gray-500">Active Students</p>
                 </div>
               </div>
             </div>

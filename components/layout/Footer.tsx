@@ -43,20 +43,20 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-dark-50 border-t border-zinc-800">
+    <footer className="bg-gray-50 border-t border-gray-200">
       <div className="container-custom py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
           {/* Brand & Description */}
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center font-bold text-dark text-xl">
+              <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center font-bold text-white text-xl shadow-md">
                 L
               </div>
-              <span className="text-xl font-bold text-white">
-                LMS <span className="text-blue-500">Academy</span>
+              <span className="text-xl font-bold text-dark-900">
+                LMS <span className="text-primary">Academy</span>
               </span>
             </Link>
-            <p className="text-zinc-400 mb-6 max-w-md">
+            <p className="text-gray-600 mb-6 max-w-md">
               Master modern web development with expert-led courses. Learn React, Next.js, TypeScript, and more to build production-ready applications.
             </p>
             
@@ -90,13 +90,13 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Quick Links</h3>
+            <h3 className="text-dark-900 font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-zinc-400 hover:text-primary transition-colors"
+                    className="text-gray-600 hover:text-primary transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -107,13 +107,13 @@ const Footer = () => {
 
           {/* Legal */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Legal</h3>
+            <h3 className="text-dark-900 font-semibold mb-4">Legal</h3>
             <ul className="space-y-3">
               {legalLinks.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-zinc-400 hover:text-primary transition-colors"
+                    className="text-gray-600 hover:text-primary transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -124,8 +124,8 @@ const Footer = () => {
         </div>
 
         {/* Bottom Section */}
-        <div className="mt-12 pt-8 border-t border-zinc-800 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-zinc-500 text-sm">
+        <div className="mt-12 pt-8 border-t border-gray-200 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-gray-500 text-sm">
             © {new Date().getFullYear()} LMS Academy. All rights reserved.
           </p>
           
@@ -139,7 +139,7 @@ const Footer = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-zinc-400 hover:text-primary transition-colors"
+                  className="text-gray-600 hover:text-primary transition-colors"
                   aria-label={social.name}
                 >
                   <Icon className="w-5 h-5" />

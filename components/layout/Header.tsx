@@ -17,15 +17,15 @@ const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-dark/80 backdrop-blur-lg border-b border-zinc-800 transition-colors">
+    <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-lg border-b border-gray-200 transition-colors shadow-sm">
       <nav className="container-custom">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center font-bold text-white text-xl group-hover:scale-105 transition-transform">
+            <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center font-bold text-white text-xl group-hover:scale-105 transition-transform shadow-md">
               L
             </div>
-            <span className="text-xl font-bold text-white hidden sm:block">
+            <span className="text-xl font-bold text-dark-900 hidden sm:block">
               LMS <span className="text-primary">Academy</span>
             </span>
           </Link>
@@ -36,7 +36,7 @@ const Header = () => {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-zinc-300 hover:text-white transition-colors font-medium"
+                className="text-gray-700 hover:text-primary transition-colors font-medium"
               >
                 {item.name}
               </Link>
@@ -53,7 +53,7 @@ const Header = () => {
           {/* Mobile Menu Button */}
           <button
             type="button"
-            className="md:hidden p-2 text-zinc-300 hover:text-white"
+            className="md:hidden p-2 text-gray-700 hover:text-primary"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -77,7 +77,7 @@ const Header = () => {
               <Link
                 key={item.name}
                 href={item.href}
-                className="block py-2 text-zinc-300 hover:text-white transition-colors font-medium"
+                className="block py-2 text-gray-700 hover:text-primary transition-colors font-medium"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {item.name}

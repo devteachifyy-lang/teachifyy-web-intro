@@ -71,7 +71,7 @@ export default function ContactPage() {
                       </div>
                       <div>
                         <p className="text-sm text-zinc-400 mb-1">{info.title}</p>
-                        <p className="text-white font-medium">{info.value}</p>
+                        <p className=" font-medium">{info.value}</p>
                       </div>
                     </div>
                   );
