@@ -19,11 +19,11 @@ export async function generateMetadata({ params }: CoursePageProps): Promise<Met
   const course = getCourseBySlug(slug);
 
   if (!course) {
-    return constructMetadata();
+    return constructMetadata({});
   }
 
   return constructMetadata({
-    title: `${course.title} - EduPro Academy`,
+    title: `${course.title} - Teachifyy`,
     description: course.description,
   });
 }
@@ -168,10 +168,10 @@ export default async function CoursePage({ params }: CoursePageProps) {
       <section className="py-12 md:py-16">
         <div className="container-custom">
           <div className="max-w-4xl">
-            {/* What You'll Learn */}
+            {/* What You will Learn */}
             <div className="mb-12">
               <h2 className="text-2xl md:text-3xl font-bold mb-6">
-                What You'll <span className="text-primary">Learn</span>
+                What You will <span className="text-primary">Learn</span>
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {course.whatYouLearn.map((item, index) => (

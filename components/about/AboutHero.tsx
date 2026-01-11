@@ -54,7 +54,7 @@ const AboutHero = () => {
             >
               <span className="block text-dark-900">A diploma for teachers</span>
               <span className="block text-dark-900 mt-2">
-                who don't want to{" "}
+                who do not want to{" "}
                 <span className="relative inline-block">
                   <span className="gradient-text relative z-10">get stuck</span>
                   {/* Animated underline emphasis */}

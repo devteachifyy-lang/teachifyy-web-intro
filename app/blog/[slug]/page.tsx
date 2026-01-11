@@ -18,11 +18,11 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   const article = getArticleBySlug(slug);
 
   if (!article) {
-    return constructMetadata();
+    return constructMetadata({});
   }
 
   return constructMetadata({
-    title: `${article.title} - EduPro Academy Blog`,
+    title: `${article.title} - Teachifyy Blog`,
     description: article.excerpt,
   });
 }

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, Star, Users, PlayCircle, BookOpen, Award, TrendingUp, Clock, CheckCircle } from "lucide-react";
 import Button from "@/components/ui/Button";
+import Image from "next/image";
 
 const HeroSection = () => {
   return (
@@ -125,9 +126,9 @@ const HeroSection = () => {
             <div className="relative rounded-2xl overflow-hidden bg-white border border-gray-200 shadow-xl group hover:border-primary/50 transition-all duration-300">
               <div className="aspect-video relative overflow-hidden">
                 {/* App Mockup Image */}
-                <img 
+                <Image 
                   src="/assets/appMockup.png" 
-                  alt="LMS Platform Preview" 
+                  alt="Teachifyy Platform Preview" 
                   className="w-full h-full object-cover"
                 />
               </div>

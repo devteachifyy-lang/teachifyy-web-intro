@@ -1,14 +1,14 @@
 import type { Metadata } from 'next';
 
 export const siteConfig = {
-    name: 'LMS Academy',
+    name: 'Teachifyy',
     description: 'Master modern web development with expert-led courses. Learn React, Next.js, TypeScript, and more.',
-    url: 'https://lms-academy.com',
+    url: '',
     ogImage: '/og-image.jpg',
     links: {
-        twitter: 'https://twitter.com/lmsacademy',
-        linkedin: 'https://linkedin.com/company/lmsacademy',
-        youtube: 'https://youtube.com/@lmsacademy',
+        twitter: '',
+        linkedin: '',
+        youtube: '',
     },
 };
 
@@ -38,7 +38,7 @@ export function constructMetadata({
             title,
             description,
             images: [image],
-            creator: '@lmsacademy',
+            creator: '@Teachifyy',
         },
         ...props,
     };

@@ -32,14 +32,14 @@ const WhyTeachifyy = () => {
                 letterSpacing: "-0.01em"
               }}
             >
-              <span className="text-dark-900">The problem isn't </span>
+              <span className="text-dark-900">The problem does not </span>
               <span className="relative inline-block">
                 <span className="text-primary relative z-10">effort</span>
                 <span className="absolute bottom-0 left-0 w-full h-3 bg-primary/10 -rotate-1" />
               </span>
               <span className="text-dark-900">.</span>
               <br />
-              <span className="text-dark-900">It's </span>
+              <span className="text-dark-900">It does not </span>
               <span className="relative inline-block">
                 <span className="gradient-text relative z-10">direction</span>
                 <span 
@@ -83,7 +83,7 @@ const WhyTeachifyy = () => {
 
               <div className="space-y-5 text-gray-700 text-lg leading-relaxed ml-0 md:ml-16">
                 {[
-                  { icon: Building2, text: "India's preschool sector is large, fragmented, and unregulated." },
+                  { icon: Building2, text: "India`s preschool sector is large, fragmented, and unregulated." },
                   { icon: Target, text: "Schools struggle to hire classroom-ready teachers." },
                   { icon: Target, text: "Teachers struggle to find a recognised, practical pathway they can trust." }
                 ].map((item, index) => {

@@ -32,7 +32,7 @@ export default function ContactPage() {
 
   const socialLinks = [
     { icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
-    { icon: Twitter, href: 'https://twitter.com', label: 'Twitter' },
+    // { icon: Twitter, href: 'https://twitter.com', label: 'Twitter' },
   ];
 
   return (
@@ -129,14 +129,14 @@ export default function ContactPage() {
             </div>
 
             {/* Contact Form */}
-            <div className="lg:col-span-2">
+            {/* <div className="lg:col-span-2">
               <div className="card p-8">
                 <h2 className="text-2xl font-bold mb-6">
                   Send us a <span className="text-primary">Message</span>
                 </h2>
                 <ContactForm />
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>

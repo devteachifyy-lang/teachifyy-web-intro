@@ -50,7 +50,7 @@ const TestimonialsSection = () => {
 
               {/* Content */}
               <p className="text-zinc-300 mb-6 relative z-10 leading-relaxed">
-                "{testimonial.content}"
+                `{testimonial.content}`
               </p>
 
               {/* Author */}

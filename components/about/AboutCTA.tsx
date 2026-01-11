@@ -41,7 +41,7 @@ const AboutCTA = () => {
             <div className="relative card p-10 md:p-16 bg-white/90 backdrop-blur-sm shadow-2xl hover:shadow-3xl transition-all duration-500">
               {/* Main message with emphasis */}
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight text-dark-900 tracking-tight" style={{ letterSpacing: "-0.01em" }}>
-                This diploma doesn't change<br />
+                This diploma does not change<br />
                 <span className="relative inline-block">
                   <span className="text-dark-900">your first salary</span>
                   <span className="absolute bottom-0 left-0 w-full h-3 bg-gray-200 -rotate-1 -z-10" />

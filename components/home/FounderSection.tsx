@@ -28,15 +28,15 @@ const FounderSection = () => {
             </h2>
             
             <p className="text-zinc-400 mb-4 leading-relaxed">
-              Hi! I'm <span className="text-white font-semibold">John Doe</span>, a passionate full-stack developer with over 10 years of experience building scalable web applications for startups and Fortune 500 companies.
+              Hi! I am <span className="text-white font-semibold">John Doe</span>, a passionate full-stack developer with over 10 years of experience building scalable web applications for startups and Fortune 500 companies.
             </p>
             
             <p className="text-zinc-400 mb-4 leading-relaxed">
-              I've helped thousands of students transition into successful tech careers through my comprehensive, project-based courses. My teaching philosophy focuses on practical, real-world skills that you can apply immediately.
+              I have helped thousands of students transition into successful tech careers through my comprehensive, project-based courses. My teaching philosophy focuses on practical, real-world skills that you can apply immediately.
             </p>
 
             <p className="text-zinc-400 mb-6 leading-relaxed">
-              When I'm not coding or teaching, you'll find me contributing to open-source projects, speaking at tech conferences, or exploring the latest web technologies.
+              When I am not coding or teaching, you will find me contributing to open-source projects, speaking at tech conferences, or exploring the latest web technologies.
             </p>
 
             {/* Stats */}

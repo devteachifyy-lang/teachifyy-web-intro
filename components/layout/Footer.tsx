@@ -3,8 +3,6 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { Linkedin, Youtube, Twitter,  Send } from 'lucide-react';
-import Button from '@/components/ui/Button';
-
 const Footer = () => {
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -25,8 +23,8 @@ const Footer = () => {
 
   const socialLinks = [
     { name: 'LinkedIn', href: 'https://linkedin.com', icon: Linkedin },
-    { name: 'YouTube', href: 'https://youtube.com', icon: Youtube },
-    { name: 'Twitter', href: 'https://twitter.com', icon: Twitter },
+    // { name: 'YouTube', href: 'https://youtube.com', icon: Youtube },
+    // { name: 'Twitter', href: 'https://twitter.com', icon: Twitter },
   ];
 
   const quickLinks = [
@@ -38,8 +36,8 @@ const Footer = () => {
 
   const legalLinks = [
     { name: 'Privacy Policy', href: '/privacy' },
-    { name: 'Terms of Service', href: '/terms' },
-    { name: 'Refund Policy', href: '/refund' },
+    // { name: 'Terms of Service', href: '/terms' },
+    // { name: 'Refund Policy', href: '/refund' },
   ];
 
   return (
@@ -50,10 +48,10 @@ const Footer = () => {
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center gap-2 mb-4">
               <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center font-bold text-white text-xl shadow-md">
-                L
+                
               </div>
               <span className="text-xl font-bold text-dark-900">
-                LMS <span className="text-primary">Academy</span>
+                 <span className="text-primary">Teachifyy </span>
               </span>
             </Link>
             <p className="text-gray-600 mb-6 max-w-md">
@@ -126,7 +124,7 @@ const Footer = () => {
         {/* Bottom Section */}
         <div className="mt-12 pt-8 border-t border-gray-200 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-gray-500 text-sm">
-            © {new Date().getFullYear()} LMS Academy. All rights reserved.
+            © {new Date().getFullYear()} Teachifyy. All rights reserved.
           </p>
           
           {/* Social Links */}

@@ -71,7 +71,7 @@ const ProfessionalJourney = () => {
                   {/* Content Card */}
                   <div className="flex-1 card card-hover p-6 md:p-8 bg-white shadow-md">
                     <div className="flex items-start gap-4">
-                      <div className={`w-12 h-12 bg-gradient-to-br from-${stage.color} to-${stage.color === 'primary' ? 'primary-600' : 'dark-900'} rounded-xl flex items-center justify-center flex-shrink-0`}>
+                      <div className={`w-12 h-12 bg-gradient-to-br from-${stage.color} to-${stage.color === `primary` ? `primary-600` : `dark-900`} rounded-xl flex items-center justify-center flex-shrink-0`}>
                         <Icon className="w-6 h-6 text-white" />
                       </div>
                       <div className="flex-1">
@@ -79,7 +79,7 @@ const ProfessionalJourney = () => {
                           {stage.title}
                         </h3>
                         <p className="text-lg md:text-xl text-gray-700 leading-relaxed italic">
-                          "{stage.description}"
+                          `{stage.description}`
                         </p>
                       </div>
                     </div>

@@ -20,7 +20,7 @@ const ProblemStatement = () => {
     },
     {
       icon: FileQuestion,
-      title: "Certificates exist — clear growth paths don't",
+      title: "Certificates exist — clear growth paths dont",
       gradient: "from-primary/10 to-dark-100/10",
       iconColor: "text-primary",
       delay: "0.3s"
@@ -60,7 +60,7 @@ const ProblemStatement = () => {
           >
             <span className="text-dark-900">Why most teacher diplomas</span>
             <br />
-            <span className="text-dark-900">don't{" "}</span>
+            <span className="text-dark-900">dont{" "}</span>
             <span className="relative inline-block">
               <span className="gradient-text relative z-10">change careers</span>
               {/* Subtle underline */}
@@ -120,11 +120,11 @@ const ProblemStatement = () => {
                   </p>
 
                   {/* Decorative dot indicator */}
-                  <div className="mt-6 flex items-center justify-center gap-1">
+                  {/* <div className="mt-6 flex items-center justify-center gap-1">
                     <div className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${problem.gradient.replace('/10', '/40').replace('/5', '/30')} group-hover:scale-150 transition-transform duration-300`} />
                     <div className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${problem.gradient.replace('/10', '/30').replace('/5', '/20')} group-hover:scale-125 transition-transform duration-300 delay-75`} />
                     <div className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${problem.gradient.replace('/10', '/20').replace('/5', '/10')} group-hover:scale-110 transition-transform duration-300 delay-100`} />
-                  </div>
+                  </div> */}
                 </div>
               </div>
             );

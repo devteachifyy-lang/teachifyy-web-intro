@@ -137,7 +137,7 @@ const TargetAudience = () => {
           <div className="relative inline-block px-8 py-4">
             <div className="absolute -inset-4 bg-gradient-to-r from-transparent via-primary/5 to-transparent rounded-2xl blur-xl" />
             <p className="relative text-xl md:text-2xl font-semibold text-dark-900">
-              Your background doesn't limit you. <span className="gradient-text">Your next step defines you.</span>
+              Your background does not limit you. <span className="gradient-text">Your next step defines you.</span>
             </p>
           </div>
         </div>
