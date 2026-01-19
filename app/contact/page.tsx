@@ -13,25 +13,25 @@ export default function ContactPage() {
     {
       icon: Mail,
       title: 'Email',
-      value: 'hello@.com',
-      href: 'mailto:hello@edupro-academy.com',
+      value: 'Support@teachifyy.com',
+      href: 'mailto:Support@teachifyy.com',
     },
     {
       icon: Phone,
       title: 'Phone',
-      value: '+0 (000) 000-0000',
-      href: 'tel:+0000000000',
+      value: '+917877447884 | +916291507718',
+      href: 'tel:+917877447884 | +916291507718',
     },
     {
       icon: MapPin,
       title: 'Location',
-      value: 'India',
+      value: 'Jaipur | Delhi | Kolkata',
       href: null,
     },
   ];
 
   const socialLinks = [
-    { icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/company/teachifyy/', label: 'LinkedIn' },
     // { icon: Twitter, href: 'https://twitter.com', label: 'Twitter' },
   ];
 
@@ -54,14 +54,14 @@ export default function ContactPage() {
       {/* Contact Section */}
       <section className="py-12 md:py-16">
         <div className="container-custom">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 justify-center">
             {/* Contact Info */}
-            <div className="lg:col-span-1">
-              <h2 className="text-2xl font-bold mb-6">
+            <div className="lg:col-span-3 flex flex-col items-center">
+              <h2 className="text-2xl font-bold mb-6 text-center">
                 Contact <span className="text-primary">Information</span>
               </h2>
               
-              <div className="space-y-6 mb-8">
+              <div className="space-y-6 mb-8 w-full max-w-md">
                 {contactInfo.map((info) => {
                   const Icon = info.icon;
                   const content = (
@@ -87,9 +87,9 @@ export default function ContactPage() {
               </div>
 
               {/* Social Links */}
-              <div>
+              <div className="text-center">
                 <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
-                <div className="flex items-center gap-3">
+                <div className="flex items-center justify-center gap-3">
                   {socialLinks.map((social) => {
                     const Icon = social.icon;
                     return (
@@ -107,25 +107,6 @@ export default function ContactPage() {
                   })}
                 </div>
               </div>
-
-              {/* Office Hours */}
-              {/* <div className="mt-8 p-6 rounded-xl bg-dark-50 border border-zinc-800">
-                <h3 className="text-lg font-semibold mb-3">Office Hours</h3>
-                <div className="space-y-2 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-zinc-400">Monday - Friday</span>
-                    <span className="text-white">9:00 AM - 6:00 PM</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-zinc-400">Saturday</span>
-                    <span className="text-white">10:00 AM - 4:00 PM</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-zinc-400">Sunday</span>
-                    <span className="text-white">Closed</span>
-                  </div>
-                </div>
-              </div> */}
             </div>
 
             {/* Contact Form */}
@@ -141,42 +122,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* FAQ Section */}
-      {/* <section className="py-12 md:py-16 bg-dark-50">
-        <div className="container-custom">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">
-              Frequently Asked <span className="text-primary">Questions</span>
-            </h2>
-            
-            <div className="space-y-4">
-              {[
-                {
-                  q: 'How long do I have access to the courses?',
-                  a: 'You have lifetime access to all courses you purchase. Learn at your own pace!',
-                },
-                {
-                  q: 'Do you offer refunds?',
-                  a: 'Yes, we offer a 30-day money-back guarantee if you\'re not satisfied with the course.',
-                },
-                {
-                  q: 'Are there any prerequisites?',
-                  a: 'Prerequisites vary by course. Check the course details page for specific requirements.',
-                },
-                {
-                  q: 'Do you provide certificates?',
-                  a: 'Yes, you\'ll receive a certificate of completion for each course you finish.',
-                },
-              ].map((faq, index) => (
-                <div key={index} className="card p-6">
-                  <h3 className="text-lg font-semibold text-white mb-2">{faq.q}</h3>
-                  <p className="text-zinc-400">{faq.a}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section> */}
+     
     </div>
   );
 }

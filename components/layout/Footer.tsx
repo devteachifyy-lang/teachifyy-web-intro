@@ -22,7 +22,7 @@ const Footer = () => {
   };
 
   const socialLinks = [
-    { name: 'LinkedIn', href: 'https://linkedin.com', icon: Linkedin },
+    { name: 'LinkedIn', href: 'https://www.linkedin.com/company/teachifyy/', icon: Linkedin },
     // { name: 'YouTube', href: 'https://youtube.com', icon: Youtube },
     // { name: 'Twitter', href: 'https://twitter.com', icon: Twitter },
   ];
@@ -35,7 +35,8 @@ const Footer = () => {
   ];
 
   const legalLinks = [
-    { name: 'Privacy Policy', href: '/privacy' },
+    // { name: 'Privacy Policy', href: '/privacy' },
+    { name: 'Terms and Conditions', href: '/terms-and-conditions' },
     // { name: 'Terms of Service', href: '/terms' },
     // { name: 'Refund Policy', href: '/refund' },
   ];
@@ -47,16 +48,19 @@ const Footer = () => {
           {/* Brand & Description */}
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center font-bold text-white text-xl shadow-md">
-                
-              </div>
-              <span className="text-xl font-bold text-dark-900">
-                 <span className="text-primary">Teachifyy </span>
-              </span>
-            </Link>
-            <p className="text-gray-600 mb-6 max-w-md">
-              Master modern web development with expert-led courses. Learn React, Next.js, TypeScript, and more to build production-ready applications.
-            </p>
+              <div className="relative w-40 h-18 overflow-hidden rounded-lg">
+                <img
+                  src="/assets/logo.jpeg"
+                  alt="Teachifyy Logo"
+                  className="object-cover w-full h-full"
+                />
+              </div>             
+            </Link>            
+            <div className="space-y-2 text-gray-600">
+              <p><span className="font-semibold">Address:</span> Jaipur | Delhi | Kolkata</p>
+              <p><span className="font-semibold">Email:</span> <a href="mailto:Support@teachifyy.com" className="hover:text-primary transition-colors">Support@teachifyy.com</a></p>
+              <p><span className="font-semibold">Contact:</span> +917877447884 | +916291507718</p>
+            </div>
             
             {/* Newsletter */}
             {/* <div>
