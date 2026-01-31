@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import Button from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -21,14 +22,17 @@ const Header = () => {
       <nav className="container-custom">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 group">
-            <div className="relative w-26 h-10 overflow-hidden rounded-lg">
-              <img
+          <Link href="/" className="flex items-center">
+            <div className="relative w-[120px] h-[40px] sm:w-[140px] sm:h-[48px]">
+              <Image
                 src="/assets/logo.jpeg"
                 alt="Teachifyy Logo"
-                className="object-cover w-full h-full"
+                fill
+                priority
+                sizes="(max-width: 768px) 120px, 140px"
+                className="object-contain"
               />
-            </div>           
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
@@ -70,7 +74,7 @@ const Header = () => {
         <div
           className={cn(
             "md:hidden overflow-hidden transition-all duration-300 ease-in-out",
-            mobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+            mobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0",
           )}
         >
           <div className="py-4 space-y-4">
