@@ -11,20 +11,20 @@ const AboutHero = () => {
       <div className="absolute inset-0 -z-10 overflow-hidden">
         {/* Gradient Mesh */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-dark-100/20" />
-        
+
         {/* Animated Orbs - Pushed back visually */}
-        <div 
+        <div
           className="absolute top-[20%] left-[10%] w-[600px] h-[600px] bg-primary/10 rounded-full blur-[140px] animate-float-slow opacity-60"
           style={{ animationDuration: "25s" }}
         />
-        <div 
+        <div
           className="absolute bottom-[10%] right-[5%] w-[500px] h-[500px] bg-dark-200/15 rounded-full blur-[140px] animate-float-slow opacity-60"
           style={{ animationDuration: "30s", animationDelay: "5s" }}
         />
-        
+
         {/* Subtle Grid Pattern */}
         <div className="absolute inset-0 bg-[linear-gradient(rgba(31,72,98,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(31,72,98,0.02)_1px,transparent_1px)] bg-[size:80px_80px] [mask-image:radial-gradient(ellipse_80%_60%_at_50%_50%,black,transparent)]" />
-        
+
         {/* Foreground Vignette */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,transparent_0%,rgba(255,255,255,0.3)_100%)]" />
       </div>
@@ -45,9 +45,9 @@ const AboutHero = () => {
           <div className="mb-10 space-y-3">
             <h4
               className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight tracking-tight animate-slide-up"
-              style={{ 
-                animationDelay: "0.2s", 
-                opacity: 0, 
+              style={{
+                animationDelay: "0.2s",
+                opacity: 0,
                 animationFillMode: "forwards",
                 letterSpacing: "-0.02em"
               }}
@@ -58,7 +58,7 @@ const AboutHero = () => {
                 <span className="relative inline-block">
                   <span className="gradient-text relative z-10">get stuck</span>
                   {/* Animated underline emphasis */}
-                  <span 
+                  <span
                     className="absolute bottom-0 left-0 w-full h-3 bg-primary/10 -rotate-1 -z-10"
                     style={{
                       animation: "slideIn 0.6s ease-out 0.8s forwards",
@@ -71,7 +71,7 @@ const AboutHero = () => {
           </div>
 
           {/* Emotional Pause - Reality Check */}
-          <div 
+          <div
             className="mb-6 animate-slide-up"
             style={{ animationDelay: "0.4s", opacity: 0, animationFillMode: "forwards" }}
           >
@@ -86,7 +86,7 @@ const AboutHero = () => {
           </div>
 
           {/* Hope Statement - Visual Breathing Space */}
-          <div 
+          <div
             className="mb-12 animate-slide-up"
             style={{ animationDelay: "0.6s", opacity: 0, animationFillMode: "forwards" }}
           >
@@ -102,16 +102,16 @@ const AboutHero = () => {
           </div>
 
           {/* Enhanced CTAs with Psychology */}
-          <div 
+          <div
             className="flex flex-col sm:flex-row items-start sm:items-center gap-6 mb-2 animate-slide-up"
             style={{ animationDelay: "0.8s", opacity: 0, animationFillMode: "forwards" }}
           >
             {/* Primary CTA with context */}
             <div className="flex flex-col gap-2 group">
               <Link href="/courses">
-                <Button 
-                  variant="primary" 
-                  size="lg" 
+                <Button
+                  variant="primary"
+                  size="lg"
                   className="shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 hover:-translate-y-0.5"
                 >
                   <span className="relative z-10">Explore the Diploma</span>
@@ -125,14 +125,14 @@ const AboutHero = () => {
 
             {/* Secondary CTA - Human touch */}
             <div className="flex flex-col gap-2 group">
-              <Link href="/contact">
-                <Button 
-                  variant="outline" 
-                  size="lg" 
+              <Link href="/assessment">
+                <Button
+                  variant="outline"
+                  size="lg"
                   className="border-2 hover:-translate-y-0.5 transition-all duration-300"
                 >
                   <MessageCircle className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                  <span>Talk to a Counsellor</span>
+                  <span>Take Assessment Test</span>
                 </Button>
               </Link>
               <span className="text-xs text-gray-500 tracking-wide px-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -142,7 +142,7 @@ const AboutHero = () => {
           </div>
 
           {/* Trust & Credibility Layer - Subtle reinforcement */}
-          <div 
+          <div
             className="flex flex-wrap gap-8 items-center justify-center sm:justify-start animate-fade-in"
             style={{ animationDelay: "1s", opacity: 0, animationFillMode: "forwards" }}
           >
@@ -173,7 +173,7 @@ const AboutHero = () => {
         </div>
 
         {/* Floating Career Path Card - Secondary Visual Anchor */}
-        <div 
+        <div
           className="absolute top-8 right-8 hidden xl:block animate-float"
           style={{ animationDelay: "1.2s", opacity: 0, animationFillMode: "forwards" }}
         >
