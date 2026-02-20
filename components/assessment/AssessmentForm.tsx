@@ -1,10 +1,12 @@
 "use client";
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Button from '@/components/ui/Button';
 import { submitAssessment } from '@/lib/api';
 
 export default function AssessmentForm() {
+    const router = useRouter();
     const [formData, setFormData] = useState({
         name: '',
         age: '',
@@ -34,6 +36,8 @@ export default function AssessmentForm() {
             setFormData({
                 name: '', age: '', latestEducation: '', profession: '', designation: '', aspiration: ''
             });
+            // Redirect to the assessment test page
+            router.push('/assessment-test');
         } catch (error) {
             console.error(error);
             setStatus('error');
