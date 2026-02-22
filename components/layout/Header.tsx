@@ -91,7 +91,7 @@ const Header = () => {
                 {item.name}
               </Link>
             ))}
-            <button className="w-[fit-content] bg-[#FF4667] text-white font-[400] text-[24px] pt-[12px] pb-[12px] px-[12px] rounded-[4px]">
+            <button className="w-[fit-content] bg-[#FF4667] text-white font-[400] text-[15px] pt-[12px] pb-[12px] px-[12px] rounded-[4px]">
               Start Here
             </button>
           </div>
