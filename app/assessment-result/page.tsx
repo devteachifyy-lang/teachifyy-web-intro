@@ -1,10 +1,19 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Button from "@/components/ui/Button";
 
 export default function AssessmentResultPage() {
+    const [fullName, setFullName] = useState("");
+
+    useEffect(() => {
+        const storedName = localStorage.getItem("fullName");
+        if (storedName) {
+            setFullName(storedName);
+        }
+    }, []);
+
     return (
         <div className="min-h-screen bg-gray-50/50 py-24 px-4 sm:px-6 lg:px-8">
             <div className="max-w-2xl mx-auto text-center">
@@ -27,7 +36,7 @@ export default function AssessmentResultPage() {
 
                 {/* Title */}
                 <h1 className="text-3xl font-bold tracking-tight text-dark-900 sm:text-4xl mb-4 animate-slide-up">
-                    Assessment Completed!
+                    {fullName ? `Assessment Completed, ${fullName}!` : "Assessment Completed!"}
                 </h1>
 
                 {/* Description */}

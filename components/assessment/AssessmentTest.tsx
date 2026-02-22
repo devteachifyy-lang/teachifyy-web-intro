@@ -43,6 +43,7 @@ export default function AssessmentTest() {
     const [message, setMessage] = useState('');
     const [userLeadId, setUserLeadId] = useState<string | null>(null);
     const [assessmentResult, setAssessmentResult] = useState<AssessmentResult | null>(null);
+    const name = localStorage.getItem('fullName');
 
     useEffect(() => {
         const fetchQuestions = async () => {
@@ -166,7 +167,7 @@ export default function AssessmentTest() {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
                         </svg>
                     </div>
-                    <h2 className="text-2xl font-bold text-gray-900 mb-2">Assessment Results</h2>
+                    <h2 className="text-2xl font-bold text-gray-900 mb-2">Assessment Results for {name} </h2>
                     <p className="text-gray-600 mb-6">You scored <span className="font-bold text-blue-600 text-xl">{assessmentResult.totalScore}</span> out of {assessmentResult.totalQuestions}</p>
                 </div>
 
@@ -176,8 +177,8 @@ export default function AssessmentTest() {
                             <div className="flex justify-between items-start mb-3">
                                 <h3 className="font-semibold text-gray-800 flex-1 pr-4">{feedback.label}</h3>
                                 <span className={`px-3 py-1 text-xs font-bold rounded-full ${feedback.rating === 'Poor' ? 'bg-red-100 text-red-700' :
-                                        feedback.rating === 'Satisfactory' ? 'bg-yellow-100 text-yellow-700' :
-                                            'bg-green-100 text-green-700'
+                                    feedback.rating === 'Satisfactory' ? 'bg-yellow-100 text-yellow-700' :
+                                        'bg-green-100 text-green-700'
                                     }`}>
                                     {feedback.rating}
                                 </span>

@@ -90,6 +90,7 @@ export default function AssessmentForm() {
             if (response?.data?.id) {
                 localStorage.setItem('assessmentId', response.data.id);
             }
+            localStorage.setItem('fullName', formData.fullName);
             setStatus('success');
             setMessage('Your assessment has been submitted successfully!');
             setFormData(EMPTY_FORM);

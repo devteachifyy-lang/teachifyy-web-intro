@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 
 const navigation = [
+  { name: "Home", href: "/" },
   { name: "Course", href: "/courses" },
   { name: "Blogs", href: "/blogs" },
   { name: "About Us", href: "/about" },
