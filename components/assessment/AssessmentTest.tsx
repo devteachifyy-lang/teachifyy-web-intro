@@ -202,6 +202,7 @@ export default function AssessmentTest() {
             scales: {
                 r: {
                     min: 0,
+                    max: 4,
                     ticks: {
                         stepSize: 1,
                     }

@@ -36,9 +36,9 @@ const FIELD_CONFIG: Record<string, {
     email: { label: 'Email Address', type: 'email', required: true },
     phone: { label: 'Phone Number', type: 'tel', required: true },
     age: { label: 'Age', type: 'number', required: true, min: '10', max: '100' },
-    education: { label: 'Latest Education', type: 'text', required: true, placeholder: 'e.g. B.Tech, Master\'s in Computer Science' },
-    profession: { label: 'Current Profession', type: 'text', required: true, placeholder: 'e.g. Software Engineer, Student' },
-    designation: { label: 'Current Designation', type: 'text', required: true, placeholder: 'e.g. SDE-1, Non-applicable' },
+    education: { label: 'Latest Education', type: 'text', required: true, placeholder: 'e.g. B.Ed, M.Ed, BA' },
+    profession: { label: 'Current Profession', type: 'text', required: true, placeholder: 'e.g. Teaching, Student' },
+    designation: { label: 'Current Designation', type: 'text', required: true, placeholder: 'e.g. Teacher, N/A' },
     goal: { label: 'Your aspiration in the next five years (Optional)', type: 'textarea', placeholder: 'Where do you see yourself technically and professionally?', rows: 5 },
 };
 
@@ -215,7 +215,7 @@ export default function AssessmentForm() {
                             {status === 'loading'
                                 ? 'Submitting...'
                                 : isLastStep
-                                    ? 'Submit Assessment'
+                                    ? 'Start Assessment'
                                     : `Continue →`}
                         </Button>
                     </div>

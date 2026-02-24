@@ -1,8 +1,59 @@
+"use client";
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 const HeroSection = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+  const heroSlides = [
+    {
+      title: (
+        <>
+          Your next classroom could <br className="hidden md:block" />
+          be in{" "}
+          <span className="text-[#FF4D67] font-bold">
+            Dubai, Vietnam, or <br className="hidden lg:block" /> beyond
+          </span>
+        </>
+      ),
+      subtitle:
+        "The global mobility network of Teachifyy can take your career there.",
+    },
+    {
+      title: (
+        <>
+          Waking up every day wanting to{" "}
+          <span className="text-[#FF4D67] font-bold">
+            change your current job?
+          </span>
+        </>
+      ),
+      subtitle:
+        "Visualize the role you deserve and plan accordingly, start with the assessment below.",
+    },
+    {
+      title: (
+        <>
+          Get the{" "}
+          <span className="text-[#FF4D67] font-bold">
+            Skills to Secure Interviews
+          </span>{" "}
+          at Top-Tier Schools
+        </>
+      ),
+      subtitle:
+        "Learn what it takes to train and stand out in the hiring process.",
+    },
+  ];
   return (
     <section className="relative w-full overflow-hidden bg-white">
       {/* Background Layer with subtle peach and light blue glows */}
@@ -12,7 +63,7 @@ const HeroSection = () => {
       </div>
 
       <div className="max-w-[1440px] mx-auto w-full relative z-10">
-        <div className="max-w-[1248px] mx-auto px-6 lg:px-12 py-16 md:py-20 lg:py-24 flex items-center min-h-[calc(100vh-80px)]">
+        <div className="max-w-[1248px] mx-auto lg:px-12 py-10 md:py-10 lg:py-12 flex items-center">
           <div className="grid lg:grid-cols-[1fr_0.9fr] gap-12 lg:gap-16 items-center w-full">
             {/* Left Content */}
             <div className="flex flex-col items-start text-left">
@@ -22,18 +73,18 @@ const HeroSection = () => {
               </div>
 
               {/* Heading */}
-              <h1 className="text-[#111827] text-[44px] font-normal leading-none tracking-normal mb-6 font-Inter">
-                Your next classroom could <br className="hidden md:block" />
-                be in{" "}
-                <span className="text-[#FF4D67] font-bold">
-                  Dubai, Vietnam, or <br className="hidden lg:block" /> beyond
-                </span>
-              </h1>
-              {/* Subtext */}
-              <p className="text-[#475569] text-[18px] md:text-[20px] mb-10 font-Inter max-w-[540px]">
-                The global mobility network of Teachifyy can take your career
-                there.
-              </p>
+              <div key={currentSlide} className="fade-slide">
+                <h1 className="text-[#111827] text-[44px] font-normal leading-none tracking-normal mb-6 font-Inter">
+                  {heroSlides[currentSlide].title}
+                </h1>
+
+                <p className="text-[#475569] text-[18px] md:text-[20px] mb-10 font-Inter max-w-[540px]">
+                  {heroSlides[currentSlide].subtitle}
+                </p>
+                <div className="flex gap-2 mt-6">
+                </div>
+              </div>
+
 
               {/* Feature Checklist */}
               <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 lg:gap-8 mb-12">
@@ -86,6 +137,7 @@ const HeroSection = () => {
                   </button>
                 </Link>
               </div>
+
             </div>
 
             {/* Right Content - Image */}

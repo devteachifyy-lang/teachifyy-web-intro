@@ -12,22 +12,22 @@ const testimonials = [
       'No other program showed me the path to go international. Teachifyy did — step by step. Never thought being a teacher in Vietnam was this easy"',
     initials: "SA",
   },
-  {
-    id: 2,
-    name: "Shivam Aggarwal",
-    role: "Primary Educator, UK",
-    content:
-      'No other program showed me the path to go international. Teachifyy did — step by step. Never thought being a teacher in Vietnam was this easy"',
-    initials: "SA",
-  },
-  {
-    id: 3,
-    name: "Shivam Aggarwal",
-    role: "Primary Educator, UK",
-    content:
-      'No other program showed me the path to go international. Teachifyy did — step by step. Never thought being a teacher in Vietnam was this easy"',
-    initials: "SA",
-  },
+  // {
+  //   id: 2,
+  //   name: "Shivam Aggarwal",
+  //   role: "Primary Educator, UK",
+  //   content:
+  //     'No other program showed me the path to go international. Teachifyy did — step by step. Never thought being a teacher in Vietnam was this easy"',
+  //   initials: "SA",
+  // },
+  // {
+  //   id: 3,
+  //   name: "Shivam Aggarwal",
+  //   role: "Primary Educator, UK",
+  //   content:
+  //     'No other program showed me the path to go international. Teachifyy did — step by step. Never thought being a teacher in Vietnam was this easy"',
+  //   initials: "SA",
+  // },
 ];
 
 const TestimonialsSection = () => {
@@ -51,7 +51,8 @@ const TestimonialsSection = () => {
         </p>
 
         {/* Cards Wrapper */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-16 w-full max-w-[1100px] mx-auto px-2">
+        {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-16 w-full max-w-[1100px] mx-auto px-2"> */}
+        <div className="flex flex-col items-center">
           {testimonials.map((test) => (
             <div
               key={test.id}
