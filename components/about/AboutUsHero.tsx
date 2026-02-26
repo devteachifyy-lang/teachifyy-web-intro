@@ -29,7 +29,7 @@ export default function AboutUsHero() {
 
                         {/* Subtext */}
                         <p className="text-lg text-slate-600 mb-8 max-w-md">
-                            For every teacher making progress, this is home. We provide the tools, the community, and the growth you've been waiting for.
+                            For every teacher seeking progress, this is home. We provide the tools, the community, and the growth you've been waiting for.
                         </p>
 
                         {/* CTA Button */}
