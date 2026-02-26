@@ -1,12 +1,9 @@
-import AboutHero from '@/components/about/AboutHero';
-import ProblemStatement from '@/components/about/ProblemStatement';
-import WhyTeachifyy from '@/components/about/WhyTeachifyy';
-import ThreePillars from '@/components/about/ThreePillars';
-import ProfessionalJourney from '@/components/about/ProfessionalJourney';
-import GlobalExposure from '@/components/about/GlobalExposure';
-import TargetAudience from '@/components/about/TargetAudience';
-import FAQ from '@/components/about/FAQ';
-import AboutCTA from '@/components/about/AboutCTA';
+import AboutUsHero from '@/components/about/AboutUsHero';
+import WhoWeAreSection from '@/components/about/WhoWeAreSection';
+import WhyWeExistSection from '@/components/about/WhyWeExistSection';
+import CoreValuesSection from '@/components/about/CoreValuesSection';
+import TeamSection from '@/components/about/TeamSection';
+import AboutBottomCta from '@/components/about/AboutBottomCta';
 
 export const metadata = {
   title: 'About Teachifyy - Teacher Diploma Program',
@@ -16,15 +13,12 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <>
-      <AboutHero />
-      <ProblemStatement />
-      <WhyTeachifyy />
-      <ThreePillars />
-      <ProfessionalJourney />
-      <GlobalExposure />
-      <TargetAudience />
-      <FAQ />
-      <AboutCTA />
+      <AboutUsHero />
+      <WhoWeAreSection />
+      <WhyWeExistSection />
+      <CoreValuesSection />
+      <TeamSection />
+      <AboutBottomCta />
     </>
   );
 }
