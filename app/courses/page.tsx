@@ -2,6 +2,9 @@ import { Metadata } from "next";
 import CourseCard from "@/components/courses/CourseCard";
 import { courses } from "@/data/courses";
 import { constructMetadata } from "@/lib/metadata";
+import CourseHero from "@/components/courses/CourseHero";
+import UserJourney from "@/components/courses/UserJourney";
+import UpcomingMasterclasses from "@/components/courses/UpcomingMasterclasses";
 
 export const metadata: Metadata = constructMetadata({
   title: "Courses",
@@ -11,27 +14,26 @@ export const metadata: Metadata = constructMetadata({
 
 export default function CoursesPage() {
   return (
-    <div className="min-h-screen">
-      {/* Header */}
-      <section className="pt-10">
-        <div className="container-custom">
-          <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Explore Our <span className="text-primary">Courses</span>
-            </h1>
-            {/* <p className="text-lg text-zinc-400">
-              Master modern web development with our comprehensive, project-based courses designed for all skill levels.
-            </p> */}
-          </div>
-        </div>
-      </section>
+    <div className="min-h-screen bg-white">
+      <CourseHero />
+      <UserJourney />
+      <UpcomingMasterclasses />
 
       {/* Courses Grid */}
-      <section className="py-12 md:py-16">
+      <section className="py-16 md:py-24">
         <div className="container-custom">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          <div className="mb-10 text-left">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2 tracking-tight">
+              Explore <span className="text-primary">Our Courses</span>
+            </h2>
+            <p className="text-gray-600 font-medium">
+              Comprehensive courses tailored for every career stage.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {courses.map((course) => (
-              <CourseCard key={course.id} course={course} />
+              <CourseCard key={course.id} course={course} className="shadow-sm border border-gray-100" />
             ))}
           </div>
         </div>
