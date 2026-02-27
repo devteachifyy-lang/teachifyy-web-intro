@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { jsPDF } from 'jspdf';
 import { useRouter } from 'next/navigation';
 import Button from '@/components/ui/Button';
 import {
@@ -9,6 +10,7 @@ import {
 } from '@/app/api/assessment';
 import {
     Chart as ChartJS,
+    Chart,
     RadialLinearScale,
     ArcElement,
     Tooltip,
@@ -48,6 +50,10 @@ interface AssessmentResult {
 
 export default function AssessmentTest() {
     const router = useRouter();
+    const resultRef = useRef<HTMLDivElement>(null);
+    // ref to the Chart.js instance so we can grab the canvas for PDF
+    const chartRef = useRef<Chart<'polarArea'>>(null);
+    const [isDownloading, setIsDownloading] = useState(false);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [answers, setAnswers] = useState<Record<string, string>>({});
     const [message, setMessage] = useState('');
@@ -162,6 +168,179 @@ export default function AssessmentTest() {
         );
     };
 
+    const handleDownloadPDF = async () => {
+        if (!assessmentResult) return;
+        setIsDownloading(true);
+        try {
+            // ── 1. Grab chart image from the live Chart.js canvas ──────────────────
+            const chartCanvas = chartRef.current?.canvas;
+            const chartImgData = chartCanvas ? chartCanvas.toDataURL('image/png') : null;
+
+            // ── 2. PDF setup (A4) ──────────────────────────────────────────────────
+            const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+            const pageW = 210;
+            const margin = 14;
+            const contentW = pageW - margin * 2;
+            let y = 18; // current y cursor
+
+            const ratingColor = (rating: string): [number, number, number] => {
+                if (rating === 'Poor') return [220, 38, 38];
+                if (rating === 'Satisfactory') return [202, 138, 4];
+                return [22, 163, 74];
+            };
+            const ratingBg = (rating: string): [number, number, number] => {
+                if (rating === 'Poor') return [254, 226, 226];
+                if (rating === 'Satisfactory') return [254, 249, 195];
+                return [220, 252, 231];
+            };
+
+            // ── 3. Header icon (plain circle + checkmark drawn as lines) ──────────
+            const cx = pageW / 2;
+            pdf.setFillColor(219, 234, 254); // blue-100
+            pdf.circle(cx, y, 7, 'F');
+            // Draw a simple checkmark using lines (no unicode needed)
+            pdf.setDrawColor(37, 99, 235);
+            pdf.setLineWidth(0.8);
+            pdf.line(cx - 3, y, cx - 1, y + 2.5);
+            pdf.line(cx - 1, y + 2.5, cx + 3.5, y - 3);
+            pdf.setLineWidth(0.2);
+            y += 13;
+
+            // ── 4. Title ──────────────────────────────────────────────────────────
+            pdf.setFont('helvetica', 'bold');
+            pdf.setFontSize(16);
+            pdf.setTextColor(17, 24, 39);
+            pdf.text(`Assessment Results for ${name || ''}`, pageW / 2, y, { align: 'center' });
+            y += 9;
+
+            // ── 5. Score line — single consistent font size, left-anchored ────────
+            // All measured at the same size (11pt) to avoid width calculation bugs
+            const scoreFontSize = 11;
+            pdf.setFontSize(scoreFontSize);
+            const prefix = 'You scored ';
+            const score = `${assessmentResult.totalScore}`;
+            const suffix = ` out of ${assessmentResult.totalQuestions}`;
+
+            // Measure all three pieces at the same font size so math is consistent
+            pdf.setFont('helvetica', 'normal');
+            const prefixW = pdf.getTextWidth(prefix);
+            pdf.setFont('helvetica', 'bold');
+            const scoreW = pdf.getTextWidth(score);
+            pdf.setFont('helvetica', 'normal');
+            const suffixW = pdf.getTextWidth(suffix);
+            const totalW = prefixW + scoreW + suffixW;
+
+            // Start x so the whole string is centered
+            const lineStartX = pageW / 2 - totalW / 2;
+
+            pdf.setFont('helvetica', 'normal');
+            pdf.setTextColor(107, 114, 128);
+            pdf.text(prefix, lineStartX, y);
+
+            pdf.setFont('helvetica', 'bold');
+            pdf.setTextColor(37, 99, 235);
+            pdf.text(score, lineStartX + prefixW, y);
+
+            pdf.setFont('helvetica', 'normal');
+            pdf.setTextColor(107, 114, 128);
+            pdf.text(suffix, lineStartX + prefixW + scoreW, y);
+            y += 10;
+
+            // ── 6. Divider ────────────────────────────────────────────────────────
+            pdf.setDrawColor(229, 231, 235);
+            pdf.line(margin, y, pageW - margin, y);
+            y += 8;
+
+            // ── 7. Chart image ────────────────────────────────────────────────────
+            if (chartImgData) {
+                const chartWidth = 160;
+                const chartHeight = 100;
+                const chartX = (pageW - chartWidth) / 2;
+                pdf.addImage(chartImgData, 'PNG', chartX, y, chartWidth, chartHeight);
+                y += chartHeight + 8;
+            }
+
+            pdf.setDrawColor(229, 231, 235);
+            pdf.line(margin, y, pageW - margin, y);
+            y += 8;
+
+            // ── 8. Category feedback cards ────────────────────────────────────────
+            pdf.setFontSize(13);
+            pdf.setFont('helvetica', 'bold');
+            pdf.setTextColor(17, 24, 39);
+            pdf.text('Category Feedback', margin, y);
+            y += 8;
+
+            const entries = Object.entries(assessmentResult.categoryFeedback);
+            for (const [, fb] of entries) {
+                // Measure content at correct font sizes before drawing
+                pdf.setFontSize(10);
+                const labelLines: string[] = pdf.splitTextToSize(fb.label, contentW - 38);
+                pdf.setFontSize(9);
+                const feedbackLines: string[] = pdf.splitTextToSize(fb.feedbackText, contentW - 6);
+
+                const labelBlockH = labelLines.length * 5.5;
+                const feedbackBlockH = feedbackLines.length * 4.8;
+                const cardH = 5 + labelBlockH + 4 + feedbackBlockH + 6;
+
+                // New page if not enough room
+                if (y + cardH > 282) {
+                    pdf.addPage();
+                    y = 16;
+                }
+
+                // Card background + border
+                pdf.setFillColor(249, 250, 251);
+                pdf.setDrawColor(229, 231, 235);
+                pdf.roundedRect(margin, y, contentW, cardH, 3, 3, 'FD');
+
+                // Rating badge (top-right of card) — measure first
+                pdf.setFontSize(8);
+                pdf.setFont('helvetica', 'bold');
+                const badgeText = fb.rating;
+                const badgeW = pdf.getTextWidth(badgeText) + 8;
+                const badgeH = 6;
+                const badgeX = margin + contentW - badgeW - 4;
+                const badgeY = y + 4;
+                pdf.setFillColor(...ratingBg(fb.rating));
+                pdf.roundedRect(badgeX, badgeY, badgeW, badgeH, 1.5, 1.5, 'F');
+                pdf.setTextColor(...ratingColor(fb.rating));
+                pdf.text(badgeText, badgeX + badgeW / 2, badgeY + 4.3, { align: 'center' });
+
+                // Category label
+                pdf.setFontSize(10);
+                pdf.setFont('helvetica', 'bold');
+                pdf.setTextColor(31, 41, 55);
+                pdf.text(labelLines, margin + 4, y + 8);
+
+                // Feedback text
+                const feedbackY = y + 5 + labelBlockH + 5;
+                pdf.setFontSize(9);
+                pdf.setFont('helvetica', 'normal');
+                pdf.setTextColor(107, 114, 128);
+                pdf.text(feedbackLines, margin + 4, feedbackY);
+
+                y += cardH + 5;
+            }
+
+            // ── 9. Footer ─────────────────────────────────────────────────────────
+            if (y + 12 > 282) { pdf.addPage(); y = 16; }
+            y += 6;
+            pdf.setFontSize(8);
+            pdf.setTextColor(156, 163, 175);
+            pdf.setFont('helvetica', 'normal');
+            pdf.text(`Generated on ${new Date().toLocaleDateString()}`, margin, y);
+            pdf.text('Teachifyy Assessment Report', pageW - margin, y, { align: 'right' });
+
+            pdf.save(`${name || 'assessment'}_results.pdf`);
+        } catch (error) {
+            console.error('Error generating PDF:', error);
+            alert('Failed to generate PDF. Please try again.');
+        } finally {
+            setIsDownloading(false);
+        }
+    };
+
     if (isLoadingQuestions) {
         return (
             <div className="bg-white rounded-xl shadow-lg p-12 max-w-3xl mx-auto mt-8 border border-gray-100 flex flex-col items-center justify-center min-h-[400px]">
@@ -214,7 +393,7 @@ export default function AssessmentTest() {
         };
 
         return (
-            <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 max-w-4xl mx-auto mt-8 border border-gray-100">
+            <div ref={resultRef} className="bg-white rounded-xl shadow-lg p-6 md:p-8 max-w-4xl mx-auto mt-8 border border-gray-100">
                 <div className="text-center mb-8">
                     <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                         <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -226,7 +405,7 @@ export default function AssessmentTest() {
                 </div>
 
                 <div className="mb-10 flex justify-center h-[400px]">
-                    <PolarArea data={chartData} options={chartOptions} />
+                    <PolarArea ref={chartRef} data={chartData} options={chartOptions} />
                 </div>
 
                 <div className="grid gap-6 md:grid-cols-2">
@@ -246,7 +425,14 @@ export default function AssessmentTest() {
                     ))}
                 </div>
 
-                <div className="mt-10 text-center">
+                <div className="mt-10 flex flex-col sm:flex-row justify-center items-center gap-4">
+                    <Button
+                        onClick={handleDownloadPDF}
+                        disabled={isDownloading}
+                        className="px-8 py-2.5 bg-green-600 text-white hover:bg-green-700 font-semibold rounded-xl shadow-sm transition-all"
+                    >
+                        {isDownloading ? 'Downloading...' : 'Download PDF'}
+                    </Button>
                     <Button
                         onClick={() => router.push('/')}
                         className="px-8 py-2.5 bg-primary text-white hover:bg-primary/90 font-semibold rounded-xl shadow-sm transition-all"
