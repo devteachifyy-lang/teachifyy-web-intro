@@ -9,7 +9,7 @@ const STEPS = [
     {
         title: 'Personal Info',
         subtitle: 'Tell us about yourself',
-        fields: ['fullName', 'email', 'phone', 'age'],
+        fields: ['fullName', 'email', 'phone', 'age', 'city'],
     },
     {
         title: 'Background',
@@ -36,6 +36,7 @@ const FIELD_CONFIG: Record<string, {
     email: { label: 'Email Address', type: 'email', required: true },
     phone: { label: 'Phone Number', type: 'tel', required: true },
     age: { label: 'Age', type: 'number', required: true, min: '10', max: '100' },
+    city: { label: 'City', type: 'text', required: true, placeholder: 'e.g. Mumbai, Delhi, London' },
     education: { label: 'Latest Education', type: 'text', required: true, placeholder: 'e.g. B.Ed, M.Ed, BA' },
     profession: { label: 'Current Profession', type: 'text', required: true, placeholder: 'e.g. Teaching, Student' },
     designation: { label: 'Current Designation', type: 'text', required: true, placeholder: 'e.g. Teacher, N/A' },
@@ -47,6 +48,7 @@ type FormData = {
     email: string;
     phone: string;
     age: string;
+    city: string;
     education: string;
     profession: string;
     designation: string;
@@ -54,7 +56,7 @@ type FormData = {
 };
 
 const EMPTY_FORM: FormData = {
-    fullName: '', email: '', phone: '', age: '',
+    fullName: '', email: '', phone: '', age: '', city: '',
     education: '', profession: '', designation: '', goal: '',
 };
 
@@ -160,7 +162,7 @@ export default function AssessmentForm() {
                         </div>
                     )}
 
-                    <div className={`grid gap-4 ${currentStep.fields.length === 4 ? 'grid-cols-2' : 'grid-cols-1'}`}>
+                    <div className={`grid gap-4 ${currentStep.fields.length >= 4 ? 'grid-cols-2' : 'grid-cols-1'}`}>
                         {currentStep.fields.map((fieldKey) => {
                             const cfg = FIELD_CONFIG[fieldKey];
                             const inputClass = "block w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm placeholder-gray-400 shadow-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-colors";
