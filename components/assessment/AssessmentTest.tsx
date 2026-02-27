@@ -3,7 +3,10 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Button from '@/components/ui/Button';
-import { submitAssessmentTest, getAssessmentQuestions } from '@/lib/api';
+import {
+    useGetAssessmentQuestionsQuery,
+    useSubmitAssessmentTestMutation,
+} from '@/app/api/assessment';
 import {
     Chart as ChartJS,
     RadialLinearScale,
@@ -45,49 +48,40 @@ interface AssessmentResult {
 
 export default function AssessmentTest() {
     const router = useRouter();
-    const [questions, setQuestions] = useState<Question[]>([]);
-    const [isLoadingQuestions, setIsLoadingQuestions] = useState(true);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [answers, setAnswers] = useState<Record<string, string>>({});
-    const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
     const [message, setMessage] = useState('');
     const [userLeadId, setUserLeadId] = useState<string | null>(null);
     const [assessmentResult, setAssessmentResult] = useState<AssessmentResult | null>(null);
     const [name, setName] = useState<string | null>(null);
 
-    useEffect(() => {
-        const fetchQuestions = async () => {
-            try {
-                const response = await getAssessmentQuestions();
-                // Handle different possible response structures
-                const rawData = response?.data?.questions || response?.data || response?.questions || response || [];
+    // Fetch assessment questions using TanStack Query
+    const { data: questionsData, isLoading: isLoadingQuestions, isError: isQuestionsError } = useGetAssessmentQuestionsQuery();
 
-                if (Array.isArray(rawData) && rawData.length > 0) {
-                    const formattedQuestions = rawData.map((q: any) => ({
-                        id: q.questionNo,
-                        text: q.questionText || q.question || q.text || q.title || '',
-                        options: {
-                            A: q.optionA || q.a || q.option_a || q.options?.A || q.A || '',
-                            B: q.optionB || q.b || q.option_b || q.options?.B || q.B || '',
-                            C: q.optionC || q.c || q.option_c || q.options?.C || q.C || '',
-                            D: q.optionD || q.d || q.option_d || q.options?.D || q.D || ''
-                        }
-                    }));
-                    setQuestions(formattedQuestions);
-                } else {
-                    console.error('Invalid questions data format:', rawData);
-                    setStatus('error');
-                    setMessage('Invalid assessment questions format received from the server.');
+    // Submit assessment test mutation
+    const { mutate: submitTest, isPending: isSubmitting, isSuccess: isSubmitSuccess } = useSubmitAssessmentTestMutation();
+
+    // Parse questions from response
+    const questions: Question[] = React.useMemo(() => {
+        if (!questionsData?.data) return [];
+        const rawData = questionsData.data?.data?.questions || questionsData.data?.questions || questionsData.data?.data || questionsData.data || [];
+
+        if (Array.isArray(rawData) && rawData.length > 0) {
+            return rawData.map((q: any) => ({
+                id: q.questionNo,
+                text: q.questionText || q.question || q.text || q.title || '',
+                options: {
+                    A: q.optionA || q.a || q.option_a || q.options?.A || q.A || '',
+                    B: q.optionB || q.b || q.option_b || q.options?.B || q.B || '',
+                    C: q.optionC || q.c || q.option_c || q.options?.C || q.C || '',
+                    D: q.optionD || q.d || q.option_d || q.options?.D || q.D || ''
                 }
-            } catch (error) {
-                console.error('Failed to fetch questions:', error);
-                setStatus('error');
-                setMessage('Failed to load questions. Please check your internet connection.');
-            } finally {
-                setIsLoadingQuestions(false);
-            }
-        };
+            }));
+        }
+        return [];
+    }, [questionsData]);
 
+    useEffect(() => {
         const id = localStorage.getItem('assessmentId');
         if (id) {
             setUserLeadId(id);
@@ -99,9 +93,13 @@ export default function AssessmentTest() {
         if (storedName) {
             setName(storedName);
         }
-
-        fetchQuestions();
     }, []);
+
+    useEffect(() => {
+        if (isQuestionsError) {
+            setMessage('Failed to load questions. Please check your internet connection.');
+        }
+    }, [isQuestionsError]);
 
     const currentQuestion = questions[currentQuestionIndex];
     const isLastQuestion = currentQuestionIndex === questions.length - 1;
@@ -128,7 +126,7 @@ export default function AssessmentTest() {
         }
     };
 
-    const handleSubmit = async () => {
+    const handleSubmit = () => {
         if (!currentQuestion) return;
         if (!answers[currentQuestion.id]) {
             alert('Please select an option before submitting.');
@@ -136,32 +134,32 @@ export default function AssessmentTest() {
         }
 
         if (!userLeadId) {
-            setStatus('error');
             setMessage('User Lead ID not found. Return to the assessment form and submit it first.');
             return;
         }
 
-        setStatus('loading');
         setMessage('');
 
-        try {
-            const response = await submitAssessmentTest({
+        submitTest(
+            {
                 userLeadId: userLeadId,
-                answers: answers
-            });
-
-            if (response?.data) {
-                setAssessmentResult(response.data);
+                answers: answers,
+            },
+            {
+                onSuccess: (response) => {
+                    if (response?.data?.data) {
+                        setAssessmentResult(response.data.data);
+                    } else if (response?.data) {
+                        setAssessmentResult(response.data);
+                    }
+                    setMessage('Your assessment test has been submitted successfully!');
+                },
+                onError: (error) => {
+                    console.error('Submission error:', error);
+                    setMessage('There was an error submitting your test. Please try again.');
+                },
             }
-
-            setStatus('success');
-            setMessage('Your assessment test has been submitted successfully!');
-            // Removed automatic redirect to allow user to view results
-        } catch (error) {
-            console.error('Submission error:', error);
-            setStatus('error');
-            setMessage('There was an error submitting your test. Please try again.');
-        }
+        );
     };
 
     if (isLoadingQuestions) {
@@ -173,7 +171,7 @@ export default function AssessmentTest() {
         );
     }
 
-    if (status === 'success' && assessmentResult) {
+    if (isSubmitSuccess && assessmentResult) {
         const labels = Object.values(assessmentResult.categoryFeedback).map((f: any) => f.label);
         const data = Object.keys(assessmentResult.categoryFeedback).map((key: string) => assessmentResult.categoryScores[key] || 0);
 
@@ -235,7 +233,7 @@ export default function AssessmentTest() {
                     {Object.entries(assessmentResult.categoryFeedback).map(([key, feedback]) => (
                         <div key={key} className="bg-gray-50 rounded-xl p-5 border border-gray-100 flex flex-col h-full">
                             <div className="flex justify-between items-start mb-3">
-                                <h3 className="font-semibold text-gray-800 flex-1 pr-4">{feedback.label}</h3>
+                                <h4 className="font-semibold text-gray-800 flex-1 pr-4">{feedback.label}</h4>
                                 <span className={`px-3 py-1 text-xs font-bold rounded-full ${feedback.rating === 'Poor' ? 'bg-red-100 text-red-700' :
                                     feedback.rating === 'Satisfactory' ? 'bg-yellow-100 text-yellow-700' :
                                         'bg-green-100 text-green-700'
@@ -285,7 +283,7 @@ export default function AssessmentTest() {
                 ></div>
             </div>
 
-            {status === 'error' && (
+            {message && !isSubmitSuccess && (
                 <div className="mb-6 rounded-md bg-red-50 p-4 border border-red-200">
                     <div className="text-sm font-medium text-red-800">{message}</div>
                 </div>
@@ -319,7 +317,7 @@ export default function AssessmentTest() {
             <div className="flex items-center justify-between pt-6 border-t border-gray-100">
                 <Button
                     onClick={handlePrevious}
-                    disabled={currentQuestionIndex === 0 || status === 'loading'}
+                    disabled={currentQuestionIndex === 0 || isSubmitting}
                     className="px-6 py-2.5 bg-white border-2 border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-gray-300 font-semibold rounded-xl disabled:opacity-50 transition-all shadow-sm"
                 >
                     Previous
@@ -328,10 +326,10 @@ export default function AssessmentTest() {
                 {isLastQuestion ? (
                     <Button
                         onClick={handleSubmit}
-                        disabled={status === 'loading'}
+                        disabled={isSubmitting}
                         className="px-8 py-2.5 bg-primary text-white hover:bg-primary/90 font-semibold rounded-xl shadow-sm disabled:opacity-50 transition-all"
                     >
-                        {status === 'loading' ? 'Submitting...' : 'Submit Assessment'}
+                        {isSubmitting ? 'Submitting...' : 'Submit Assessment'}
                     </Button>
                 ) : (
                     <Button

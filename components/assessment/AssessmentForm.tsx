@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Button from '@/components/ui/Button';
-import { submitAssessment } from '@/lib/api';
+import { useSubmitAssessmentMutation } from '@/app/api/assessment';
 
 const STEPS = [
     {
@@ -62,8 +62,9 @@ export default function AssessmentForm() {
     const router = useRouter();
     const [step, setStep] = useState(0);
     const [formData, setFormData] = useState<FormData>(EMPTY_FORM);
-    const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
     const [message, setMessage] = useState('');
+
+    const { mutate: submitAssessment, isPending, isError, isSuccess } = useSubmitAssessmentMutation();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -82,24 +83,25 @@ export default function AssessmentForm() {
         }
     };
 
-    const handleSubmit = async () => {
-        setStatus('loading');
+    const handleSubmit = () => {
         setMessage('');
-        try {
-            const response = await submitAssessment(formData);
-            if (response?.data?.id) {
-                localStorage.setItem('assessmentId', response.data.id);
-            }
-            localStorage.setItem('fullName', formData.fullName);
-            setStatus('success');
-            setMessage('Your assessment has been submitted successfully!');
-            setFormData(EMPTY_FORM);
-            router.push('/assessment-test');
-        } catch (error: any) {
-            console.error(error);
-            setStatus('error');
-            setMessage(error?.response?.data?.message || 'There was an error submitting your assessment. Please try again.');
-        }
+        submitAssessment(formData, {
+            onSuccess: (response) => {
+                if (response?.data?.data?.id) {
+                    localStorage.setItem('assessmentId', response.data.data.id);
+                } else if (response?.data?.id) {
+                    localStorage.setItem('assessmentId', response.data.id);
+                }
+                localStorage.setItem('fullName', formData.fullName);
+                setMessage('Your assessment has been submitted successfully!');
+                setFormData(EMPTY_FORM);
+                router.push('/assessment-test');
+            },
+            onError: (error: any) => {
+                console.error(error);
+                setMessage(error?.response?.data?.message || 'There was an error submitting your assessment. Please try again.');
+            },
+        });
     };
 
     return (
@@ -152,7 +154,7 @@ export default function AssessmentForm() {
 
                 {/* Form Body */}
                 <form onSubmit={handleNext} className="px-6 py-6">
-                    {status === 'error' && (
+                    {isError && (
                         <div className="mb-4 rounded-lg bg-red-50 px-4 py-3 border border-red-200">
                             <p className="text-sm font-medium text-red-800">{message}</p>
                         </div>
@@ -209,10 +211,10 @@ export default function AssessmentForm() {
                         )}
                         <Button
                             type="submit"
-                            disabled={status === 'loading'}
+                            disabled={isPending}
                             className="flex-1 flex justify-center items-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-semibold text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 transition-all"
                         >
-                            {status === 'loading'
+                            {isPending
                                 ? 'Submitting...'
                                 : isLastStep
                                     ? 'Start Assessment'
