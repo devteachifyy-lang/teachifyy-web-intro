@@ -4,7 +4,7 @@ const teamMembers = [
     {
         name: 'Shivam Aggarwal',
         role: 'Founder',
-        image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format&fit=crop',
+        image: '',
         featured: true, // Specifically matched in the design as larger
     },
     {

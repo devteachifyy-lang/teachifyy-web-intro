@@ -1,245 +1,348 @@
-import { Metadata } from 'next';
-import { notFound } from 'next/navigation';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Clock, Users, Star, CheckCircle, ArrowLeft } from 'lucide-react';
-import Button from '@/components/ui/Button';
-import Badge from '@/components/ui/Badge';
-import SocialShare from '@/components/ui/SocialShare';
-import CourseCard from '@/components/courses/CourseCard';
-import { getCourseById, courses } from '@/data/courses';
-import { constructMetadata } from '@/lib/metadata';
+"use client";
 
-interface CoursePageProps {
-  params: Promise<{ id: string }>;
-}
+import React, { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { CheckCircle, ChevronDown, ChevronUp, Share2 } from "lucide-react";
+import CtaSection from "@/components/home/CtaSection";
 
-export async function generateMetadata({ params }: CoursePageProps): Promise<Metadata> {
-  const { id } = await params;
-  const course = getCourseById(id);
+// Static course data (will be replaced with API later)
+const courseData = {
+  success: true,
+  data: {
+    courseId: "ECE-001",
+    slug: "diploma-in-early-childhood-education",
 
-  if (!course) {
-    return constructMetadata({});
-  }
+    course: {
+      title: "Diploma in Early Childhood Education",
+      description:
+        "Master the art of early education with our UK-standard curriculum.Designed for educators seeking global academic credibility and practical classroom excellence.",
+      image: "/assets/courseThumb.jpeg",
+    },
 
-  return constructMetadata({
-    title: `${course.title} - Teachifyy`,
-    description: course.description,
-  });
-}
+    aboutCourse: {
+      description: [
+        "Prior to its development, extensive market research was conducted with 1000+ teachers and preschool owners.",
+        "The program integrates inclusive pedagogy, play-based experiential learning, neuroplasticity principles, and AI-enabled technology.",
+        "Designed for global markets and contemporary preschool models.",
+      ],
+    },
 
-export async function generateStaticParams() {
-  return courses.map((course) => ({
-    id: course.id,
-  }));
-}
+    whatYouWillLearn: {
+      title: "What You'll Learn",
+      points: [
+        "Apply global teaching methods in modern classrooms.",
+        "Understand child development and emotional well-being.",
+        "Create inclusive and engaging learning environments.",
+        "Communicate effectively with parents and lead responsibly.",
+        "Plan and manage a successful preschool.",
+      ],
+    },
 
-export default async function CoursePage({ params }: CoursePageProps) {
-  const { id } = await params;
-  const course = getCourseById(id);
+    curriculum: {
+      totalLevels: 3,
+      totalWeeks: 24,
+      levels: [
+        {
+          levelId: "L1",
+          title: "Level 1 – Foundations",
+          topics: [
+            "Child development, psychology & health fundamentals",
+            "Play-based, inclusive & trauma-informed teaching",
+            "Curriculum design, literacy & numeracy basics",
+            "Classroom management & safeguarding practices",
+            "Child rights & parent partnership skills",
+            "Ethics & professional teaching foundations",
+          ],
+        },
+        {
+          levelId: "L2",
+          title: "Level 2 – Global & Advanced Practice",
+          topics: [
+            "Advanced pedagogy models",
+            "Global preschool frameworks",
+            "Assessment & observation techniques",
+            "Technology in early education",
+          ],
+        },
+        {
+          levelId: "L3",
+          title: "Level 3 – Leadership & Entrepreneurship",
+          topics: [
+            "Preschool business setup",
+            "Financial planning & budgeting",
+            "Marketing & admissions strategy",
+            "Team leadership & operations",
+          ],
+        },
+      ],
+    },
 
-  if (!course) {
-    notFound();
-  }
+    pricing: {
+      currency: "INR",
+      originalPrice: 99900,
+    },
 
-  const relatedCourses = courses
-    .filter((c) => c.id !== course.id && c.category === course.category)
-    .slice(0, 3);
+    mentor: {
+      name: "Ms. Sohini Mondal",
+      designation: "Early Childhood Education Specialist",
+      image: "/assets/courseThumb.jpeg",
+      bio: "With over 7 years of teaching and tutoring experience, she has worked with children from varied communities and across ICSE schools.",
+    },
+  },
+};
+
+export default function CoursePage() {
+  const { data } = courseData;
+  const [openLevel, setOpenLevel] = useState<string | null>(
+    data.curriculum.levels[0]?.levelId || null
+  );
+
+  const toggleLevel = (levelId: string) => {
+    setOpenLevel((prev) => (prev === levelId ? null : levelId));
+  };
+
+  const formattedPrice = new Intl.NumberFormat("en-IN").format(
+    data.pricing.originalPrice
+  );
 
   return (
-    <div className="min-h-screen">
-      {/* Breadcrumb */}
-      <div className=" border-b border-zinc-800">
-        <div className="container-custom py-4">
-          <Link
-            href="/courses"
-            className="inline-flex items-center gap-2 text-zinc-400 hover:text-primary transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Back to Courses
-          </Link>
+    <div className="min-h-screen bg-white">
+      {/* ======================== HERO SECTION ======================== */}
+      <section className="relative overflow-hidden">
+        {/* Subtle decorative blob */}
+        {/* <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] translate-x-1/2 -translate-y-1/2 pointer-events-none" /> */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <div className="absolute bottom-[-10%] left-[-5%] w-[600px] h-[600px] bg-[#FFF0EA] rounded-full blur-[100px] opacity-100" />
+          <div className="absolute bottom-[-10%] right-[-5%] w-[500px] h-[500px] bg-[#EBF3FC] rounded-full blur-[100px] opacity-100" />
         </div>
-      </div>
+        <div className="container-custom relative z-10 py-12 md:py-16 lg:py-20">
+          <div className="flex flex-col-reverse lg:flex-row items-center gap-8 lg:gap-12">
+            {/* Left – Text */}
+            <div className="flex-1 text-center lg:text-left">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-bold text-[#000000] leading-tight tracking-tight mb-5">
+                {data.course.title}
+              </h1>
+              <p className="text-[#000000]/80 text-base md:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0 mb-8">
+                {data.course.description}
+              </p>
 
-      {/* Course Hero */}
+              {/* <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
+                <Link href="/contact">
+                  <button className="bg-primary hover:bg-primary-600 text-white font-semibold text-[15px] px-8 py-3 rounded-lg transition-colors shadow-lg shadow-primary/25 w-full sm:w-auto">
+                    Enroll Now
+                  </button>
+                </Link>
+                <button className="border-2 border-white/30 text-white font-medium text-[15px] px-8 py-3 rounded-lg hover:bg-white/10 transition-colors w-full sm:w-auto">
+                  Explore Curriculum
+                </button>
+              </div> */}
+            </div>
+
+            {/* Right – Image */}
+            <div className="flex-shrink-0 w-full max-w-[260px] sm:max-w-[300px] md:max-w-[340px] lg:max-w-[380px]">
+              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl shadow-black/40">
+                <Image
+                  src={data.course.image}
+                  alt={data.course.title}
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ======================== ABOUT + PRICING SECTION ======================== */}
       <section className="section-padding">
         <div className="container-custom">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            {/* Left Column - Course Info */}
-            <div className="lg:col-span-2">
-              <div className="flex items-center gap-3 mb-4 ">
-                <Badge variant="default">{course.category}</Badge>
-                <Badge variant="default">{course.level}</Badge>
-                {course.badge && <Badge variant="default">{course.badge}</Badge>}
-              </div>
-
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-                {course.title}
-              </h1>
-
-              <p className="text-lg text-zinc-400 mb-6">{course.description}</p>
-
-              {/* Meta Info */}
-              <div className="flex flex-wrap items-center gap-6 mb-6 text-sm">
-                <div className="flex items-center gap-2">
-                  <Star className="w-5 h-5 text-primary fill-current" />
-                  <span className="font-semibold text-white">{course.rating}</span>
-                  <span className="text-zinc-400">rating</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Users className="w-5 h-5 text-primary" />
-                  <span className="text-zinc-300">{course.students.toLocaleString()} students</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Clock className="w-5 h-5 text-primary" />
-                  <span className="text-zinc-300">{course.duration}</span>
+          <div className="flex flex-col lg:flex-row gap-10 lg:gap-14">
+            {/* Left Column – About + What You'll Learn */}
+            <div className="flex-1 min-w-0">
+              {/* About This Course */}
+              <div className="mb-10">
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-5">
+                  About This Course
+                </h2>
+                <div className="space-y-4">
+                  {data.aboutCourse.description.map((para, i) => (
+                    <p
+                      key={i}
+                      className="text-gray-600 text-[15px] leading-relaxed"
+                    >
+                      {para}
+                    </p>
+                  ))}
                 </div>
               </div>
 
-              {/* Instructor */}
-              <div className="flex items-center gap-4 p-4 bg-dark-50 rounded-xl border border-zinc-800">
-                <div className="w-16 h-16 rounded-full bg-zinc-700 overflow-hidden relative">
-                  <Image
-                    src={course.instructor.avatar}
-                    alt={course.instructor.name}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div>
-                  <p className="text-sm text-zinc-400">Instructor</p>
-                  <p className="font-semibold text-white text-lg">{course.instructor.name}</p>
-                  <p className="text-sm text-zinc-400">{course.instructor.bio}</p>
-                </div>
+              {/* What You'll Learn */}
+              <div>
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-5">
+                  {data.whatYouWillLearn.title}
+                </h2>
+                <ul className="space-y-3">
+                  {data.whatYouWillLearn.points.map((point, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                      <span className="text-gray-700 text-[15px] leading-relaxed">
+                        {point}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
 
-            {/* Right Column - Enrollment Card */}
-            <div>
-              <div className="card p-6 sticky top-24">
-                <div className="relative aspect-video rounded-lg overflow-hidden mb-6 bg-zinc-800">
-                  <Image
-                    src={course.thumbnail}
-                    alt={course.title}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-
-                <div className="mb-6">
-                  <div className="flex items-baseline gap-3 mb-2">
-                    <span className="text-4xl font-bold text-primary">${course.price}</span>
-                    {course.originalPrice && (
-                      <span className="text-lg text-zinc-500 line-through">
-                        ${course.originalPrice}
+            {/* Right Column – Pricing Card */}
+            <div className="w-full lg:w-[340px] xl:w-[370px] shrink-0">
+              <div className="lg:sticky lg:top-24">
+                <div className="bg-white border border-gray-200 rounded-2xl shadow-xl shadow-gray-200/60 p-6">
+                  {/* Price */}
+                  <div className="mb-5">
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-3xl md:text-4xl font-bold text-gray-900">
+                        ₹{formattedPrice}
                       </span>
-                    )}
+                      {/* If there's a strikethrough price, show it */}
+                      {/* <span className="text-lg text-gray-400 line-through">₹1,29,900</span> */}
+                    </div>
                   </div>
-                  {course.originalPrice && (
-                    <p className="text-sm text-green-500 font-medium">
-                      Save ${(course.originalPrice - course.price).toFixed(2)}
-                    </p>
+
+                  <hr className="border-gray-100 mb-5" />
+
+                  {/* Feature List */}
+                  <ul className="space-y-3 mb-6">
+                    {[
+                      "24 Weeks Program",
+                      "3 Levels Covered",
+                      "Live Mentorship",
+                      "Certificate of Completion",
+                      "Job Assistance",
+                    ].map((feature, i) => (
+                      <li key={i} className="flex items-center gap-3">
+                        <CheckCircle className="w-[18px] h-[18px] text-primary shrink-0" />
+                        <span className="text-gray-700 text-sm">
+                          {feature}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* Enroll CTA */}
+                  <Link href="/contact" className="block mb-3">
+                    <button className="w-full bg-primary hover:bg-primary-600 text-white font-semibold text-[15px] py-3.5 rounded-lg transition-colors shadow-md shadow-primary/20">
+                      Enroll Now
+                    </button>
+                  </Link>
+
+                  {/* Secondary Links */}
+                  <div className="text-center space-y-2 pt-2">
+                    <Link
+                      href="/contact"
+                      className="block text-sm text-gray-500 hover:text-primary transition-colors"
+                    >
+                      Talk to a Counsellor
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ======================== CURRICULUM SECTION ======================== */}
+      <section className="section-padding bg-gray-50/60">
+        <div className="container-custom">
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+            Course Curriculum
+          </h2>
+
+          <div className="space-y-3 max-w-3xl">
+            {data.curriculum.levels.map((level) => {
+              const isOpen = openLevel === level.levelId;
+              return (
+                <div
+                  key={level.levelId}
+                  className="bg-white border border-gray-200 rounded-xl overflow-hidden transition-shadow hover:shadow-md"
+                >
+                  {/* Accordion Header */}
+                  <button
+                    onClick={() => toggleLevel(level.levelId)}
+                    className="w-full flex items-center justify-between px-5 py-4 text-left focus:outline-none group"
+                  >
+                    <span className="font-semibold text-gray-900 text-[15px] md:text-base group-hover:text-primary transition-colors">
+                      {level.title}
+                    </span>
+                    {isOpen ? (
+                      <ChevronUp className="w-5 h-5 text-gray-400 shrink-0" />
+                    ) : (
+                      <ChevronDown className="w-5 h-5 text-gray-400 shrink-0" />
+                    )}
+                  </button>
+
+                  {/* Accordion Body */}
+                  {isOpen && (
+                    <div className="px-5 pb-5 pt-0">
+                      <ul className="space-y-2.5 border-t border-gray-100 pt-4">
+                        {level.topics.map((topic, i) => (
+                          <li
+                            key={i}
+                            className="flex items-start gap-3 text-gray-600 text-sm"
+                          >
+                            <div className="w-1.5 h-1.5 rounded-full bg-primary shrink-0 mt-1.5" />
+                            {topic}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   )}
                 </div>
-
-                <Button variant="primary" size="lg" className="w-full mb-4">
-                  Enroll Now
-                </Button>
-
-                <Button variant="outline" size="md" className="w-full">
-                  Add to Wishlist
-                </Button>
-
-                <div className="mt-6 pt-6 border-t border-zinc-800">
-                  <SocialShare
-                    url={`#`}
-                    title={course.title}
-                    description={course.description}
-                    className="justify-center"
-                  />
-                </div>
-              </div>
-            </div>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* Course Content */}
-      <section className="py-12 md:py-16">
+      {/* ======================== MENTOR SECTION ======================== */}
+      <section className="section-padding">
         <div className="container-custom">
-          <div className="max-w-4xl">
-            {/* What You will Learn */}
-            <div className="mb-12">
-              <h2 className="text-2xl md:text-3xl font-bold mb-6">
-                What You will <span className="text-primary">Learn</span>
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {course.whatYouLearn.map((item, index) => (
-                  <div key={index} className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                    <span className="text-zinc-300">{item}</span>
-                  </div>
-                ))}
-              </div>
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+            Your Mentor
+          </h2>
+
+          <div className="flex flex-col sm:flex-row items-start gap-5 max-w-2xl">
+            {/* Mentor Image */}
+            <div className="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden shrink-0 border-2 border-gray-100 relative">
+              <Image
+                src={data.mentor.image}
+                alt={data.mentor.name}
+                fill
+                className="object-cover"
+              />
             </div>
 
-            {/* Curriculum */}
-            <div className="mb-12">
-              <h2 className="text-2xl md:text-3xl font-bold mb-6">
-                Course <span className="text-primary">Curriculum</span>
-              </h2>
-              <div className="space-y-4">
-                {course.curriculum.map((module, index) => (
-                  <div key={index} className="card p-6">
-                    <h3 className="text-lg font-semibold text-white mb-3">
-                      {index + 1}. {module.module}
-                    </h3>
-                    <ul className="space-y-2">
-                      {module.lessons.map((lesson, lessonIndex) => (
-                        <li key={lessonIndex} className="flex items-center gap-2 text-zinc-400">
-                          <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                          {lesson}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Requirements */}
+            {/* Mentor Info */}
             <div>
-              <h2 className="text-2xl md:text-3xl font-bold mb-6">
-                <span className="text-primary">Requirements</span>
-              </h2>
-              <ul className="space-y-3">
-                {course.requirements.map((requirement, index) => (
-                  <li key={index} className="flex items-start gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-primary shrink-0 mt-2" />
-                    <span className="text-zinc-300">{requirement}</span>
-                  </li>
-                ))}
-              </ul>
+              <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-0.5">
+                {data.mentor.name}
+              </h3>
+              <p className="text-primary text-sm font-medium mb-3">
+                {data.mentor.designation}
+              </p>
+              <p className="text-gray-600 text-[15px] leading-relaxed">
+                {data.mentor.bio}
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Related Courses */}
-      {relatedCourses.length > 0 && (
-        <section className="py-12 md:py-16 bg-dark-50">
-          <div className="container-custom">
-            <h2 className="text-2xl md:text-3xl font-bold mb-8">
-              Related <span className="text-primary">Courses</span>
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-              {relatedCourses.map((relatedCourse) => (
-                <CourseCard key={relatedCourse.id} course={relatedCourse} />
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
+      {/* ======================== CTA SECTION ======================== */}
+      <CtaSection />
     </div>
   );
 }

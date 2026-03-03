@@ -50,6 +50,8 @@ export default function AboutUsHero() {
                                 src="/assets/aboutHero.jpg"
                                 alt="Teachers in a classroom setting"
                                 className="w-full h-full object-cover"
+                                width={1200}
+                                height={600}
                             />
                         </div>
                     </div>
