@@ -1,109 +1,58 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, use } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { CheckCircle, ChevronDown, ChevronUp, Share2 } from "lucide-react";
 import CtaSection from "@/components/home/CtaSection";
+import { useGetPublicCourseBySlugQuery } from "@/app/api/course";
 
-// Static course data (will be replaced with API later)
-const courseData = {
-  success: true,
-  data: {
-    courseId: "ECE-001",
-    slug: "diploma-in-early-childhood-education",
+export default function CoursePage({ params }: { params: Promise<{ id: string }> }) {
+  const resolvedParams = use(params);
+  const slug = resolvedParams.id;
 
-    course: {
-      title: "Diploma in Early Childhood Education",
-      description:
-        "Master the art of early education with our UK-standard curriculum.Designed for educators seeking global academic credibility and practical classroom excellence.",
-      image: "/assets/courseThumb.jpeg",
-    },
+  const { data: apiResponse, isLoading, error } = useGetPublicCourseBySlugQuery(slug);
 
-    aboutCourse: {
-      description: [
-        "Prior to its development, extensive market research was conducted with 1000+ teachers and preschool owners.",
-        "The program integrates inclusive pedagogy, play-based experiential learning, neuroplasticity principles, and AI-enabled technology.",
-        "Designed for global markets and contemporary preschool models.",
-      ],
-    },
+  const data = apiResponse?.data;
 
-    whatYouWillLearn: {
-      title: "What You'll Learn",
-      points: [
-        "Apply global teaching methods in modern classrooms.",
-        "Understand child development and emotional well-being.",
-        "Create inclusive and engaging learning environments.",
-        "Communicate effectively with parents and lead responsibly.",
-        "Plan and manage a successful preschool.",
-      ],
-    },
+  const [openLevel, setOpenLevel] = useState<string | null>(null);
 
-    curriculum: {
-      totalLevels: 3,
-      totalWeeks: 24,
-      levels: [
-        {
-          levelId: "L1",
-          title: "Level 1 – Foundations",
-          topics: [
-            "Child development, psychology & health fundamentals",
-            "Play-based, inclusive & trauma-informed teaching",
-            "Curriculum design, literacy & numeracy basics",
-            "Classroom management & safeguarding practices",
-            "Child rights & parent partnership skills",
-            "Ethics & professional teaching foundations",
-          ],
-        },
-        {
-          levelId: "L2",
-          title: "Level 2 – Global & Advanced Practice",
-          topics: [
-            "Advanced pedagogy models",
-            "Global preschool frameworks",
-            "Assessment & observation techniques",
-            "Technology in early education",
-          ],
-        },
-        {
-          levelId: "L3",
-          title: "Level 3 – Leadership & Entrepreneurship",
-          topics: [
-            "Preschool business setup",
-            "Financial planning & budgeting",
-            "Marketing & admissions strategy",
-            "Team leadership & operations",
-          ],
-        },
-      ],
-    },
-
-    pricing: {
-      currency: "INR",
-      originalPrice: 99900,
-    },
-
-    mentor: {
-      name: "Ms. Sohini Mondal",
-      designation: "Early Childhood Education Specialist",
-      image: "/assets/courseThumb.jpeg",
-      bio: "With over 7 years of teaching and tutoring experience, she has worked with children from varied communities and across ICSE schools.",
-    },
-  },
-};
-
-export default function CoursePage() {
-  const { data } = courseData;
-  const [openLevel, setOpenLevel] = useState<string | null>(
-    data.curriculum.levels[0]?.levelId || null
-  );
+  React.useEffect(() => {
+    if (data?.curriculum?.levels?.[0]?.levelId && !openLevel) {
+      setOpenLevel(data.curriculum.levels[0].levelId);
+    }
+  }, [data, openLevel]);
 
   const toggleLevel = (levelId: string) => {
     setOpenLevel((prev) => (prev === levelId ? null : levelId));
   };
 
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-white">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
+
+  if (error || !data) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-white">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">Course not found</h1>
+          <p className="text-gray-600 mb-6">The course you are looking for does not exist or an error occurred.</p>
+          <Link href="/courses">
+            <button className="bg-primary hover:bg-primary-600 text-white font-medium px-6 py-2.5 rounded-lg transition-colors">
+              Browse Courses
+            </button>
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
   const formattedPrice = new Intl.NumberFormat("en-IN").format(
-    data.pricing.originalPrice
+    data.pricing?.originalPrice || 0
   );
 
   return (
@@ -142,13 +91,15 @@ export default function CoursePage() {
             {/* Right – Image */}
             <div className="flex-shrink-0 w-full max-w-[260px] sm:max-w-[300px] md:max-w-[340px] lg:max-w-[380px]">
               <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl shadow-black/40">
-                <Image
-                  src={data.course.image}
-                  alt={data.course.title}
-                  fill
-                  className="object-cover"
-                  priority
-                />
+                {data.course?.image && (
+                  <Image
+                    src={data.course.image}
+                    alt={data.course.title || "Course thumbnail"}
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                )}
               </div>
             </div>
           </div>
@@ -167,7 +118,7 @@ export default function CoursePage() {
                   About This Course
                 </h2>
                 <div className="space-y-4">
-                  {data.aboutCourse.description.map((para, i) => (
+                  {data.aboutCourse?.description?.map((para: string, i: number) => (
                     <p
                       key={i}
                       className="text-gray-600 text-[15px] leading-relaxed"
@@ -180,11 +131,9 @@ export default function CoursePage() {
 
               {/* What You'll Learn */}
               <div>
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-5">
-                  {data.whatYouWillLearn.title}
-                </h2>
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-5">What You will Learn</h2>
                 <ul className="space-y-3">
-                  {data.whatYouWillLearn.points.map((point, i) => (
+                  {data.whatYouWillLearn?.points?.map((point: string, i: number) => (
                     <li key={i} className="flex items-start gap-3">
                       <CheckCircle className="w-5 h-5 text-primary shrink-0 mt-0.5" />
                       <span className="text-gray-700 text-[15px] leading-relaxed">
@@ -216,8 +165,8 @@ export default function CoursePage() {
                   {/* Feature List */}
                   <ul className="space-y-3 mb-6">
                     {[
-                      "24 Weeks Program",
-                      "3 Levels Covered",
+                      `${data.curriculum?.totalWeeks || 0} Weeks Program`,
+                      `${data.curriculum?.totalLevels || 0} Levels Covered`,
                       "Live Mentorship",
                       "Certificate of Completion",
                       "Job Assistance",
@@ -262,47 +211,51 @@ export default function CoursePage() {
           </h2>
 
           <div className="space-y-3 max-w-3xl">
-            {data.curriculum.levels.map((level) => {
-              const isOpen = openLevel === level.levelId;
-              return (
-                <div
-                  key={level.levelId}
-                  className="bg-white border border-gray-200 rounded-xl overflow-hidden transition-shadow hover:shadow-md"
-                >
-                  {/* Accordion Header */}
-                  <button
-                    onClick={() => toggleLevel(level.levelId)}
-                    className="w-full flex items-center justify-between px-5 py-4 text-left focus:outline-none group"
+            {data.curriculum?.levels?.length > 0 ? (
+              data.curriculum.levels.map((level: any) => {
+                const isOpen = openLevel === level.levelId;
+                return (
+                  <div
+                    key={level.levelId}
+                    className="bg-white border border-gray-200 rounded-xl overflow-hidden transition-shadow hover:shadow-md"
                   >
-                    <span className="font-semibold text-gray-900 text-[15px] md:text-base group-hover:text-primary transition-colors">
-                      {level.title}
-                    </span>
-                    {isOpen ? (
-                      <ChevronUp className="w-5 h-5 text-gray-400 shrink-0" />
-                    ) : (
-                      <ChevronDown className="w-5 h-5 text-gray-400 shrink-0" />
-                    )}
-                  </button>
+                    {/* Accordion Header */}
+                    <button
+                      onClick={() => toggleLevel(level.levelId)}
+                      className="w-full flex items-center justify-between px-5 py-4 text-left focus:outline-none group"
+                    >
+                      <span className="font-semibold text-gray-900 text-[15px] md:text-base group-hover:text-primary transition-colors">
+                        {level.title}
+                      </span>
+                      {isOpen ? (
+                        <ChevronUp className="w-5 h-5 text-gray-400 shrink-0" />
+                      ) : (
+                        <ChevronDown className="w-5 h-5 text-gray-400 shrink-0" />
+                      )}
+                    </button>
 
-                  {/* Accordion Body */}
-                  {isOpen && (
-                    <div className="px-5 pb-5 pt-0">
-                      <ul className="space-y-2.5 border-t border-gray-100 pt-4">
-                        {level.topics.map((topic, i) => (
-                          <li
-                            key={i}
-                            className="flex items-start gap-3 text-gray-600 text-sm"
-                          >
-                            <div className="w-1.5 h-1.5 rounded-full bg-primary shrink-0 mt-1.5" />
-                            {topic}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </div>
-              );
-            })}
+                    {/* Accordion Body */}
+                    {isOpen && (
+                      <div className="px-5 pb-5 pt-0">
+                        <ul className="space-y-2.5 border-t border-gray-100 pt-4">
+                          {level.topics?.map((topic: string, i: number) => (
+                            <li
+                              key={i}
+                              className="flex items-start gap-3 text-gray-600 text-sm"
+                            >
+                              <div className="w-1.5 h-1.5 rounded-full bg-primary shrink-0 mt-1.5" />
+                              {topic}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                );
+              })
+            ) : (
+              <p className="text-gray-500">No curriculum available for this course.</p>
+            )}
           </div>
         </div>
       </section>
@@ -316,13 +269,17 @@ export default function CoursePage() {
 
           <div className="flex flex-col sm:flex-row items-start gap-5 max-w-2xl">
             {/* Mentor Image */}
-            <div className="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden shrink-0 border-2 border-gray-100 relative">
-              <Image
-                src={data.mentor.image}
-                alt={data.mentor.name}
-                fill
-                className="object-cover"
-              />
+            <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-gray-100 flex items-center justify-center shrink-0 border-2 border-gray-100 relative overflow-hidden text-2xl font-bold text-gray-400">
+              {data.mentor?.imageUrl || data.mentor?.image ? (
+                <Image
+                  src={data.mentor.imageUrl || data.mentor.image}
+                  alt={data.mentor?.name || "Mentor"}
+                  fill
+                  className="object-cover"
+                />
+              ) : (
+                data.mentor?.name?.charAt(0)?.toUpperCase() || "M"
+              )}
             </div>
 
             {/* Mentor Info */}

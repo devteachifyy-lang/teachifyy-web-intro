@@ -26,13 +26,13 @@ const CourseCard = ({ course, className }: CourseCardProps) => {
   return (
     <>
       <Link
-        href={`/courses/${course.id}`}
+        href={`/courses/${course.slug}`}
         className={cn("card card-hover group block relative", className)}
       >
         {/* Thumbnail */}
         <div className="relative aspect-video overflow-hidden bg-zinc-800 h-[280px] w-[400px]">
           <Image
-            src={course.thumbnail}
+            src={course.image}
             alt={course.title}
             // width={300}
             // height={100}
@@ -56,7 +56,7 @@ const CourseCard = ({ course, className }: CourseCardProps) => {
             <span className="text-primary font-medium">{course.category}</span>
             <span className="flex items-center gap-1">
               <Clock className="w-4 h-4" />
-              {course.duration}
+              {course.totalWeeks} Weeks
             </span>
           </div>
 
@@ -86,13 +86,13 @@ const CourseCard = ({ course, className }: CourseCardProps) => {
           {/* Footer */}
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4 text-sm">
-              <div className="flex items-center gap-1 text-primary">
+              {/* <div className="flex items-center gap-1 text-primary">
                 <Star className="w-4 h-4 fill-current" />
                 <span className="font-semibold">{course.rating}</span>
-              </div>
+              </div> */}
               <div className="flex items-center gap-1 text-zinc-400">
                 <Users className="w-4 h-4" />
-                <span>{course.students.toLocaleString()}</span>
+                <span>12500</span>
               </div>
             </div>
 

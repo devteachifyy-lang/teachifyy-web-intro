@@ -1,6 +1,5 @@
 import { Metadata } from "next";
-import CourseCard from "@/components/courses/CourseCard";
-import { courses } from "@/data/courses";
+import CoursesList from "@/components/courses/CoursesList";
 import { constructMetadata } from "@/lib/metadata";
 import CourseHero from "@/components/courses/CourseHero";
 import UserJourney from "@/components/courses/UserJourney";
@@ -31,11 +30,7 @@ export default function CoursesPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-            {courses.map((course) => (
-              <CourseCard key={course.id} course={course} className="shadow-sm border border-gray-100" />
-            ))}
-          </div>
+          <CoursesList />
         </div>
       </section>
     </div>

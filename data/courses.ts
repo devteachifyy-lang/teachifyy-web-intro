@@ -12,6 +12,12 @@ export interface Course {
         avatar: string;
         bio: string;
     };
+    mentor: {
+        name: string;
+        imageUrl: string;
+    },
+    image: string;
+    totalWeeks: number;
     rating: number;
     students: number;
     price: number;
@@ -26,69 +32,3 @@ export interface Course {
     button: boolean;
 }
 
-export const courses: Course[] = [
-    {
-        id: '1',
-        slug: 'How to Move From B.ed to Dubai Classrooms',
-        title: 'How to Move From B.ed to Dubai Classrooms',
-        description: 'Gateway to your international teaching career.',
-        thumbnail: '/assets/webinar.png',
-        category: 'Webinar',
-        duration: '1 hour',
-        level: 'Intermediate',
-        instructor: {
-            name: '',
-            avatar: '',
-            bio: '',
-        },
-        rating: 4.8,
-        students: 12500,
-        price: 49.99,
-        originalPrice: 99.99,
-        badge: 'Bestseller',
-        curriculum: [],
-        whatYouLearn: [],
-        requirements: [],
-        button: true,
-    },
-    {
-        id: '2',
-        slug: 'Diploma in Early Childhood Education',
-        title: 'Diploma in Early Childhood Education',
-        description: 'Teachifyy is a career-focused diploma program designed for teachers who don’t want to remain stuck in low-paying, stagnant roles. Built around real classroom realities and long-term career growth, the program goes beyond theory to develop confident, employable educators with strong teaching skills, professional presence, and clear growth pathways. By combining practical pedagogy, modern teaching tools, mentorship, and career strategy, Teachifyy prepares teachers not just to get jobs—but to grow in them over time. UK-inspired in standards, India-focused in execution, and built with real schools, Teachifyy helps teachers build respect, stability, and sustainable income in the profession.',
-        thumbnail: '/assets/courseThumb.jpeg',
-        category: 'Course',
-        duration: '40+ hours',
-        level: 'Intermediate',
-        instructor: {
-            name: '',
-            avatar: '',
-            bio: '',
-        },
-        rating: 4.8,
-        students: 12500,
-        price: 49.99,
-        originalPrice: 99.99,
-        badge: 'Bestseller',
-        curriculum: [],
-        whatYouLearn: [],
-        requirements: [],
-        button: false,
-    },
-];
-
-export function getCourseById(id: string): Course | undefined {
-    return courses.find((course) => course.id === id);
-}
-
-export function getCourseBySlug(slug: string): Course | undefined {
-    return courses.find((course) => course.slug === slug);
-}
-
-export function getCoursesByCategory(category: string): Course[] {
-    return courses.filter((course) => course.category === category);
-}
-
-export function getFeaturedCourses(limit: number = 3): Course[] {
-    return courses.slice(0, limit);
-}
