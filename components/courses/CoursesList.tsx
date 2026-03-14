@@ -17,7 +17,7 @@ export default function CoursesList() {
     if (error) {
         return (
             <div className="text-center py-20 text-red-500">
-                <p>Failed to load courses. Please try again later.</p>
+                <p>Course Coming Soon</p>
             </div>
         );
     }

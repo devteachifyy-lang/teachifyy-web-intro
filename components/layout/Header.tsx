@@ -8,9 +8,10 @@ import Image from "next/image";
 
 const navigation = [
   { name: "Home", href: "/" },
-  { name: "Course", href: "/courses" },
-  // { name: "Blogs", href: "/blogs" },
-  // { name: "About Us", href: "/about" },
+  { name: "Courses", href: "/courses" },
+  { name: "Blogs", href: "/blog" },
+  { name: "About Us", href: "/about" },
+  { name: "Career", href: "/career" },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -50,10 +51,11 @@ const Header = () => {
           </div>
 
           {/* CTA Button */}
-          <div className="hidden md:block">
-            <Link href="/start">
-              <button className="bg-[#FF4D67] text-white font-medium text-[15px] pt-[12px] pb-[12px] px-[24px] rounded-[4px] hover:bg-[#ff3b57] transition-all shrink-0">
-                Start Here
+          <div className="hidden md:flex items-center gap-3">
+            <Link href="/download">
+              <button className="bg-[#FF4D67] text-white font-medium text-[15px] pt-[10px] pb-[10px] px-[20px] rounded-full hover:bg-[#ff3b57] transition-all shrink-0 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
+                Download the App
               </button>
             </Link>
           </div>

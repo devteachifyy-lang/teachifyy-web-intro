@@ -71,8 +71,9 @@ const UpcomingMasterclasses = () => {
                     {/* Right Column - Image Placeholder */}
                     <div className="flex-1 w-full bg-blue-100 rounded-[2rem] h-[400px] lg:h-[500px] relative overflow-hidden hidden md:block">
                         {/* Keeping it as a large placeholder matching the blue light tone from the mockup */}
-                        <div className="absolute inset-0 bg-blue-100 flex items-center justify-center">
+                        <div className="absolute inset-0 bg-red-100 flex items-center justify-center">
                             {/* Empty matching right side box */}
+                            <Image src="/assets/upcoming-masterclasses.jpg" alt="Upcoming Masterclasses" fill />
                         </div>
                     </div>
 

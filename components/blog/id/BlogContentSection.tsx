@@ -1,0 +1,53 @@
+import Image from 'next/image';
+import { mockBlogData } from '@/app/blog/[id]/mockData';
+import { Check } from 'lucide-react';
+
+export default function BlogContentSection({ content }: { content: typeof mockBlogData.data.content }) {
+    return (
+        <section className="pb-12">
+            <div className="container-custom max-w-4xl mx-auto space-y-16">
+                {content.map((section, index) => (
+                    <div key={index} className="space-y-6">
+                        <h2 className="text-2xl md:text-3xl font-bold text-zinc-900 dark:text-white leading-tight">
+                            {section.title}
+                        </h2>
+
+                        {section.paragraphs.map((para, pIdx) => (
+                            <p key={pIdx} className="text-zinc-700 dark:text-zinc-300 text-lg leading-relaxed">
+                                {para}
+                            </p>
+                        ))}
+
+                        {section.image && (
+                            <div className="relative aspect-video rounded-2xl overflow-hidden mt-8 mb-8 border border-zinc-100 dark:border-zinc-800 shadow-sm">
+                                <Image
+                                    src={section.image}
+                                    alt={section.title}
+                                    fill
+                                    className="object-cover"
+                                />
+                            </div>
+                        )}
+
+                        {section.highlightPoints && section.highlightPoints.length > 0 && (
+                            <div className="mt-8">
+                                <div className="border-l-4 border-primary pl-6 py-2 space-y-4">
+                                    {section.highlightPoints.map((point, hIdx) => (
+                                        <div key={hIdx} className="flex items-start gap-3">
+                                            <div className="mt-1 w-5 h-5 rounded-full bg-blue-50 flex items-center justify-center flex-shrink-0">
+                                                <Check className="w-3 h-3 text-primary" />
+                                            </div>
+                                            <span className="text-zinc-800 dark:text-zinc-200 font-medium">
+                                                {point}
+                                            </span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                ))}
+            </div>
+        </section>
+    );
+}

@@ -4,29 +4,19 @@ const teamMembers = [
     {
         name: 'Shivam Aggarwal',
         role: 'Founder',
-        image: '',
+        image: '/assets/shivam.png',
         featured: true, // Specifically matched in the design as larger
     },
     {
-        name: 'Team Member 2',
-        role: 'Co-founder',
-        image: '',
+        name: 'Shivam Agarwal',
+        role: 'Founder',
+        image: '/assets/shivam.png',
     },
     {
-        name: 'Team Member 3',
-        role: 'Operations',
-        image: '',
+        name: 'Sohini Mondal',
+        role: 'Educator',
+        image: '/assets/sohini.png',
     },
-    {
-        name: 'Team Member 4',
-        role: 'Marketing',
-        image: '',
-    },
-    {
-        name: 'Team Member 5',
-        role: 'Design',
-        image: '',
-    }
 ];
 
 export default function TeamSection() {
@@ -42,7 +32,7 @@ export default function TeamSection() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-0">
 
                     {/* Main featured profile card (Shivam) spanning 2 rows / 1 col on desktop */}
-                    <div className="md:col-span-1 md:row-span-2 relative h-[500px] md:h-[738px] rounded-3xl overflow-hidden bg-slate-200 aspect-[3/4] md:aspect-auto group shadow-sm transition-shadow hover:shadow-xl">
+                    {/* <div className="md:col-span-1 md:row-span-2 relative h-[500px] md:h-[738px] rounded-3xl overflow-hidden bg-slate-200 aspect-[3/4] md:aspect-auto group shadow-sm transition-shadow hover:shadow-xl">
                         {teamMembers[0].image ? (
                             <Image
                                 src={teamMembers[0].image}
@@ -52,12 +42,11 @@ export default function TeamSection() {
                         ) : (
                             <div className="w-full h-full bg-slate-200" />
                         )}
-                        {/* Gradient overlay for text */}
                         <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-6 pt-24 text-white">
                             <h3 className="text-xl font-bold mb-1">{teamMembers[0].name}</h3>
                             <p className="text-white/80 text-sm font-medium">{teamMembers[0].role}</p>
                         </div>
-                    </div>
+                    </div> */}
 
                     {/* Grid of other team members (4 cards in right column spaces) */}
                     <div className="md:col-span-2 grid grid-cols-2 gap-6 h-full">
@@ -67,16 +56,18 @@ export default function TeamSection() {
                                     <Image
                                         src={member.image}
                                         alt={member.name}
-                                        className="w-full h-full object-cover grayscale transition-transform duration-500 group-hover:scale-105 hover:grayscale-0"
+                                        className="object-cover transition-transform duration-500 "
+                                        width={500}
+                                        height={500}
                                     />
                                 ) : (
-                                    <div className="w-full h-full flex items-center justify-center text-slate-400">
+                                    <div className="w-full h-full flex items-center justify-center text-white">
                                         <span className="sr-only">{member.name}</span>
                                     </div>
                                 )}
                                 {/* Optional: Add name/role overlay for other members, omitted in design screenshot intentionally but good for real usage */}
-                                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/50 to-transparent p-4 text-white opacity-0 group-hover:opacity-100 transition-opacity">
-                                    <h3 className="font-semibold text-sm">{member.name}</h3>
+                                <div className="absolute inset-x-0 bottom-0 p-4 ">
+                                    <h3 className="font-semibold text-sm text-white">{member.name}</h3>
                                 </div>
                             </div>
                         ))}

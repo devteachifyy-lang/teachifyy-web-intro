@@ -22,24 +22,24 @@ export default function AboutUsHero() {
 
                         {/* Heading */}
                         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 mb-6 leading-[1.1]">
-                            Built for teachers<br />
-                            who <span className="text-[#ff4d67]">deserve</span><br />
-                            <span className="text-[#ff4d67]">better.</span>
+                            For every teacher
+                            ready to grow,<br />
+                            <span className="text-[#ff4d67]">This is the Place.</span>
                         </h1>
 
                         {/* Subtext */}
                         <p className="text-lg text-slate-600 mb-8 max-w-md">
-                            For every teacher seeking progress, this is home. We provide the tools, the community, and the growth you have been waiting for.
+                            We are here to create a trusted space for teachers where progress is practical, and confusion is replaced with clarity and confidence.
                         </p>
 
                         {/* CTA Button */}
-                        <Link
+                        {/* <Link
                             href="/join"
                             className="inline-flex items-center justify-center rounded-full bg-[#ff4d67] px-8 py-3.5 text-base font-medium text-white shadow-sm gap-2"
                         >
                             Learn More
                             <ArrowRight className="h-5 w-5" />
-                        </Link>
+                        </Link> */}
                     </div>
 
                     {/* Right Content - Image */}
@@ -47,7 +47,7 @@ export default function AboutUsHero() {
                         {/* Using a placeholder for now since we don't have the exact image asset */}
                         <div className="absolute inset-0 bg-slate-200">
                             <Image
-                                src="/assets/aboutHero.jpg"
+                                src="/assets/aboutNew.jpg"
                                 alt="Teachers in a classroom setting"
                                 className="w-full h-full object-cover"
                                 width={1200}

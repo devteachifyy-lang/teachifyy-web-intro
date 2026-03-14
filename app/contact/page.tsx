@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
-import { Mail, MapPin, Phone, Linkedin, Twitter } from 'lucide-react';
-import ContactForm from '@/components/contact/ContactForm';
+import Image from 'next/image';
+import ContactFaq from '@/components/contact/ContactFaq';
 import { constructMetadata } from '@/lib/metadata';
 
 export const metadata: Metadata = constructMetadata({
@@ -9,120 +9,78 @@ export const metadata: Metadata = constructMetadata({
 });
 
 export default function ContactPage() {
-  const contactInfo = [
-    {
-      icon: Mail,
-      title: 'Email',
-      value: 'Support@teachifyy.com',
-      href: 'mailto:Support@teachifyy.com',
-    },
-    {
-      icon: Phone,
-      title: 'Phone',
-      value: '+917877447884 | +916291507718',
-      href: 'tel:+917877447884 | +916291507718',
-    },
-    {
-      icon: MapPin,
-      title: 'Location',
-      value: 'Jaipur | Delhi | Kolkata',
-      href: null,
-    },
-  ];
-
-  const socialLinks = [
-    { icon: Linkedin, href: 'https://www.linkedin.com/company/teachifyy/', label: 'LinkedIn' },
-    // { icon: Twitter, href: 'https://twitter.com', label: 'Twitter' },
-  ];
-
   return (
-    <div className="min-h-screen">
-      {/* Header */}
-      {/* <section className="section-padding bg-gradient-to-b from-dark to-dark-50">
+    <div className="min-h-screen bg-white">
+      {/* Hero Section */}
+      <section className="md:pt-16 pt-5  pb-16 overflow-hidden">
         <div className="container-custom">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Get in <span className="text-primary">Touch</span>
-            </h1>
-            <p className="text-lg text-zinc-400">
-              Have a question or want to learn more about our courses? We'd love to hear from you.
-            </p>
-          </div>
-        </div>
-      </section> */}
-
-      {/* Contact Section */}
-      <section className="py-12 md:py-16">
-        <div className="container-custom">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 justify-center">
-            {/* Contact Info */}
-            <div className="lg:col-span-3 flex flex-col items-center">
-              <h2 className="text-2xl font-bold mb-6 text-center">
-                Contact <span className="text-primary">Information</span>
-              </h2>
-
-              <div className="space-y-6 mb-8 w-full max-w-md">
-                {contactInfo.map((info) => {
-                  const Icon = info.icon;
-                  const content = (
-                    <div className="flex items-start gap-4 p-4 rounded-lg bg-dark-50 border border-zinc-800 hover:border-primary/50 transition-colors">
-                      <div className="p-2 rounded-lg bg-primary/10">
-                        <Icon className="w-5 h-5 text-primary" />
-                      </div>
-                      <div>
-                        <p className="text-sm text-zinc-400 mb-1">{info.title}</p>
-                        <p className=" font-medium">{info.value}</p>
-                      </div>
-                    </div>
-                  );
-
-                  return info.href ? (
-                    <a key={info.title} href={info.href} className="block">
-                      {content}
-                    </a>
-                  ) : (
-                    <div key={info.title}>{content}</div>
-                  );
-                })}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left Content */}
+            <div className="space-y-6">
+              <div className="inline-block px-3 py-1 bg-[#DDE6F2] text-black text-xs  tracking-widest uppercase rounded-full">
+                DEDICATED SUPPORT TEAM
               </div>
-
-              {/* Social Links */}
-              <div className="text-center">
-                <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
-                <div className="flex items-center justify-center gap-3">
-                  {socialLinks.map((social) => {
-                    const Icon = social.icon;
-                    return (
-                      <a
-                        key={social.label}
-                        href={social.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-3 rounded-lg bg-zinc-800 hover:bg-primary hover:text-dark text-zinc-300 transition-all"
-                        aria-label={social.label}
-                      >
-                        <Icon className="w-5 h-5" />
-                      </a>
-                    );
-                  })}
-                </div>
-              </div>
+              <h1 className="text-4xl md:text-5xl lg:text-[3.5rem] font-medium leading-tight text-[#1a202c] tracking-tight">
+                We&apos;re Here to<br />
+                Support Your<br />
+                Teaching Journey
+              </h1>
+              <p className="text-base text-zinc-600 max-w-md font-normal leading-relaxed">
+                Whether you have questions about our programs, career opportunities, or admissions, our team is here to guide you
+              </p>
             </div>
 
-            {/* Contact Form */}
-            {/* <div className="lg:col-span-2">
-              <div className="card p-8">
-                <h2 className="text-2xl font-bold mb-6">
-                  Send us a <span className="text-primary">Message</span>
-                </h2>
-                <ContactForm />
-              </div>
-            </div> */}
+            {/* Right Image */}
+            <div className="relative rounded-[2rem] overflow-hidden h-[300px] lg:h-[380px] w-full max-w-lg mx-auto lg:ml-auto shadow-2xl">
+              <Image
+                src="/assets/contactUsHero.jpg"
+                alt="Teacher on laptop"
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
           </div>
         </div>
       </section>
 
+      {/* Empty Form Section with Gradient Background */}
+      <section className="relative py-28 min-h-[600px] bg-gradient-to-tr from-[#ffebe6] via-white to-[#e6f0ff]">
+        <div className="container-custom relative z-10 flex justify-center">
+          {/* Empty White Card representing the form container */}
+          <div className="bg-white rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.05)] w-full max-w-3xl min-h-[600px]">
+            {/* Form placeholder - form fields will go here eventually */}
+          </div>
+        </div>
+      </section>
 
+      {/* Program Selection CTA */}
+      <section className="bg-[#0E172B] py-24 text-center ">
+        <div className="container-custom max-w-3xl mx-auto space-y-6">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white">
+            Not Sure Which Program is <span className="text-[#FF4667]">Right for You?</span>
+          </h2>
+          <p className="text-zinc-300 text-base md:text-lg font-light">
+            Our advisors can help you understand your career goals and guide you toward the right learning path for your professional growth.
+          </p>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-24 bg-white">
+        <div className="container-custom">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-zinc-900 mb-4 tracking-tight">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-zinc-600 text-base max-w-2xl mx-auto">
+              Find answers to some of the most frequent inquiries from our community.
+            </p>
+          </div>
+
+          <ContactFaq />
+        </div>
+      </section>
     </div>
   );
 }

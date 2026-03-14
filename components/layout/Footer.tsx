@@ -60,9 +60,12 @@ const Footer = () => {
               { label: "Home", path: "/" },
               { label: "Courses", path: "/courses" },
               { label: "Assessment", path: "/assessment" },
-              // { label: "Blogs", path: "/blog" },
+              { label: "Blogs", path: "/blog" },
               { label: "About Us", path: "/about" },
+              { label: "Career", path: "/career" },
               { label: "Contact", path: "/contact" },
+              { label: "Download App", path: "/download" },
+              { label: "Terms & Conditions", path: "/terms-and-conditions" },
             ].map((link) => (
               <li key={link.label}>
                 <Link
