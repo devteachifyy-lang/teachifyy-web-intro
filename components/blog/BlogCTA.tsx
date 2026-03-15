@@ -11,9 +11,11 @@ export default function BlogCTA() {
           <p className="text-[#9FB3C8] text-[17px] mb-12 text-balance max-w-2xl leading-relaxed">
             Unlock your full potential as an educator. Join thousands of teachers who are redefining early childhood education through our certified training programs.
           </p>
-          <button className="bg-white text-dark-900 hover:bg-gray-50 px-10 py-4 rounded-full font-bold transition-transform hover:scale-105 active:scale-95 shadow-[0_4px_14px_rgb(255,255,255,0.2)]">
-            Talk to a Counsellor
-          </button>
+          <Link href="/contact">
+            <button className="bg-white text-dark-900 hover:bg-gray-50 px-10 py-4 rounded-full font-bold transition-transform hover:scale-105 active:scale-95 shadow-[0_4px_14px_rgb(255,255,255,0.2)]">
+              Talk to a Counsellor
+            </button>
+          </Link>
         </div>
       </div>
     </section>

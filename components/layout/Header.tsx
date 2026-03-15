@@ -12,7 +12,7 @@ const navigation = [
   { name: "Blogs", href: "/blog" },
   { name: "About Us", href: "/about" },
   { name: "Career", href: "/career" },
-  { name: "Contact", href: "/contact" },
+  { name: "Contact Us", href: "/contact" },
 ];
 
 const Header = () => {
@@ -79,7 +79,7 @@ const Header = () => {
         <div
           className={cn(
             "md:hidden overflow-hidden transition-all duration-300 ease-in-out",
-            mobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0",
+            mobileMenuOpen ? "opacity-100" : "max-h-0 opacity-0",
           )}
         >
           <div className="py-4 space-y-4">
@@ -93,9 +93,14 @@ const Header = () => {
                 {item.name}
               </Link>
             ))}
-            <button className="w-[fit-content] bg-[#FF4667] text-white font-[400] text-[15px] pt-[12px] pb-[12px] px-[12px] rounded-[4px]">
-              Start Here
-            </button>
+            <div className="md:flex items-center gap-3">
+              <Link href="/download">
+                <button className="bg-[#FF4D67] text-white font-medium text-[15px] pt-[10px] pb-[10px] px-[20px] rounded-full hover:bg-[#ff3b57] transition-all shrink-0 flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
+                  Download the App
+                </button>
+              </Link>
+            </div>
           </div>
         </div>
       </nav>
