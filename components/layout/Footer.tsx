@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Linkedin, Instagram, Mail, Phone, MapPin } from "lucide-react";
+import { Linkedin, Instagram, Facebook, Youtube, Mail, Phone, MapPin } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -47,6 +47,36 @@ const Footer = () => {
                 strokeWidth={1.5}
               />
             </a>
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              rel="noreferrer"
+              className="w-[38px] h-[38px] rounded-full border-[1.5px] border-[#386b9b] flex items-center justify-center hover:bg-white/10 transition-colors"
+            >
+              <Facebook
+                className="w-[18px] h-[18px] text-white"
+                strokeWidth={1.5}
+              />
+            </a>
+            <a
+              href="https://youtube.com"
+              target="_blank"
+              rel="noreferrer"
+              className="w-[38px] h-[38px] rounded-full border-[1.5px] border-[#386b9b] flex items-center justify-center hover:bg-white/10 transition-colors"
+            >
+              <Youtube
+                className="w-[18px] h-[18px] text-white"
+                strokeWidth={1.5}
+              />
+            </a>
+          </div>
+          <div className="flex gap-4 mt-8 items-center">
+            <Link href="https://play.google.com/store/apps/details?id=com.teachifyy.app" className="hover:opacity-80 transition-opacity ">
+              <Image src="/assets/androidDownload.png" alt="Get it on Google Play" width={140} height={42} className="h-[42px] w-auto rounded-lg" />
+            </Link>
+            <Link href="#" className="hover:opacity-80 transition-opacity">
+              <Image src="/assets/IosDownload.png" alt="Download on the App Store" width={140} height={42} className="h-[42px] w-auto rounded-lg" />
+            </Link>
           </div>
         </div>
 
@@ -108,10 +138,17 @@ const Footer = () => {
                 className="w-[18px] h-[18px] shrink-0"
                 strokeWidth={1.5}
               />
-              <span>Office Address (Bikaner)</span>
+              <span>New Delhi.</span>
             </li>
           </ul>
         </div>
+      </div>
+
+      {/* Copyright */}
+      <div className="max-w-[1248px] mx-auto px-6 lg:px-12 mt-16 pt-8 border-t border-[#386b9b] flex flex-col md:flex-row justify-center items-center text-center">
+        <p className="text-[#cbd5e1] text-[14px]">
+          Copyright teachifyy &copy; {new Date().getFullYear()} All rights reserved.
+        </p>
       </div>
     </footer>
   );

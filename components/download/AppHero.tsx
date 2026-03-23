@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default function AppHero() {
   return (
-    <section className="relative w-full overflow-hidden py-10 md:py-20">
+    <section className="relative w-full overflow-hidden pt-10 md:pt-20">
       {/* Background soft glows */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute top-[-10%] left-[-5%] w-[600px] h-[600px] bg-[#FFF0EA] rounded-full blur-[100px] opacity-60" />
@@ -11,16 +11,16 @@ export default function AppHero() {
       </div>
 
       <div className="container-custom relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-stretch">
           {/* Left Content */}
-          <div className="flex flex-col items-start max-w-xl">
+          <div className="flex flex-col justify-center items-start max-w-xl pb-0 md:pb-20">
             {/* Badge */}
             <div className="inline-flex items-center rounded-full border  bg-[#DDE6F2] px-4 py-1.5 shadow-sm mb-6">
-              <span className="text-xs  text-slate-700 tracking-widest uppercase">MOBILE APP</span>
+              <span className="text-xs  text-slate-700 uppercase">MOBILE APP</span>
             </div>
 
             {/* Heading */}
-            <h1 className="text-4xl md:text-5xl font-light tracking-tight text-slate-900 mb-5 leading-[1.15]">
+            <h1 className="text-4xl md:text-5xl font-light text-slate-900 mb-5 leading-[1.15]">
               Learn Anywhere with{' '}
               <br />
               the{' '}
@@ -74,7 +74,7 @@ export default function AppHero() {
           </div>
 
           {/* Right Content — App Mockup */}
-          <div className="relative flex items-center justify-center md:justify-end">
+          <div className="relative flex items-end justify-center md:justify-end h-full mt-4 md:mt-0">
             <div className="relative w-[280px] md:w-[320px]">
               <Image
                 src="/assets/teachifyyAppHero1.png"

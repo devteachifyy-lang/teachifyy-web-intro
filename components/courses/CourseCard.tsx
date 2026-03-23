@@ -105,19 +105,19 @@ const CourseCard = ({ course, className }: CourseCardProps) => {
           </div> */}
 
           {/* Footer */}
-          <div className="flex items-center justify-between">
+          {/* <div className="flex items-center justify-between">
             <div className="flex items-center gap-4 text-sm">
-              {/* <div className="flex items-center gap-1 text-primary">
+              <div className="flex items-center gap-1 text-primary">
                 <Star className="w-4 h-4 fill-current" />
                 <span className="font-semibold">{course.rating}</span>
-              </div> */}
+              </div>
               <div className="flex items-center gap-1 text-zinc-400">
                 <Users className="w-4 h-4" />
                 <span>12500</span>
               </div>
             </div>
 
-            {/* <div className="text-right">
+            <div className="text-right">
               {course.originalPrice && (
                 <span className="text-sm text-zinc-500 line-through mr-2">
                   ${course.originalPrice}
@@ -126,8 +126,9 @@ const CourseCard = ({ course, className }: CourseCardProps) => {
               <span className="text-xl font-bold text-primary">
                 ${course.price}
               </span>
-            </div> */}
-          </div>{course.button && (
+            </div>
+          </div>
+          {course.button && (
             <div className="absolute bottom-3 right-3 z-10">
               <Button
                 onClick={handleButtonClick}
@@ -136,7 +137,7 @@ const CourseCard = ({ course, className }: CourseCardProps) => {
                 BUY NOW
               </Button>
             </div>
-          )}
+          )} */}
         </div>
       </Link>
 

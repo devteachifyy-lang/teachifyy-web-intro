@@ -3,7 +3,7 @@ import { Download } from 'lucide-react';
 
 export default function AppBottomCta() {
   return (
-    <section className="py-16 md:py-20 bg-[#214671]">
+    <section className="py-16 md:py-20 bg-[#0E172B]">
       <div className="container-custom">
         <div className=" rounded-3xl text-center ">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-5 leading-[1.2] tracking-tight">
