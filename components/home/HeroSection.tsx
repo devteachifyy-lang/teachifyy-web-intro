@@ -75,7 +75,7 @@ const HeroSection = () => {
               </div>
 
               {/* Heading */}
-              <div key={currentSlide}>
+              <div key={currentSlide} className="animate-fade-in h-[250px]" >
                 <h1 className="text-[#111827] 
                   text-[28px] 
                   sm:text-[34px] 
@@ -153,8 +153,8 @@ const HeroSection = () => {
               <div className="relative w-full aspect-[4/3] 
                 rounded-[24px] 
                 sm:rounded-[32px] 
-                lg:rounded-l-[40px] 
-                lg:rounded-r-[140px] 
+                lg:rounded-l-[76px] 
+                lg:rounded-r-[76px] 
                 overflow-hidden">
                 <Image
                   src="/assets/teacher-classroom.png"
