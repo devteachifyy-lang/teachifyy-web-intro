@@ -8,10 +8,10 @@ export default function AboutBottomCta() {
             </div>
             <div className="container mx-auto max-w-4xl relative z-20 flex justify-center items-center flex-col">
                 <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-white mb-10 max-w-5xl leading-tight">
-                    Creating an ecosystem where teachers trust themselves, their craft, and their impact, becoming unstoppable at every step.
+                    Creating an ecosystem where teachers trust themselves, their craft,and their impact,<br /> <span className="text-[#FF4667]"> becoming unstoppable at every step.</span>
                 </h2>
                 {/* Small descriptive text below */}
-                <p className="text-blue-100/70 text-sm max-w-2xl mx-auto leading-relaxed border-t border-white/10 pt-8 mt-4">
+                <p className="text-blue-100/70 text-sm max-w-2xl mx-auto leading-relaxed mt-4">
                     We are building the future of education, one empowered teacher at a time.
                     Join us in redesigning the teaching experience to be more rewarding, respected, and relevant in the 21st century.
                 </p>

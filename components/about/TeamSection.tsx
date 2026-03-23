@@ -51,23 +51,25 @@ export default function TeamSection() {
                     {/* Grid of other team members (4 cards in right column spaces) */}
                     <div className="md:col-span-2 grid grid-cols-2 gap-6 h-full">
                         {teamMembers.slice(1).map((member, idx) => (
-                            <div key={idx} className="relative rounded-3xl overflow-hidden bg-[#E2E8F0] aspect-square group shadow-sm transition-shadow hover:shadow-xl">
-                                {member.image ? (
-                                    <Image
-                                        src={member.image}
-                                        alt={member.name}
-                                        className="object-cover transition-transform duration-500 "
-                                        width={500}
-                                        height={500}
-                                    />
-                                ) : (
-                                    <div className="w-full h-full flex items-center justify-center text-white">
-                                        <span className="sr-only">{member.name}</span>
-                                    </div>
-                                )}
-                                {/* Optional: Add name/role overlay for other members, omitted in design screenshot intentionally but good for real usage */}
-                                <div className="absolute inset-x-0 bottom-0 p-4 ">
-                                    <h3 className="font-semibold text-sm text-white">{member.name}</h3>
+                            <div key={idx} className="group">
+                                <div className="relative rounded-3xl overflow-hidden bg-[#E2E8F0] aspect-square shadow-sm transition-shadow hover:shadow-xl mb-4">
+                                    {member.image ? (
+                                        <Image
+                                            src={member.image}
+                                            alt={member.name}
+                                            className="object-cover transition-transform duration-500 group-hover:scale-105"
+                                            width={900}
+                                            height={900}
+                                        />
+                                    ) : (
+                                        <div className="w-full h-full flex items-center justify-center text-slate-400">
+                                            <span className="sr-only">{member.name}</span>
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="px-1">
+                                    <h3 className="font-semibold text-lg text-slate-900">{member.name}</h3>
+                                    <p className="text-slate-600 text-sm mt-1">{member.role}</p>
                                 </div>
                             </div>
                         ))}

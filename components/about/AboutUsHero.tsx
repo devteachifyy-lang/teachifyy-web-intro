@@ -16,12 +16,12 @@ export default function AboutUsHero() {
                     {/* Left Content */}
                     <div className="flex flex-col items-start max-w-xl">
                         {/* Badge */}
-                        <div className="inline-flex items-center rounded-full border border-blue-100 bg-white px-4 py-1.5 shadow-sm mb-6">
-                            <span className="text-sm font-semibold text-slate-800">EMPOWERING EDUCATORS</span>
+                        <div className="inline-flex items-center rounded-full border border-blue-100 bg-[#DDE6F2] px-4 py-1.5 shadow-sm mb-6">
+                            <span className="text-sm">EMPOWERING EDUCATORS</span>
                         </div>
 
                         {/* Heading */}
-                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 mb-6 leading-[1.1]">
+                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 leading-[1.1]">
                             For every teacher
                             ready to grow,<br />
                             <span className="text-[#ff4d67]">This is the Place.</span>
@@ -43,7 +43,7 @@ export default function AboutUsHero() {
                     </div>
 
                     {/* Right Content - Image */}
-                    <div className="relative w-full aspect-[4/3] max-w-lg mx-auto md:ml-auto rounded-3xl overflow-hidden shadow-2xl rotate-6">
+                    <div className="relative w-full aspect-[4/3] max-w-lg mx-auto md:ml-auto rounded-3xl overflow-hidden shadow-2xl">
                         {/* Using a placeholder for now since we don't have the exact image asset */}
                         <div className="absolute inset-0 bg-slate-200">
                             <Image

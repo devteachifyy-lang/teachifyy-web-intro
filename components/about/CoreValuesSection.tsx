@@ -1,8 +1,8 @@
-import { Sparkles, Heart, Zap, ShieldCheck } from 'lucide-react';
+import { Medal, Heart, Blend, ShieldCheck } from 'lucide-react';
 
 const values = [
     {
-        icon: Sparkles,
+        icon: Medal,
         title: 'Excellence',
         description: 'We never settle for "good enough" in our content or community.',
     },
@@ -12,7 +12,7 @@ const values = [
         description: 'Teachers deserve to be understood, not just instructed.',
     },
     {
-        icon: Zap,
+        icon: Blend,
         title: 'Impact',
         description: 'Every lesson we teach aims to transform a classroom somewhere.',
     },

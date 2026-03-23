@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+
 const timelineItems = [
     {
         title: "The Beginning",
@@ -27,6 +31,8 @@ const timelineItems = [
 ];
 
 export default function WhyWeExistSection() {
+    const [activeIndex, setActiveIndex] = useState(0);
+
     return (
         <section className="py-16 md:py-24 bg-white border-t border-slate-100">
             <div className="container mx-auto px-4 max-w-6xl">
@@ -46,21 +52,28 @@ export default function WhyWeExistSection() {
                     {/* Horizontal line */}
                     <div className="absolute top-[10px] left-0 right-0 h-[3px] bg-slate-200" />
 
-                    <div className="grid grid-cols-5 relative z-10">
-                        {timelineItems.map((item, i) => (
-                            <div key={i} className="flex flex-col items-start pr-6">
-                                {/* Dot */}
-                                <div className="w-5 h-5 bg-[#1F4862] rounded-full ring-4 ring-white shadow-md mb-6 shrink-0" />
+                    <div className="grid grid-cols-5 relative z-10" onMouseLeave={() => setActiveIndex(0)}>
+                        {timelineItems.map((item, i) => {
+                            const isActive = activeIndex === i;
+                            return (
+                                <div 
+                                    key={i} 
+                                    onMouseEnter={() => setActiveIndex(i)}
+                                    className={`flex flex-col items-start pr-6 cursor-pointer transition-all duration-300 ${isActive ? '-translate-y-1 opacity-100 grayscale-0' : 'opacity-50 grayscale hover:opacity-100 hover:grayscale-0'}`}
+                                >
+                                    {/* Dot */}
+                                    <div className={`w-5 h-5 rounded-full ring-4 ring-white mb-6 shrink-0 transition-all duration-300 ${isActive ? 'bg-[#FF4667] scale-125 shadow-md' : 'bg-slate-400 shadow-sm'}`} />
 
-                                {/* Content */}
-                                <h3 className="font-bold text-slate-900 text-[15px] leading-snug mb-1.5">
-                                    {item.title}
-                                </h3>
-                                <p className="text-slate-500 text-[13px] leading-relaxed">
-                                    {item.description}
-                                </p>
-                            </div>
-                        ))}
+                                    {/* Content */}
+                                    <h3 className={`font-bold text-[15px] leading-snug mb-1.5 transition-colors duration-300 ${isActive ? 'text-[#FF4667]' : 'text-slate-500'}`}>
+                                        {item.title}
+                                    </h3>
+                                    <p className={`text-[13px] leading-relaxed transition-colors duration-300 ${isActive ? 'text-slate-800' : 'text-slate-400'}`}>
+                                        {item.description}
+                                    </p>
+                                </div>
+                            );
+                        })}
                     </div>
                 </div>
 
