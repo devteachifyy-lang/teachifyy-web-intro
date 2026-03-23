@@ -6,28 +6,28 @@ import { Star } from "lucide-react";
 const testimonials = [
   {
     id: 1,
-    name: "Shivam Aggarwal",
-    role: "Primary Educator, UK",
+    name: "Syed Rahman",
+    role: "Primary Educator , Vietnam",
     content:
-      'No other program showed me the path to go international. Teachifyy did — step by step. Never thought being a teacher in Vietnam was this easy"',
-    initials: "SA",
+      '“No other program showed me the path to go international. Teachifyy did — step by step. Never thought being a teacher in Vietnam was this easy”',
+    initials: "SR",
   },
-  // {
-  //   id: 2,
-  //   name: "Shivam Aggarwal",
-  //   role: "Primary Educator, UK",
-  //   content:
-  //     'No other program showed me the path to go international. Teachifyy did — step by step. Never thought being a teacher in Vietnam was this easy"',
-  //   initials: "SA",
-  // },
-  // {
-  //   id: 3,
-  //   name: "Shivam Aggarwal",
-  //   role: "Primary Educator, UK",
-  //   content:
-  //     'No other program showed me the path to go international. Teachifyy did — step by step. Never thought being a teacher in Vietnam was this easy"',
-  //   initials: "SA",
-  // },
+  {
+    id: 2,
+    name: "Holly Hilton",
+    role: "Primary Educator , UK",
+    content:
+      '“There’s a certain confidence you carry after going through Teachifyy. It reflects in the way you speak, teach, and lead a classroom.”',
+    initials: "HH",
+  },
+  {
+    id: 3,
+    name: "Sohini Mondal",
+    role: "Mentor",
+    content:
+      '“Teachifyy focuses on what most training misses — real classroom readiness. It’s not about completing a course, it’s about becoming a teacher students remember.”',
+    initials: "SM",
+  },
 ];
 
 const TestimonialsSection = () => {
@@ -51,8 +51,7 @@ const TestimonialsSection = () => {
         </p>
 
         {/* Cards Wrapper */}
-        {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-16 w-full max-w-[1100px] mx-auto px-2"> */}
-        <div className="flex flex-col items-center">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-16 w-full max-w-[1100px] mx-auto px-2">
           {testimonials.map((test) => (
             <div
               key={test.id}
@@ -70,14 +69,11 @@ const TestimonialsSection = () => {
 
               {/* Front Content Container */}
               <div className="relative z-10 ml-[55px] mt-[55px] pr-4 lg:pr-6 flex flex-col items-start min-h-[220px]">
-                {/* Text Content */}
                 <p className="text-[#334155] text-[12px] leading-[1.7] italic font-medium tracking-tight pr-2">
                   {test.content}
                 </p>
 
-                {/* Profile section pinned to bottom */}
                 <div className="mt-[20px] w-full flex items-center justify-between">
-                  {/* Avatar and Info */}
                   <div className="flex items-center gap-[10px]">
                     <div className="w-[28px] h-[28px] shrink-0 rounded-full bg-[#2b5886] text-white flex items-center justify-center font-bold text-[10px]">
                       {test.initials}
@@ -92,7 +88,6 @@ const TestimonialsSection = () => {
                     </div>
                   </div>
 
-                  {/* Stars Graphic */}
                   <div className="flex items-center gap-[2px] shrink-0">
                     {[1, 2, 3, 4, 5].map((star) => (
                       <Star

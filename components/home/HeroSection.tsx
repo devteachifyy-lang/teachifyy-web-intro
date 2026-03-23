@@ -1,19 +1,12 @@
 "use client";
 import Link from "next/link";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight, Check, ChartNoAxesCombined } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-    }, 5000);
-
-    return () => clearInterval(interval);
-  });
   const heroSlides = [
     {
       title: (
@@ -54,116 +47,147 @@ const HeroSection = () => {
         "Learn what it takes to train and stand out in the hiring process.",
     },
   ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section className="relative w-full overflow-hidden bg-white">
-      {/* Background Layer with subtle peach and light blue glows */}
+      {/* Background */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute bottom-[-10%] left-[-5%] w-[600px] h-[600px] bg-[#FFF0EA] rounded-full blur-[100px] opacity-100" />
-        <div className="absolute bottom-[-10%] right-[-5%] w-[500px] h-[500px] bg-[#EBF3FC] rounded-full blur-[100px] opacity-100" />
+        <div className="absolute bottom-[-20%] left-[-10%] w-[400px] h-[400px] md:w-[600px] md:h-[600px] bg-[#FFF0EA] rounded-full blur-[100px]" />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[350px] h-[350px] md:w-[500px] md:h-[500px] bg-[#EBF3FC] rounded-full blur-[100px]" />
       </div>
 
-      <div className="max-w-[1440px] mx-auto w-full relative z-10">
-        <div className="max-w-[1248px] mx-auto px-5 lg:px-12 py-10 md:py-10 lg:py-12 flex items-center">
-          <div className="grid lg:grid-cols-[1fr_0.9fr] gap-12 lg:gap-16 items-center w-full">
-            {/* Left Content */}
+      <div className="max-w-[1440px] mx-auto relative z-10">
+        <div className="max-w-[1248px] mx-auto px-4 sm:px-6 lg:px-12 py-8 md:py-10 lg:py-12">
+          <div className="grid lg:grid-cols-[1fr_0.9fr] gap-10 lg:gap-16 items-center">
+
+            {/* LEFT */}
             <div className="flex flex-col items-start text-left">
               {/* Badge */}
-              <div className="inline-flex items-center bg-[#DDE6F2] text-[#000000] text-[10px] font-[400] uppercase tracking-wider rounded-full px-[24px] py-[6px] mb-6">
+              <div className="inline-flex items-center bg-[#DDE6F2] text-black text-[9px] sm:text-[10px] uppercase tracking-wider rounded-full px-4 sm:px-6 py-1.5 mb-5">
                 PROFESSIONAL TEACHER DEVELOPMENT
               </div>
 
               {/* Heading */}
-              <div key={currentSlide} className="fade-slide">
-                <h1 className="text-[#111827] text-[44px] font-normal leading-none tracking-normal mb-6 font-Inter">
+              <div key={currentSlide}>
+                <h1 className="text-[#111827] 
+                  text-[28px] 
+                  sm:text-[34px] 
+                  md:text-[40px] 
+                  lg:text-[44px] 
+                  leading-tight 
+                  mb-4 
+                  font-Inter
+                  font-light">
                   {heroSlides[currentSlide].title}
                 </h1>
 
-                <p className="text-[#475569] text-[18px] md:text-[20px] mb-10 font-Inter max-w-[540px]">
+                <p className="text-[#475569] 
+                  text-[13px] 
+                  sm:text-[14px] 
+                  md:text-[16px] 
+                  mb-6 
+                  max-w-full 
+                  lg:max-w-[540px]">
                   {heroSlides[currentSlide].subtitle}
                 </p>
-                <div className="flex gap-2 mt-6">
-                </div>
               </div>
 
-
-              {/* Feature Checklist */}
-              <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 lg:gap-8 mb-12">
-                <div className="flex items-center gap-[8px]">
-                  <div className="w-[16px] h-[16px] rounded-full bg-[#34A853] flex items-center justify-center shrink-0">
-                    <Check
-                      className="w-[10px] h-[10px] text-white"
-                      strokeWidth={4}
-                    />
+              {/* Checklist */}
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 mb-8">
+                {[
+                  "UK-research backed",
+                  "Real classroom application",
+                  "Global career mobility",
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-2">
+                    <div className="w-4 h-4 rounded-full bg-[#34A853] flex items-center justify-center">
+                      <Check className="w-2.5 h-2.5 text-white" strokeWidth={4} />
+                    </div>
+                    <span className="text-[#334155] text-[12px] sm:text-[13px] font-medium">
+                      {item}
+                    </span>
                   </div>
-                  <span className="text-[#334155] text-[13px] md:text-[12px] font-medium font-sans">
-                    UK-research backed
-                  </span>
-                </div>
-                <div className="flex items-center gap-[8px]">
-                  <div className="w-[16px] h-[16px] rounded-full bg-[#34A853] flex items-center justify-center shrink-0">
-                    <Check
-                      className="w-[10px] h-[10px] text-white"
-                      strokeWidth={4}
-                    />
-                  </div>
-                  <span className="text-[#334155] text-[13px] md:text-[12px] font-medium font-sans">
-                    Real classroom application
-                  </span>
-                </div>
-                <div className="flex items-center gap-[8px]">
-                  <div className="w-[16px] h-[16px] rounded-full bg-[#34A853] flex items-center justify-center shrink-0">
-                    <Check
-                      className="w-[10px] h-[10px] text-white"
-                      strokeWidth={4}
-                    />
-                  </div>
-                  <span className="text-[#334155] text-[13px] md:text-[12px] font-medium font-sans">
-                    Global career mobility
-                  </span>
-                </div>
+                ))}
               </div>
 
-              {/* CTA Buttons */}
-              <div className="flex flex-wrap items-center gap-[14px]">
-                <Link href="/courses">
-                  <button className="flex items-center justify-center bg-[#FF4D67] text-white font-medium text-[15px] pt-[14px] pb-[14px] pl-[28px] pr-[24px] rounded-full hover:bg-[#ff3b57] transition-colors">
+              {/* Buttons */}
+              <div className="flex flex-col sm:flex-row w-full sm:w-auto gap-3 sm:gap-4">
+                <Link href="/courses" className="w-full sm:w-auto">
+                  <button className="w-full sm:w-auto flex items-center justify-center bg-[#FF4D67] text-white text-[14px] sm:text-[15px] py-3 px-6 rounded-full">
                     Register for Webinar
-                    <ArrowRight className="w-[18px] h-[18px] ml-2" />
+                    <ArrowRight className="w-4 h-4 ml-2" />
                   </button>
                 </Link>
-                <Link href="/assessment">
-                  <button className="flex items-center justify-center bg-transparent text-[#111827] border-[1px] border-[#FFc6ce] font-medium text-[15px] py-[14px] px-[28px] rounded-full hover:bg-slate-50 hover:border-[#FF4D67] transition-colors">
+
+                <Link href="/assessment" className="w-full sm:w-auto">
+                  <button className="w-full sm:w-auto flex items-center justify-center border border-[#FFc6ce] text-[#111827] text-[14px] sm:text-[15px] py-3 px-6 rounded-full">
                     Take Assessment
                   </button>
                 </Link>
               </div>
 
+              {/* Logos */}
+              <div className="flex flex-wrap items-center gap-4 mt-8">
+                {["herosmall1.png", "herosmall2.png", "herosmall3.png"].map((img, i) => (
+                  <Image
+                    key={i}
+                    src={`/assets/${img}`}
+                    alt="feature"
+                    width={120}
+                    height={40}
+                    className="h-[30px] sm:h-[40px] md:h-[50px] w-auto object-contain"
+                  />
+                ))}
+              </div>
             </div>
 
-            {/* Right Content - Image */}
-            <div className="relative w-full mt-8 lg:mt-0 lg:ml-auto max-w-[580px]">
-              {/* Image Container with Custom Corners */}
-              <div className="relative w-full aspect-[4/3] rounded-[26.5px] overflow-hidden z-10">
+            {/* RIGHT IMAGE */}
+            <div className="relative w-full max-w-[580px] mx-auto lg:mx-0">
+              <div className="relative w-full aspect-[4/3] 
+                rounded-[24px] 
+                sm:rounded-[32px] 
+                lg:rounded-l-[40px] 
+                lg:rounded-r-[140px] 
+                overflow-hidden">
                 <Image
                   src="/assets/teacher-classroom.png"
-                  alt="Teacher pointing in a classroom with a global cityscape view"
+                  alt="Teacher"
                   fill
                   className="object-cover"
                   priority
                 />
+              </div>
 
-                {/* Decorative Frame Overlay (User's Custom Image) - Moved INSIDE so it fully clips the outer rounded corners! */}
-                <div className="absolute top-0 left-0 w-[55%] h-[55%] sm:w-[50%] sm:h-[50%] z-20 pointer-events-none">
-                  <Image
-                    src="/assets/corner-frame.png"
-                    alt="Decorative corner frame"
-                    fill
-                    priority
-                    className="object-contain object-left-top"
-                  />
+              {/* Floating Card */}
+              <div className="absolute 
+                bottom-[-20px] 
+                sm:bottom-4 
+                left-1/2 
+                -translate-x-1/2 
+                lg:left-[-20px] 
+                lg:translate-x-0 
+                bg-white rounded-xl sm:rounded-2xl 
+                px-4 py-3 
+                shadow-lg 
+                flex items-center gap-3 
+                min-w-[200px]">
+                <ChartNoAxesCombined className="w-6 h-6 text-[#34A853]" />
+                <div>
+                  <p className="font-bold text-[13px]">Success</p>
+                  <p className="text-[11px] text-gray-500">
+                    Up to 167% salary growth
+                  </p>
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </div>

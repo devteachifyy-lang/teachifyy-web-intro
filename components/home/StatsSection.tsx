@@ -1,7 +1,30 @@
-import React from "react";
+"use client";
+
+import React, { useState, useEffect, useRef } from "react";
 import { BarChart3 } from "lucide-react";
 
 const StatsSection = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const chartRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (chartRef.current) {
+      observer.observe(chartRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section className="w-full py-20 bg-white">
       <div className="max-w-[1248px] mx-auto px-6 lg:px-12 flex flex-col items-center">
@@ -11,7 +34,7 @@ const StatsSection = () => {
         </div>
 
         {/* Heading */}
-        <h2 className="text-[#0F172A] text-[32px] md:text-[40px] font-bold font-sans tracking-tight mb-12 text-center">
+        <h2 className="text-[#0F172A] text-[23px] md:text-[40px] font-bold font-sans tracking-tight mb-12 text-center">
           The Numbers Behind the Challenge
         </h2>
 
@@ -40,18 +63,24 @@ const StatsSection = () => {
           </div>
 
           {/* Right Content - Chart Mockup */}
-          <div className="w-full md:w-[340px] h-[260px] bg-[#537497] rounded-[32px] p-6 relative z-10 flex flex-col justify-between shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+          <div
+            ref={chartRef}
+            className="w-full md:w-[340px] h-[260px] bg-[#537497] rounded-[32px] p-6 relative z-10 flex flex-col justify-between shadow-[0_8px_30px_rgba(0,0,0,0.12)]"
+          >
             <h4 className="text-white text-[18px] md:text-[20px] font-bold font-sans tracking-tight">
               Placement Rate
             </h4>
 
-            <div className="flex justify-center items-end h-[160px] gap-4 w-full px-2">
+            <div className="flex justify-center items-end h-[160px] w-full px-10">
               {/* Bar 1 */}
               <div className="flex flex-col items-center gap-[6px] flex-1 h-full justify-end">
                 <span className="text-white/90 text-[10px] md:text-[11px] font-medium whitespace-nowrap mb-1">
                   Total Grads
                 </span>
-                <div className="w-full max-w-[48px] bg-[#2C4A70] rounded-t-[16px] h-[100%]" />
+                <div
+                  className="w-full max-w-[48px] bg-[#2C4A70] rounded-t-[16px] transition-all duration-[1200ms] ease-out"
+                  style={{ height: isVisible ? "100%" : "0%" }}
+                />
                 <span className="text-white/90 text-[11px] md:text-[12px] font-medium leading-none mt-2">
                   6L+
                 </span>
@@ -62,7 +91,10 @@ const StatsSection = () => {
                 <span className="text-white/90 text-[10px] md:text-[11px] font-medium whitespace-nowrap mb-1">
                   Employed
                 </span>
-                <div className="w-full max-w-[48px] bg-white rounded-t-[16px] h-[58%]" />
+                <div
+                  className="w-full max-w-[48px] bg-white rounded-t-[16px] transition-all duration-[1200ms] delay-300 ease-out"
+                  style={{ height: isVisible ? "58%" : "0%" }}
+                />
                 <span className="text-white/90 text-[11px] md:text-[12px] font-medium leading-none mt-2">
                   58%
                 </span>
@@ -73,7 +105,10 @@ const StatsSection = () => {
                 <span className="text-white/90 text-[10px] md:text-[11px] font-medium whitespace-nowrap mb-1">
                   Gap
                 </span>
-                <div className="w-full max-w-[48px] bg-[#2C4A70] rounded-t-[16px] h-[42%]" />
+                <div
+                  className="w-full max-w-[48px] bg-[#2C4A70] rounded-t-[16px] transition-all duration-[1200ms] delay-[600ms] ease-out"
+                  style={{ height: isVisible ? "42%" : "0%" }}
+                />
                 <span className="text-white/90 text-[11px] md:text-[12px] font-medium leading-none mt-2">
                   42%
                 </span>
