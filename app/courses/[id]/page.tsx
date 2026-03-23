@@ -3,7 +3,7 @@
 import React, { useState, use } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { CheckCircle, ChevronDown, ChevronUp, Share2 } from "lucide-react";
+import { CheckCircle, ChevronDown, ChevronUp, Share2, ShieldCheck } from "lucide-react";
 import CtaSection from "@/components/home/CtaSection";
 import { useGetPublicCourseBySlugQuery } from "@/app/api/course";
 
@@ -76,6 +76,23 @@ export default function CoursePage({ params }: { params: Promise<{ id: string }>
                 {data.course.description}
               </p>
 
+              {/* Course Features Chips */}
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-1 mt-8">
+                <span className="border border-gray-200 rounded-full px-3 py-1 text-[#111827] text-[12px] font-light bg-white">
+                  Video lessons
+                </span>
+                <span className="border border-gray-200 rounded-full px-3 py-1 text-[#111827] text-[12px] font-light bg-white">
+                  {data.curriculum?.totalWeeks ? `${data.curriculum.totalWeeks * 10}+ hours` : '220+ hours'}
+                </span>
+                <span className="border border-gray-200 rounded-full px-3 py-1 text-[#111827] text-[12px] font-light bg-white">
+                  Beginner Level
+                </span>
+                <span className="bg-[#325A86] text-white rounded-full px-3 py-1 text-[12px] font-light flex items-center gap-2">
+                  <CheckCircle className="w-[18px] h-[18px] fill-white text-[#325A86]" />
+                  Certification Included
+                </span>
+              </div>
+
               {/* <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
                 <Link href="/contact">
                   <button className="bg-primary hover:bg-primary-600 text-white font-semibold text-[15px] px-8 py-3 rounded-lg transition-colors shadow-lg shadow-primary/25 w-full sm:w-auto">
@@ -89,8 +106,9 @@ export default function CoursePage({ params }: { params: Promise<{ id: string }>
             </div>
 
             {/* Right – Image */}
+            {/* 1120px Width × 840px Height */}
             <div className="flex-shrink-0 w-full max-w-[320px] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[560px]">
-              <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden shadow-2xl shadow-black/40">
+              <div className="relative w-full aspect-[4/3] rounded-[24px] sm:rounded-[32px] lg:rounded-l-[76px] lg:rounded-r-[76px] overflow-hidden shadow-2xl shadow-black/40">
                 {data.course?.image && (
                   <Image
                     src={data.course.image}
@@ -150,55 +168,67 @@ export default function CoursePage({ params }: { params: Promise<{ id: string }>
             </div>
 
             {/* Right Column – Pricing Card */}
-            <div className="w-full lg:w-[340px] xl:w-[370px] shrink-0">
+            {/* Right Column – Pricing Card */}
+            <div className="w-full lg:w-[380px] xl:w-[420px] shrink-0">
               <div className="lg:sticky lg:top-24">
-                <div className="bg-white border border-gray-200 rounded-2xl shadow-xl shadow-gray-200/60 p-6">
-                  {/* Price */}
-                  <div className="mb-5">
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-3xl md:text-4xl font-bold text-gray-900">
+                <div className="bg-white rounded-[40px] shadow-[0_8px_40px_rgb(0,0,0,0.06)] p-8 border border-gray-100 flex flex-col">
+                  {/* Price Header */}
+                  <div className="mb-8">
+                    <div className="flex flex-wrap items-center gap-3 mb-2">
+                      <span className="text-[44px] md:text-[52px] font-bold text-[#111827] leading-none tracking-tight">
                         ₹{formattedPrice}
                       </span>
-                      {/* If there's a strikethrough price, show it */}
-                      {/* <span className="text-lg text-gray-400 line-through">₹1,29,900</span> */}
+                      <span className="text-xl md:text-2xl text-[#9ca3af] line-through font-bold">
+                        ₹100000
+                      </span>
                     </div>
+                    <p className="text-[#34A853] font-bold text-[13px] md:text-[14px]">
+                      Limited time early bird pricing
+                    </p>
                   </div>
 
-                  <hr className="border-gray-100 mb-5" />
+                  {/* What's included */}
+                  <div className="mb-10 flex-1">
+                    <p className="text-[#9ca3af] font-bold text-[15px] mb-5">
+                      What's included
+                    </p>
+                    <ul className="space-y-4">
+                      {[
+                        "Recorded Lessons",
+                        "Practice Test",
+                        "Certification",
+                        "On-Demand Live Classes",
+                        "Mentorship",
+                        "Career and Placement Support",
+                      ].map((feature, i) => (
+                        <li key={i} className="flex items-center gap-3">
+                          <CheckCircle className="w-[20px] h-[20px] fill-[#34A853] text-white shrink-0" />
+                          <span className="text-[#111827] text-[16px] font-normal tracking-wide">
+                            {feature}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
 
-                  {/* Feature List */}
-                  <ul className="space-y-3 mb-6">
-                    {[
-                      `${data.curriculum?.totalWeeks || 0} Weeks Program`,
-                      `${data.curriculum?.totalLevels || 0} Levels Covered`,
-                      "Live Mentorship",
-                      "Certificate of Completion",
-                      "Job Assistance",
-                    ].map((feature, i) => (
-                      <li key={i} className="flex items-center gap-3">
-                        <CheckCircle className="w-[18px] h-[18px] text-primary shrink-0" />
-                        <span className="text-gray-700 text-sm">
-                          {feature}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* Enroll CTA */}
-                  <Link href={`/courses/${slug}/enroll`} className="block mb-3">
-                    <button className="w-full bg-primary hover:bg-primary-600 text-white font-semibold text-[15px] py-3.5 rounded-lg transition-colors shadow-md shadow-primary/20">
-                      Enroll Now
-                    </button>
-                  </Link>
-
-                  {/* Secondary Links */}
-                  <div className="text-center space-y-2 pt-2">
-                    <Link
-                      href="/contact"
-                      className="block text-sm text-gray-500 hover:text-primary transition-colors"
-                    >
-                      Talk to a Counsellor
+                  {/* CTA Buttons */}
+                  <div className="space-y-4 w-full">
+                    <Link href={`/courses/${slug}/enroll`} className="block w-full">
+                      <button className="w-full bg-[#FF4667] hover:bg-[#E53858] text-white font-normal text-[17px] py-[14px] transition-colors border border-[#FF4667]">
+                        Enroll Now
+                      </button>
                     </Link>
+                    <Link href="/contact" className="block w-full">
+                      <button className="w-full border border-[#FF4667] text-[#111827] bg-white hover:bg-gray-50 font-normal text-[17px] py-[14px] transition-colors">
+                        Talk to an Advisor
+                      </button>
+                    </Link>
+                  </div>
+
+                  {/* Secure Checkout */}
+                  <div className="mt-8 flex items-center justify-center gap-2 text-[#9ca3af]">
+                    <ShieldCheck className="w-[18px] h-[18px] stroke-2" />
+                    <span className="text-sm font-bold">Secure Checkout</span>
                   </div>
                 </div>
               </div>
@@ -257,40 +287,51 @@ export default function CoursePage({ params }: { params: Promise<{ id: string }>
       </section>
 
       {/* ======================== MENTOR SECTION ======================== */}
-      <section className="section-padding">
-        <div className="container-custom">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
-            Your Mentor
-          </h2>
+      <section className="section-padding flex flex-col items-start justify-start">
+        <div className="container-custom  w-full flex justify-start">
 
-          <div className="flex flex-col sm:flex-row items-start gap-5 max-w-2xl">
-            {/* Mentor Image */}
-            <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-gray-100 flex items-center justify-center shrink-0 border-2 border-gray-100 relative overflow-hidden text-2xl font-bold text-gray-400">
-              {data.mentor?.imageUrl || data.mentor?.image ? (
-                <Image
-                  src={data.mentor.imageUrl || data.mentor.image}
-                  alt={data.mentor?.name || "Mentor"}
-                  fill
-                  className="object-cover"
-                />
-              ) : (
-                data.mentor?.name?.charAt(0)?.toUpperCase() || "M"
-              )}
+          <div className="bg-[#DDE6F28A] w-fit rounded-2xl p-6 sm:p-8 md:p-10">
+
+            {/* Heading */}
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+              Your Mentor
+            </h2>
+
+            {/* Content */}
+            <div className="flex flex-col sm:flex-row items-start gap-5 max-w-2xl">
+
+              {/* Mentor Image */}
+              <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-gray-100 flex items-center justify-center shrink-0 border-2 border-gray-100 relative overflow-hidden text-2xl font-bold text-gray-400">
+                {data.mentor?.imageUrl || data.mentor?.image ? (
+                  <Image
+                    src={data.mentor.imageUrl || data.mentor.image}
+                    alt={data.mentor?.name || "Mentor"}
+                    fill
+                    className="object-cover"
+                  />
+                ) : (
+                  data.mentor?.name?.charAt(0)?.toUpperCase() || "M"
+                )}
+              </div>
+
+              {/* Mentor Info */}
+              <div>
+                <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-0.5">
+                  {data.mentor?.name}
+                </h3>
+
+                <p className="text-primary text-sm font-medium mb-3">
+                  {data.mentor?.designation}
+                </p>
+
+                <p className="text-gray-600 text-[14px] sm:text-[15px] leading-relaxed">
+                  {data.mentor?.bio}
+                </p>
+              </div>
             </div>
 
-            {/* Mentor Info */}
-            <div>
-              <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-0.5">
-                {data.mentor.name}
-              </h3>
-              <p className="text-primary text-sm font-medium mb-3">
-                {data.mentor.designation}
-              </p>
-              <p className="text-gray-600 text-[15px] leading-relaxed">
-                {data.mentor.bio}
-              </p>
-            </div>
           </div>
+
         </div>
       </section>
 

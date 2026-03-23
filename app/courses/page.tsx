@@ -16,7 +16,7 @@ export default function CoursesPage() {
     <div className="min-h-screen bg-white">
       <CourseHero />
       <UserJourney />
-      <UpcomingMasterclasses />
+      {/* <UpcomingMasterclasses /> */}
 
       {/* Courses Grid */}
       <section className="py-16 md:py-24">

@@ -6,19 +6,18 @@ const CtaSection = () => {
     <section className="w-full bg-[#0E172B] py-24 px-6 relative overflow-hidden">
       <div className="max-w-[900px] mx-auto flex flex-col items-center text-center relative z-10">
         {/* Badge */}
-        <div className="inline-flex items-center bg-[#DDE6F2] text-[#000000] text-[10px] font-[400] uppercase tracking-wider rounded-full px-[24px] py-[6px] mb-8">
+        {/* <div className="inline-flex items-center bg-[#DDE6F2] text-[#000000] text-[10px] font-[400] uppercase tracking-wider rounded-full px-[24px] py-[6px] mb-8">
           TAKE THE FIRST STEP
-        </div>
+        </div> */}
 
         {/* Heading */}
         <h2 className="text-white text-[35px] md:text-[40px] lg:text-[48px] font-bold leading-tight mb-6 font-sans tracking-tight">
           Teaching Requires Continuous
           Learning <br className="hidden md:block" />
-          <span className="text-[#FF4D67]">You Were Meant to Be?</span>
         </h2>
 
         {/* Subheading */}
-        <p className="text-white/90 text-[15px] md:text-[16px] max-w-[600px] leading-relaxed mb-12 font-[300] tracking-wide">
+        <p className="text-white/90 text-[15px] md:text-[16px]  leading-relaxed mb-12 font-[300] tracking-wide">
           Join  specialized educators worldwide who are redefining the boundaries of the classroom.
         </p>
 
