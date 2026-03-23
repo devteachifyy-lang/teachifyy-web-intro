@@ -30,7 +30,7 @@ export default function WhatWeCareAbout() {
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-3 tracking-tight">
             What We Care About
           </h2>
-          <p className="text-slate-500 text-base max-w-xl mx-auto leading-relaxed">
+          <p className="text-slate-500 text-base  mx-auto leading-relaxed">
             Our values define how we work, learn, and grow together - as we build tools for the world&apos;s most important profession.
           </p>
         </div>

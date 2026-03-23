@@ -45,37 +45,23 @@ export default function WhoCanReachOut() {
             Who Can Reach Out
           </h2>
           <p className="text-slate-500 text-base max-w-2xl mx-auto leading-relaxed">
-            We are open to talented people from many backgrounds. Here are some
-            of the profiles we are always excited to hear from when considering
-            filling positions on our team.
+            We&apos;re not just looking for job candidates — we&apos;re looking for collaborators, thinkers, and people who care deeply about education.
           </p>
         </div>
 
         {/* Roles Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-3xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto my-6">
           {roles.map((role) => {
             const Icon = role.icon;
             return (
               <div
                 key={role.title}
-                className={`flex items-center gap-3 rounded-xl border px-5 py-4 transition-all duration-200 hover:shadow-md cursor-pointer ${role.highlighted
-                  ? 'border-[#ff4d67] bg-white'
-                  : 'border-slate-200 bg-white'
-                  }`}
+                className="flex items-center gap-5 bg-white border-l-[4px] border-[#FF4667] rounded-xl px-6 py-5 shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer"
               >
-                <div
-                  className={`flex items-center justify-center w-9 h-9 rounded-full shrink-0 ${role.highlighted
-                    ? 'bg-[#fff0f2]'
-                    : 'bg-slate-100'
-                    }`}
-                >
-                  <Icon
-                    className={`w-4 h-4 ${role.highlighted ? 'text-[#ff4d67]' : 'text-slate-500'
-                      }`}
-                    strokeWidth={1.8}
-                  />
+                <div className="flex items-center justify-center w-11 h-11 rounded-full bg-[#f8fafc] shrink-0 border border-slate-100">
+                  <Icon className="w-[20px] h-[20px] text-[#334155]" strokeWidth={1.5} />
                 </div>
-                <span className="text-slate-800 text-[14px] font-medium leading-snug">
+                <span className="text-[#111827] text-[15px] font-bold leading-tight">
                   {role.title}
                 </span>
               </div>
@@ -85,8 +71,7 @@ export default function WhoCanReachOut() {
 
         {/* Bottom note */}
         <p className="text-center text-slate-500 text-[14px] mt-10 max-w-xl mx-auto leading-relaxed">
-          Don&apos;t see yourself here? That&apos;s okay if you&apos;re passionate about education and want to contribute, we still want to hear your story.
-        </p>
+          Don&apos;t see yourself here? That&apos;s okay — if you&apos;re passionate about education and want to contribute, we still want to hear your story.</p>
       </div>
     </section>
   );

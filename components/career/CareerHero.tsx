@@ -16,12 +16,12 @@ export default function CareerHero() {
           {/* Left Content */}
           <div className="flex flex-col items-start max-w-xl">
             {/* Badge */}
-            <div className="inline-flex items-center rounded-full border border-blue-100 bg-white px-4 py-1.5 shadow-sm mb-6">
-              <span className="text-xs font-semibold text-slate-700 tracking-widest uppercase">WORK WITH US</span>
+            <div className="inline-flex items-center rounded-full border border-blue-100 bg-[#DDE6F2] px-4 py-1.5 shadow-sm mb-6">
+              <span className="text-xs font-semibold text-slate-700 uppercase">WORK WITH US</span>
             </div>
 
             {/* Heading */}
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900 mb-5 leading-[1.15]">
+            <h1 className="text-4xl  md:text-5xl font-bold tracking-wide text-slate-900 mb-5 leading-[1.15]">
               Build the{' '}
               <span className="text-[#FF4667]">Future</span>
               <br />
@@ -30,16 +30,16 @@ export default function CareerHero() {
             </h1>
 
             {/* Subtext */}
-            <p className="text-black mb-8 max-w-md leading-relaxed text-lg">
+            <p className="text-black mb-8 max-w-md leading-relaxed text-sm">
               At Teachifyy, we are building meaningful learning experiences for educators. Join our mission to empower teachers and transform classrooms.
             </p>
-            <p className=" text-slate-600 mb-2 max-w-md leading-relaxed text-sm">
+            <p className=" text-slate-600 mb-2 max-w-md leading-relaxed text-xs">
               Even if there are no open roles, we are always excited to connect with passionate people.
             </p>
             {/* CTA Button */}
             <Link
               href="#opportunities"
-              className="inline-flex items-center gap-2 bg-[#ff4d67] text-white font-medium text-[15px] pt-[12px] pb-[12px] px-[24px] hover:bg-[#ff3b57] transition-all rounded-full"
+              className="inline-flex items-center gap-2 bg-[#FF4667] text-white font-medium text-[15px] pt-[12px] pb-[12px] px-[24px] hover:bg-[#ff3b57] transition-all rounded-full"
             >
               Send us a message
               <ArrowRight className="h-4 w-4" />
@@ -47,24 +47,26 @@ export default function CareerHero() {
           </div>
 
           {/* Right Content - Image */}
-          <div className="relative w-full aspect-[4/3] max-w-lg mx-auto md:ml-auto rounded-2xl overflow-hidden shadow-2xl">
-            <Image
-              src="/assets/careerHero.jpg"
-              alt="Build the Future of Education"
-              fill
-              className="object-cover"
-              priority
-            />
+          <div className="relative w-full max-w-[580px] mx-auto md:ml-auto">
+            <div className="relative w-full aspect-[4/3] rounded-[24px] sm:rounded-[32px] lg:rounded-l-[76px] lg:rounded-r-[76px] overflow-hidden shadow-2xl">
+              <Image
+                src="/assets/careerHero.jpg"
+                alt="Build the Future of Education"
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
             {/* Stats badge overlay */}
-            <div className="absolute bottom-4 left-4 bg-white rounded-xl px-3 py-2 shadow-md flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-[#ff4d67]/10 flex items-center justify-center">
+            <div className="absolute bottom-[-20px] sm:bottom-4 left-1/2 -translate-x-1/2 md:left-[-20px] md:translate-x-0 bg-white rounded-xl sm:rounded-2xl px-4 py-3 shadow-lg flex items-center gap-3 min-w-[200px]">
+              <div className="w-8 h-8 rounded-full bg-[#ff4d67]/10 flex items-center justify-center shrink-0">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="#ff4d67" stroke="#ff4d67" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
                 </svg>
               </div>
               <div>
-                <p className="text-[10px] text-slate-400 font-medium">Our Mission</p>
-                <p className="text-sm font-bold text-slate-800">Educators First Always</p>
+                <p className="text-[11px] text-slate-500 font-medium">Our Mission</p>
+                <p className="text-[13px] font-bold text-slate-800">Educators First Always</p>
               </div>
             </div>
           </div>

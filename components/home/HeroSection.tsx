@@ -75,7 +75,7 @@ const HeroSection = () => {
               </div>
 
               {/* Heading */}
-              <div key={currentSlide} className="animate-fade-in h-[250px]" >
+              <div key={currentSlide} className="animate-fade-in lg:h-[250px] h-[150px]" >
                 <h1 className="text-[#111827] 
                   text-[28px] 
                   sm:text-[34px] 

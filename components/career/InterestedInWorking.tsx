@@ -7,8 +7,8 @@ export default function InterestedInWorking() {
       <div className="container-custom">
         <div className="text-center max-w-2xl mx-auto">
           {/* Badge */}
-          <div className="inline-flex items-center rounded-full border border-blue-100 bg-white px-4 py-1.5 shadow-sm mb-6">
-            <span className="text-xs font-semibold text-slate-700 tracking-widest uppercase">OPEN TO CONVERSATIONS</span>
+          <div className="inline-flex items-center rounded-full border border-blue-100 bg-[#DDE6F2] px-4 py-1.5 shadow-sm mb-6">
+            <span className="text-xs  text-slate-700 uppercase">OPEN TO CONVERSATIONS</span>
           </div>
 
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4 tracking-tight">
