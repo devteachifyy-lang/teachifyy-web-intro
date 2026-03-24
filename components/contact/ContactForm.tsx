@@ -1,165 +1,213 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { Mail, MapPin, Phone, Send } from 'lucide-react';
-import Button from '@/components/ui/Button';
+import React, { useState } from "react";
+import Button from "@/components/ui/Button";
+import { useSubmitContactMutation } from "@/app/api/contact";
 
-const ContactForm = () => {
+export default function ContactForm() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
+    fullName: "",
+    email: "",
+    phone: "",
+    age: "",
+    city: "",
+    profession: "",
+    qualifications: "",
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitMessage, setSubmitMessage] = useState('');
+
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [successMessage, setSuccessMessage] = useState("");
 
-  const validateForm = () => {
+  const { mutate: submitContact, isPending } = useSubmitContactMutation();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    // Clear error when user types
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: "" }));
+    }
+  };
+
+  const validate = () => {
     const newErrors: Record<string, string> = {};
-
-    if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
-    }
-
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email';
-    }
-
-    if (!formData.subject.trim()) {
-      newErrors.subject = 'Subject is required';
-    }
-
-    if (!formData.message.trim()) {
-      newErrors.message = 'Message is required';
-    } else if (formData.message.trim().length < 10) {
-      newErrors.message = 'Message must be at least 10 characters';
-    }
+    if (!formData.fullName.trim()) newErrors.fullName = "Full Name is required";
+    if (!formData.email.trim()) newErrors.email = "Email Address is required";
+    else if (!/^\S+@\S+\.\S+$/.test(formData.email)) newErrors.email = "Invalid email format";
+    if (!formData.phone.trim()) newErrors.phone = "Phone Number is required";
+    if (!formData.age.trim()) newErrors.age = "Age is required";
+    if (!formData.city.trim()) newErrors.city = "City is required";
+    if (!formData.profession.trim()) newErrors.profession = "Profession is required";
+    if (!formData.qualifications.trim()) newErrors.qualifications = "Qualifications are required";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (!validateForm()) {
-      return;
-    }
-
-    setIsSubmitting(true);
-    setSubmitMessage('');
-
-    // Simulate API call
-    setTimeout(() => {
-      setSubmitMessage('Thank you for your message! We\'ll get back to you soon.');
-      setFormData({ name: '', email: '', subject: '', message: '' });
-      setIsSubmitting(false);
-      setTimeout(() => setSubmitMessage(''), 5000);
-    }, 1500);
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-    // Clear error when user starts typing
-    if (errors[name]) {
-      setErrors((prev) => ({ ...prev, [name]: '' }));
+    setSuccessMessage("");
+    
+    if (validate()) {
+      submitContact(formData, {
+        onSuccess: () => {
+          setSuccessMessage("Thank you! Your information has been submitted successfully.");
+          setFormData({
+            fullName: "",
+            email: "",
+            phone: "",
+            age: "",
+            city: "",
+            profession: "",
+            qualifications: "",
+          });
+        },
+        onError: () => {
+          setErrors({ submit: "Failed to submit. Please try again later." });
+        },
+      });
     }
   };
+
+  const inputClasses = "w-full border border-gray-200 rounded-[10px] px-4 py-3.5 text-[15px] focus:outline-none focus:ring-2 focus:ring-[#FF4667]/20 focus:border-[#FF4667] transition-all bg-white text-gray-800 placeholder:text-gray-400";
+  const labelClasses = "block text-[14px] font-semibold text-gray-700 mb-2.5";
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      {/* Name */}
-      <div>
-        <label htmlFor="name" className="block text-sm font-medium  mb-2">
-          Name *
-        </label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          className="input-field"
-          placeholder="Your full name"
-        />
-        {errors.name && <p className="mt-1 text-sm text-red-500">{errors.name}</p>}
+    <div className="w-full h-full flex flex-col items-center justify-center p-4">
+      <h2 className="text-[32px] md:text-[40px] font-bold text-[#1A202C] mb-8 text-center tracking-tight">
+        Tell us about <span className="text-[#FF4667]">You.</span>
+      </h2>
+
+      <div className="w-full flex-grow bg-white rounded-[2rem] shadow-[0_15px_60px_rgba(0,0,0,0.08)] p-8 md:p-10 border border-gray-50/50">
+        {successMessage && (
+          <div className="mb-6 p-4 bg-green-50/80 border border-green-200 text-green-700 rounded-xl text-center font-medium">
+            {successMessage}
+          </div>
+        )}
+        
+        {errors.submit && (
+          <div className="mb-6 p-4 bg-red-50/80 border border-red-200 text-red-700 rounded-xl text-center font-medium">
+            {errors.submit}
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6">
+            {/* Full Name */}
+            <div>
+              <label htmlFor="fullName" className={labelClasses}>Full Name</label>
+              <input
+                type="text"
+                id="fullName"
+                name="fullName"
+                value={formData.fullName}
+                onChange={handleChange}
+                className={inputClasses}
+              />
+              {errors.fullName && <p className="text-red-500 text-xs mt-1.5 font-medium">{errors.fullName}</p>}
+            </div>
+
+            {/* Email Address */}
+            <div>
+              <label htmlFor="email" className={labelClasses}>Email Address</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className={inputClasses}
+              />
+              {errors.email && <p className="text-red-500 text-xs mt-1.5 font-medium">{errors.email}</p>}
+            </div>
+
+            {/* Phone Number */}
+            <div>
+              <label htmlFor="phone" className={labelClasses}>Phone Number</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                className={inputClasses}
+              />
+              {errors.phone && <p className="text-red-500 text-xs mt-1.5 font-medium">{errors.phone}</p>}
+            </div>
+
+            {/* Age */}
+            <div>
+              <label htmlFor="age" className={labelClasses}>Age</label>
+              <div className="relative">
+                <input
+                  type="number"
+                  id="age"
+                  name="age"
+                  value={formData.age}
+                  onChange={handleChange}
+                  className={inputClasses}
+                />
+              </div>
+              {errors.age && <p className="text-red-500 text-xs mt-1.5 font-medium">{errors.age}</p>}
+            </div>
+            
+            {/* City */}
+            <div>
+              <label htmlFor="city" className={labelClasses}>City</label>
+              <input
+                type="text"
+                id="city"
+                name="city"
+                value={formData.city}
+                onChange={handleChange}
+                placeholder="e.g. Mumbai, Delhi, London"
+                className={inputClasses}
+              />
+              {errors.city && <p className="text-red-500 text-xs mt-1.5 font-medium">{errors.city}</p>}
+            </div>
+
+            {/* Profession */}
+            <div>
+              <label htmlFor="profession" className={labelClasses}>Profession</label>
+              <input
+                type="text"
+                id="profession"
+                name="profession"
+                value={formData.profession}
+                onChange={handleChange}
+                placeholder="e.g. Software Engineer, Student"
+                className={inputClasses}
+              />
+              {errors.profession && <p className="text-red-500 text-xs mt-1.5 font-medium">{errors.profession}</p>}
+            </div>
+          </div>
+
+          {/* Qualifications */}
+          <div>
+            <label htmlFor="qualifications" className={labelClasses}>Qualifications</label>
+            <input
+              type="text"
+              id="qualifications"
+              name="qualifications"
+              value={formData.qualifications}
+              onChange={handleChange}
+              placeholder="e.g. B.Tech, MCA, etc."
+              className={inputClasses}
+            />
+            {errors.qualifications && <p className="text-red-500 text-xs mt-1.5 font-medium">{errors.qualifications}</p>}
+          </div>
+
+          <div className="pt-4">
+            <Button
+              type="submit"
+              isLoading={isPending}
+              className="w-full bg-[#FF4667] hover:bg-[#E03A56] text-white rounded-[12px] py-4 text-[16px] font-semibold border-none shadow-[0_4px_14px_rgba(255,70,103,0.3)] hover:shadow-[0_6px_20px_rgba(255,70,103,0.4)] transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed"
+            >
+              Continue
+            </Button>
+          </div>
+        </form>
       </div>
-
-      {/* Email */}
-      <div>
-        <label htmlFor="email" className="block text-sm font-medium  mb-2">
-          Email *
-        </label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          className="input-field"
-          placeholder="your.email@example.com"
-        />
-        {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email}</p>}
-      </div>
-
-      {/* Subject */}
-      <div>
-        <label htmlFor="subject" className="block text-sm font-medium  mb-2">
-          Subject *
-        </label>
-        <input
-          type="text"
-          id="subject"
-          name="subject"
-          value={formData.subject}
-          onChange={handleChange}
-          className="input-field"
-          placeholder="What is this about?"
-        />
-        {errors.subject && <p className="mt-1 text-sm text-red-500">{errors.subject}</p>}
-      </div>
-
-      {/* Message */}
-      <div>
-        <label htmlFor="message" className="block text-sm font-medium  mb-2">
-          Message *
-        </label>
-        <textarea
-          id="message"
-          name="message"
-          value={formData.message}
-          onChange={handleChange}
-          rows={6}
-          className="input-field resize-none"
-          placeholder="Tell us more about your inquiry..."
-        />
-        {errors.message && <p className="mt-1 text-sm text-red-500">{errors.message}</p>}
-      </div>
-
-      {/* Submit Button */}
-      <Button
-        type="submit"
-        variant="primary"
-        size="lg"
-        isLoading={isSubmitting}
-        className="w-full"
-      >
-        {!isSubmitting && <Send className="w-5 h-5" />}
-        {isSubmitting ? 'Sending...' : 'Send Message'}
-      </Button>
-
-      {/* Success Message */}
-      {submitMessage && (
-        <div className="p-4 bg-primary/10 border border-primary/20 rounded-lg text-primary text-center">
-          {submitMessage}
-        </div>
-      )}
-    </form>
+    </div>
   );
-};
-
-export default ContactForm;
+}

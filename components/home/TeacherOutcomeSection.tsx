@@ -21,7 +21,7 @@ const TeacherOutcomeSection = () => {
 
           {/* Description */}
           <p className="text-[#64748b] text-[16px] md:text-[18px] text-center max-w-2xl mx-auto leading-relaxed font-Inter">
-            We don't just train teachers — we transform careers. Here's <br className="hidden md:block" />
+            We don&apos;t just train teachers — we transform careers. Here&apos;s <br className="hidden md:block" />
             the real difference Teachifyy makes.
           </p>
         </div>

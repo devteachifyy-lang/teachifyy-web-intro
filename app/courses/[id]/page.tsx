@@ -190,7 +190,7 @@ export default function CoursePage({ params }: { params: Promise<{ id: string }>
                   {/* What's included */}
                   <div className="mb-10 flex-1">
                     <p className="text-[#9ca3af] font-bold text-[15px] mb-5">
-                      What's included
+                      What&apos;s included
                     </p>
                     <ul className="space-y-4">
                       {[

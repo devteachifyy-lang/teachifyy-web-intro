@@ -4,28 +4,28 @@ import Image from "next/image";
 const DifferencesSection = () => {
   const differences = [
     {
-      icon: "/assets/diff-icon-1.png",
+      icon: "/assets/png_1.png",
       text: "Built on UK Classroom Research",
-      width: 128,
-      height: 119,
+      width: 100,
+      height: 80,
     },
     {
-      icon: "/assets/diff-icon-2.png",
+      icon: "/assets/png_2.png",
       text: "Solving NEP 2020 Skilled Teacher Shortage",
-      width: 117,
-      height: 105,
+      width: 100,
+      height: 80,
     },
     {
-      icon: "/assets/diff-icon-3.png",
+      icon: "/assets/png_3.png",
       text: "Guided by Leaders of Indian Education",
-      width: 72,
-      height: 72,
+      width: 100,
+      height: 80,
     },
     {
-      icon: "/assets/diff-icon-4.png",
-      text: "Building a Teacher Network",
-      width: 117,
-      height: 105,
+      icon: "/assets/png_4.png",
+      text: "Building a Strong Teacher Network",
+      width: 100,
+      height: 80,
     },
   ];
 
@@ -55,13 +55,13 @@ const DifferencesSection = () => {
               key={index}
               className="bg-[#DDE6F2] rounded-[24px] p-6 flex flex-col items-center text-center shadow-[0_4px_12px_rgba(0,0,0,0.02)] hover:shadow-[0_8px_24px_rgba(31,72,98,0.08)] transition-all min-h-[190px] justify-center gap-5"
             >
-              <div className="shrink-0 flex items-center justify-center">
+              <div className="flex items-center justify-center">
                 <Image
                   src={diff.icon}
                   alt={diff.text}
                   width={diff.width}
                   height={diff.height}
-                  className="object-contain max-w-full h-auto"
+                  className={`w-[${diff.width}px] h-[${diff.height}px]`}
                 />
               </div>
               <p className="text-[#1F2937] font-medium text-[15px] leading-snug px-2">

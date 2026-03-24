@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import Image from 'next/image';
 import ContactFaq from '@/components/contact/ContactFaq';
+import ContactForm from '@/components/contact/ContactForm';
 import { Mail, Phone, MapPin, Linkedin, ChartNoAxesCombined } from 'lucide-react';
 import { constructMetadata } from '@/lib/metadata';
 
@@ -125,47 +126,16 @@ export default function ContactPage() {
       </section>
 
       {/* REST CODE (UNCHANGED) */}
-      <section className="relative py-28 bg-gradient-to-tr from-[#ffebe6] via-white to-[#e6f0ff]">
-        <div className="container-custom relative z-10 flex justify-center">
-          <div className="bg-white rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.05)] w-full max-w-5xl min-h-[600px] overflow-hidden flex flex-col md:flex-row">
+      <section className="bg-gradient-to-tr from-[#ffebe6] via-white to-[#e6f0ff] flex items-center justify-center">
 
-            <div className="bg-[#0E172B] text-white p-10 md:p-14 w-full flex flex-col relative overflow-hidden">
-              <div className="relative z-10 flex-grow max-w-2xl mx-auto w-full">
-                <h3 className="text-2xl md:text-3xl font-bold mb-8 md:mb-12 text-white ">Contact Information</h3>
 
-                <div className="space-y-8 md:space-y-10">
-                  {contactInfo.map((info, index) => (
-                    <div key={index} className="flex gap-4">
-                      <info.icon className="w-5 h-5 text-[#FF4667] shrink-0 mt-1" strokeWidth={2} />
-                      <div className="space-y-1 border-b border-white/10 pb-4 w-full">
-                        <h4 className="text-sm text-zinc-400 font-medium tracking-wide uppercase">{info.title}</h4>
-                        <div className="text-base md:text-[17px] font-medium">
-                          {info.href ? (
-                            <a href={info.href} className="hover:text-[#FF4667] transition-colors">{info.value}</a>
-                          ) : (
-                            <span>{info.value}</span>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
 
-                <div className="relative z-10 mt-12 flex gap-4">
-                  {socialLinks.map((social, index) => (
-                    <a key={index} href={social.href} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#FF4667] transition-all">
-                      <social.icon className="w-[18px] h-[18px]" strokeWidth={2} />
-                    </a>
-                  ))}
-                </div>
-              </div>
-
-              <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-[#FF4667]/20 rounded-full blur-3xl"></div>
-              <div className="absolute top-12 -right-12 w-32 h-32 bg-[#FF4667]/10 rounded-full blur-2xl"></div>
-            </div>
-
-          </div>
+        {/* Right Box: Form */}
+        <div className="w-full md:w-7/12 p-6 flex items-center justify-center bg-gray-50/30">
+          <ContactForm />
         </div>
+
+
       </section>
 
       <section className="bg-[#0E172B] py-24 text-center">
