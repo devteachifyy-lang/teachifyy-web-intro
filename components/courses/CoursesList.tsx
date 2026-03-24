@@ -33,15 +33,43 @@ export default function CoursesList() {
         );
     }
 
+    const [featuredCourse, secondCourse, ...restCourses] = courses;
+
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-            {courses.map((course: any) => (
-                <CourseCard
-                    key={course.courseId}
-                    course={course}
-                    className="shadow-sm border border-gray-100"
-                />
-            ))}
+        <div className="flex flex-col gap-6 lg:gap-8">
+            {/* Top row: Featured (2/3) + second course (1/3) */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 ">
+                <div className="md:col-span-2 md:h-[450px]">
+                    <CourseCard
+                        key={featuredCourse.courseId || 0}
+                        course={featuredCourse}
+                        isFeatured={true}
+                        className="shadow-sm border border-gray-100"
+                    />
+                </div>
+                {secondCourse && (
+                    <CourseCard
+                        key={secondCourse.courseId || 1}
+                        course={secondCourse}
+                        isFeatured={false}
+                        className="shadow-sm border border-gray-100 h-full"
+                    />
+                )}
+            </div>
+
+            {/* Remaining courses in 3-col grid */}
+            {restCourses.length > 0 && (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                    {restCourses.map((course: any, index: number) => (
+                        <CourseCard
+                            key={course.courseId || index + 2}
+                            course={course}
+                            isFeatured={false}
+                            className="shadow-sm border border-gray-100"
+                        />
+                    ))}
+                </div>
+            )}
         </div>
     );
 }

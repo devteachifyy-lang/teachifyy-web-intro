@@ -2,146 +2,123 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Clock, Users, Star, X } from "lucide-react";
-import Badge from "@/components/ui/Badge";
+import { Clock, X, ArrowRight } from "lucide-react";
 import { Course } from "@/data/courses";
 import { cn } from "@/lib/utils";
-import Button from "../ui/Button";
 import { useState } from "react";
 
 interface CourseCardProps {
   course: Course;
   className?: string;
+  isFeatured?: boolean;
 }
 
-const CourseCard = ({ course, className }: CourseCardProps) => {
+const CourseCard = ({
+  course,
+  className,
+  isFeatured = false,
+}: CourseCardProps) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  const handleButtonClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsPopupOpen(true);
-  };
+  // Button text logic
+  const buttonText = course.category?.includes("Diploma")
+    ? "View Diploma"
+    : course.category?.includes("Certification")
+      ? "Get Certified"
+      : isFeatured
+        ? "View program"
+        : "Explore Course";
 
   return (
     <>
       <Link
         href={`/courses/${course.slug}`}
-        className={cn("card card-hover group block relative", className)}
+        className={cn(
+          "group flex flex-col h-full bg-white rounded-[2.5rem] border border-gray-100 shadow-sm overflow-hidden",
+          className
+        )}
       >
         {/* Thumbnail */}
-        <div className="relative aspect-video overflow-hidden bg-zinc-800 w-full">
+        <div className="relative w-full aspect-[5/3] overflow-hidden">
           <Image
-            src={course.image}
+            src={course.image || "/assets/placeholder-course.jpg"}
             alt={course.title}
-            // width={300}
-            // height={100}
             fill
-            className="object-cover group-hover:scale-105 transition-transform duration-300"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="object-cover group-hover:scale-105 transition-transform duration-500"
           />
-          {course.badge && (
-            <div className="absolute top-3 left-3 z-10">
-              <Badge variant="default" className="bg-white/80 backdrop-blur-sm">
-                {course.badge}
-              </Badge>
+
+          {/* POPULAR badge */}
+          {(isFeatured || course.badge) && (
+            <div className="absolute top-5 right-5 z-10">
+              <span className="bg-[#ff4d67] text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest shadow-sm">
+                {course.badge || "POPULAR"}
+              </span>
             </div>
           )}
 
+          {/* Category chip — bottom-left of image */}
+          {course.category && (
+            <div className="absolute bottom-4 left-4 z-10">
+              <span className="bg-white/90 backdrop-blur-sm text-gray-700 text-xs font-medium px-3 py-1 rounded-full shadow-sm">
+                {course.category}
+              </span>
+            </div>
+          )}
         </div>
 
         {/* Content */}
-        <div className="p-5">
-          {/* Category & Duration */}
-          <div className="flex items-center gap-4 text-sm text-zinc-400 mb-3">
-            <span className="text-primary font-medium">{course.category}</span>
-            <span className="flex items-center gap-1">
-              <Clock className="w-4 h-4" />
-              {course.totalWeeks} Weeks
-            </span>
-          </div>
-
+        <div className="px-6 pb-6 lg:px-8 lg:pb-8 flex flex-col flex-grow">
           {/* Title */}
-          <h3 className="text-xl font-bold text-text-primary mb-2 group-hover:text-primary transition-colors line-clamp-2">
+          <h3
+            className={cn(
+              "font-bold text-gray-900 mb-2 group-hover:text-primary transition-colors line-clamp-2 min-h-[56px]",
+              isFeatured ? "text-2xl lg:text-3xl" : "text-xl"
+            )}
+          >
             {course.title}
           </h3>
 
           {/* Description */}
-          <div className="text-zinc-400 text-sm mb-4">
-            {course.description && course.description.length > 120 ? (
-              <>
-                {isExpanded
-                  ? course.description
-                  : `${course.description.substring(0, 120)}...`}
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setIsExpanded(!isExpanded);
-                  }}
-                  className="text-primary hover:text-primary/80 font-medium ml-1 inline-block"
-                >
-                  {isExpanded ? "Show less" : "Read more"}
-                </button>
-              </>
-            ) : (
-              course.description
-            )}
-          </div>
-
-          {/* Instructor */}
-          {/* <div className="flex items-center gap-3 mb-4 pb-4 border-b border-zinc-800">
-            <div className="w-8 h-8 rounded-full bg-zinc-700 overflow-hidden relative">
-              <Image
-                src={course.instructor.avatar}
-                alt={course.instructor.name}
-                fill
-                className="object-cover"
-              />
-            </div>
-            <span className="text-sm text-zinc-300">
-              {course.instructor.name}
-            </span>
-          </div> */}
+          <p className="text-gray-500 text-sm mb-6 line-clamp-2 min-h-[40px]">
+            {course.description}
+          </p>
 
           {/* Footer */}
-          {/* <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4 text-sm">
-              <div className="flex items-center gap-1 text-primary">
-                <Star className="w-4 h-4 fill-current" />
-                <span className="font-semibold">{course.rating}</span>
+          <div className="flex items-center justify-between pt-4 mt-auto border-t border-gray-50/50">
+            {/* Instructor */}
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-gray-100 overflow-hidden relative shrink-0">
+                {course.instructor?.avatar && (
+                  <Image
+                    src={course.instructor.avatar}
+                    alt={course.instructor.name || "Instructor"}
+                    fill
+                    className="object-cover"
+                  />
+                )}
               </div>
-              <div className="flex items-center gap-1 text-zinc-400">
-                <Users className="w-4 h-4" />
-                <span>12500</span>
+
+              <div className="flex flex-col">
+                <span className="text-xs text-gray-800 font-semibold whitespace-nowrap">
+                  With {course.instructor?.name || "Instructor"}
+                </span>
+                <span className="text-[11px] text-gray-500 flex items-center gap-1 mt-0.5">
+                  <Clock className="w-[11px] h-[11px]" />
+                  {course.totalWeeks || "8"} Weeks
+                </span>
               </div>
             </div>
 
-            <div className="text-right">
-              {course.originalPrice && (
-                <span className="text-sm text-zinc-500 line-through mr-2">
-                  ${course.originalPrice}
-                </span>
-              )}
-              <span className="text-xl font-bold text-primary">
-                ${course.price}
-              </span>
+            {/* CTA */}
+            <div className="text-[#ff4d67] text-xs sm:text-sm font-semibold flex items-center gap-1 group-hover:translate-x-1 transition-transform ml-2 shrink-0">
+              {buttonText}
+              <ArrowRight className="w-4 h-4 ml-0.5" />
             </div>
           </div>
-          {course.button && (
-            <div className="absolute bottom-3 right-3 z-10">
-              <Button
-                onClick={handleButtonClick}
-                className="bg-[#ff4d67] backdrop-blur-sm text-White"
-              >
-                BUY NOW
-              </Button>
-            </div>
-          )} */}
         </div>
       </Link>
 
-      {/* Popup Modal */}
+      {/* Popup */}
       {isPopupOpen && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
@@ -161,6 +138,7 @@ const CourseCard = ({ course, className }: CourseCardProps) => {
             >
               <X className="w-5 h-5" />
             </button>
+
             <Image
               src={"/assets/qrCode.jpeg"}
               alt={course.title}
