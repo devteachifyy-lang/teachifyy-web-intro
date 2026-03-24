@@ -52,7 +52,7 @@ const UserJourney = () => {
                     <div className="flex flex-col lg:flex-row gap-4 lg:gap-1 lg:items-center">
                         {steps.map((step, index) => (
                             <React.Fragment key={step.id}>
-                                <div className=" bg-blue-50 hover:bg-blue-100/80 transition-colors p-2 rounded-2xl border border-blue-100/50 shadow-sm relative group h-60 w-full">
+                                <div className=" bg-blue-50 hover:bg-blue-100/80 transition-colors p-2 rounded-2xl border border-blue-100/50 shadow-sm relative group h-40 md:h-48 w-full">
                                     <div className="mb-4">
                                         {/* Icon container */}
                                         <div className="w-10 h-10 rounded-full flex items-center justify-center bg-white shadow-sm mb-4">
