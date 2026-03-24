@@ -40,13 +40,12 @@ export default function BlogHero({ hero, date }: Props) {
             </div>
           </div>
           <div className="order-1 lg:order-2">
-            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg border border-zinc-100 dark:border-zinc-800">
+            <div className="relative w-full max-w-[450px] h-[450px] mx-auto rounded-[50px] overflow-hidden shadow-lg border border-zinc-100 dark:border-zinc-800">
               <Image
                 src={hero.image}
                 alt={hero.title}
-                width={1200}
-                height={600}
                 fill
+                className="object-cover"
               />
             </div>
           </div>

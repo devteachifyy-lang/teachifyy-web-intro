@@ -75,7 +75,7 @@ const HeroSection = () => {
               </div>
 
               {/* Heading */}
-              <div key={currentSlide} className="animate-fade-in lg:h-[250px] h-[150px]" >
+              <div key={currentSlide} className="animate-fade-in lg:h-[250px] h-[180px]" >
                 <h1 className="text-[#111827] 
                   text-[28px] 
                   sm:text-[34px] 
@@ -149,13 +149,8 @@ const HeroSection = () => {
             </div>
 
             {/* RIGHT IMAGE */}
-            <div className="relative w-full max-w-[580px] mx-auto lg:mx-0">
-              <div className="relative w-full aspect-[4/3] 
-                rounded-[24px] 
-                sm:rounded-[32px] 
-                lg:rounded-l-[76px] 
-                lg:rounded-r-[76px] 
-                overflow-hidden">
+            <div className="relative w-full max-w-[450px] mx-auto lg:mx-0">
+              <div className="relative w-full h-[450px] max-w-full rounded-[50px] overflow-hidden">
                 <Image
                   src="/assets/teacher-classroom.png"
                   alt="Teacher"

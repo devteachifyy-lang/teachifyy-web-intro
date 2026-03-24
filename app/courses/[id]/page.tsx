@@ -107,8 +107,8 @@ export default function CoursePage({ params }: { params: Promise<{ id: string }>
 
             {/* Right – Image */}
             {/* 1120px Width × 840px Height */}
-            <div className="flex-shrink-0 w-full max-w-[320px] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[560px]">
-              <div className="relative w-full aspect-[4/3] rounded-[24px] sm:rounded-[32px] lg:rounded-l-[76px] lg:rounded-r-[76px] overflow-hidden shadow-2xl shadow-black/40">
+            <div className="flex-shrink-0 w-full max-w-[450px]">
+              <div className="relative w-full h-[450px] max-w-full rounded-[50px] overflow-hidden shadow-2xl shadow-black/40">
                 {data.course?.image && (
                   <Image
                     src={data.course.image}

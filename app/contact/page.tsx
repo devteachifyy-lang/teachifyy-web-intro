@@ -81,13 +81,8 @@ export default function ContactPage() {
               </div>
 
               {/* RIGHT IMAGE */}
-              <div className="relative w-full max-w-[580px] mx-auto lg:mx-0">
-                <div className="relative w-full aspect-[4/3] 
-                  rounded-[24px] 
-                  sm:rounded-[32px] 
-                  lg:rounded-l-[76px] 
-                  lg:rounded-r-[76px] 
-                  overflow-hidden">
+              <div className="relative w-full max-w-[450px] mx-auto lg:mx-0">
+                <div className="relative w-full h-[450px] max-w-full rounded-[50px] overflow-hidden">
                   <Image
                     src="/assets/contactUsHero.jpg"
                     alt="Teacher on laptop"

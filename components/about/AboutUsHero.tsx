@@ -21,10 +21,10 @@ export default function AboutUsHero() {
                         </div>
 
                         {/* Heading */}
-                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 leading-[1.1]">
+                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-light text-slate-900 mb-6 leading-[1.1]">
                             For every teacher
                             ready to grow,<br />
-                            <span className="text-[#ff4d67]">This is the Place.</span>
+                            <span className="text-[#ff4d67] font-bold">This is the Place.</span>
                         </h1>
 
                         {/* Subtext */}
@@ -43,7 +43,7 @@ export default function AboutUsHero() {
                     </div>
 
                     {/* Right Content - Image */}
-                    <div className="relative w-full aspect-[4/3] max-w-lg mx-auto md:ml-auto rounded-3xl overflow-hidden shadow-2xl">
+                    <div className="relative w-full max-w-[450px] h-[450px] mx-auto md:ml-auto rounded-[50px] overflow-hidden shadow-2xl">
                         {/* Using a placeholder for now since we don't have the exact image asset */}
                         <div className="absolute inset-0 bg-slate-200">
                             <Image

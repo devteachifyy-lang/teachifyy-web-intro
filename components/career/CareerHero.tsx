@@ -17,16 +17,16 @@ export default function CareerHero() {
           <div className="flex flex-col items-start max-w-xl">
             {/* Badge */}
             <div className="inline-flex items-center rounded-full border border-blue-100 bg-[#DDE6F2] px-4 py-1.5 shadow-sm mb-6">
-              <span className="text-xs font-semibold text-slate-700 uppercase">WORK WITH US</span>
+              <span className="text-xs uppercase">WORK WITH US</span>
             </div>
 
             {/* Heading */}
-            <h1 className="text-4xl  md:text-5xl font-bold tracking-wide text-slate-900 mb-5 leading-[1.15]">
+            <h1 className="text-4xl  md:text-5xl font-light  text-slate-900 mb-5 leading-[1.15]">
               Build the{' '}
-              <span className="text-[#FF4667]">Future</span>
+              <span className="text-[#FF4667] font-bold">Future</span>
               <br />
               of{' '}
-              <span className="text-[#FF4667]">Education</span>
+              <span className="text-[#FF4667] font-bold">Education</span>
             </h1>
 
             {/* Subtext */}
@@ -47,8 +47,8 @@ export default function CareerHero() {
           </div>
 
           {/* Right Content - Image */}
-          <div className="relative w-full max-w-[580px] mx-auto md:ml-auto">
-            <div className="relative w-full aspect-[4/3] rounded-[24px] sm:rounded-[32px] lg:rounded-l-[76px] lg:rounded-r-[76px] overflow-hidden shadow-2xl">
+          <div className="relative w-full max-w-[450px] mx-auto md:ml-auto">
+            <div className="relative w-full h-[450px] max-w-full rounded-[50px] overflow-hidden shadow-2xl">
               <Image
                 src="/assets/careerHero.jpg"
                 alt="Build the Future of Education"
