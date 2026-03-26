@@ -11,9 +11,9 @@ interface Props {
 }
 
 export default function BlogListSection({ blogs }: Props) {
-  if (!blogs || blogs.length === 0) return null;
-
   const [activeCategory, setActiveCategory] = useState("All");
+
+  if (!blogs || blogs.length === 0) return null;
 
   const categories = ["All", ...Array.from(new Set(blogs.map((b) => b.category)))];
 
