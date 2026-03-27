@@ -67,11 +67,11 @@ const StatsSection = () => {
             ref={chartRef}
             className="w-full md:w-[340px] h-[260px] bg-[#537497] rounded-[32px] p-6 relative z-10 flex flex-col justify-between shadow-[0_8px_30px_rgba(0,0,0,0.12)]"
           >
-            <h4 className="text-white text-[18px] md:text-[20px] font-bold font-sans tracking-tight">
+            <h4 className="text-white text-[18px] md:text-[20px] font-bold font-sans tracking-tight md:pl-14 pl-11">
               Placement Rate
             </h4>
 
-            <div className="flex justify-center items-end h-[160px] w-full px-10">
+            <div className="flex justify-center items-end h-[160px] w-full md:px-14 px-10">
               {/* Bar 1 */}
               <div className="flex flex-col items-center gap-[6px] flex-1 h-full justify-end">
                 <span className="text-white/90 text-[10px] md:text-[11px] font-medium whitespace-nowrap mb-1">

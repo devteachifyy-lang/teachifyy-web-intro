@@ -184,7 +184,8 @@ const HeroSection = () => {
                 px-4 py-3 
                 shadow-lg 
                 flex items-center gap-3 
-                min-w-[200px]"
+                min-w-[200px]
+                animate-float"
               >
                 <ChartNoAxesCombined className="w-6 h-6 text-[#34A853]" />
                 <div>

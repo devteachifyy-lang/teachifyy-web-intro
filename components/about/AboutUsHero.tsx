@@ -17,7 +17,7 @@ export default function AboutUsHero() {
                     <div className="flex flex-col items-start max-w-xl">
                         {/* Badge */}
                         <div className="inline-flex items-center rounded-full border border-blue-100 bg-[#DDE6F2] px-4 py-1.5 shadow-sm mb-6">
-                            <span className="text-sm">EMPOWERING EDUCATORS</span>
+                            <span className="text-[9px] sm:text-[10px]">EMPOWERING EDUCATORS</span>
                         </div>
 
                         {/* Heading */}

@@ -15,7 +15,7 @@ export default function DownloadPage() {
     <div className="min-h-screen bg-white">
       <AppHero />
       <AppFeatures />
-      {/* <AppScreenshots /> */}
+      <AppScreenshots />
       <AppBottomCta />
     </div>
   );

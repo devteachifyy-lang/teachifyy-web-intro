@@ -13,6 +13,7 @@ export default function ContactForm() {
     city: "",
     profession: "",
     qualifications: "",
+    message: "test"
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -47,10 +48,14 @@ export default function ContactForm() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSuccessMessage("");
-    
+
     if (validate()) {
       submitContact(formData, {
         onSuccess: () => {
+          // Persist email so resource download popup is skipped for this user
+          if (typeof window !== "undefined") {
+            localStorage.setItem("lead_email", formData.email);
+          }
           setSuccessMessage("Thank you! Your information has been submitted successfully.");
           setFormData({
             fullName: "",
@@ -60,6 +65,7 @@ export default function ContactForm() {
             city: "",
             profession: "",
             qualifications: "",
+            message: "Test"
           });
         },
         onError: () => {
@@ -84,7 +90,7 @@ export default function ContactForm() {
             {successMessage}
           </div>
         )}
-        
+
         {errors.submit && (
           <div className="mb-6 p-4 bg-red-50/80 border border-red-200 text-red-700 rounded-xl text-center font-medium">
             {errors.submit}
@@ -150,7 +156,7 @@ export default function ContactForm() {
               </div>
               {errors.age && <p className="text-red-500 text-xs mt-1.5 font-medium">{errors.age}</p>}
             </div>
-            
+
             {/* City */}
             <div>
               <label htmlFor="city" className={labelClasses}>City</label>
@@ -160,7 +166,6 @@ export default function ContactForm() {
                 name="city"
                 value={formData.city}
                 onChange={handleChange}
-                placeholder="e.g. Mumbai, Delhi, London"
                 className={inputClasses}
               />
               {errors.city && <p className="text-red-500 text-xs mt-1.5 font-medium">{errors.city}</p>}
@@ -175,7 +180,6 @@ export default function ContactForm() {
                 name="profession"
                 value={formData.profession}
                 onChange={handleChange}
-                placeholder="e.g. Software Engineer, Student"
                 className={inputClasses}
               />
               {errors.profession && <p className="text-red-500 text-xs mt-1.5 font-medium">{errors.profession}</p>}
@@ -184,14 +188,13 @@ export default function ContactForm() {
 
           {/* Qualifications */}
           <div>
-            <label htmlFor="qualifications" className={labelClasses}>Qualifications</label>
+            <label htmlFor="qualifications" className={labelClasses}>Question</label>
             <input
               type="text"
               id="qualifications"
               name="qualifications"
               value={formData.qualifications}
               onChange={handleChange}
-              placeholder="e.g. B.Tech, MCA, etc."
               className={inputClasses}
             />
             {errors.qualifications && <p className="text-red-500 text-xs mt-1.5 font-medium">{errors.qualifications}</p>}

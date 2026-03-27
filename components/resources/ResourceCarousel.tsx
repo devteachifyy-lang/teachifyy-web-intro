@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import LeadDownloadModal from "./LeadDownloadModal";
 
 export interface Resource {
   id: string;
@@ -18,45 +19,60 @@ export interface Resource {
 
 // ── Single card ───────────────────────────────────────────────────────────────
 export function ResourceCard({ resource }: { resource: Resource }) {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleDownloadClick = () => {
+    setShowModal(true);
+  };
+
   return (
-    <div className="bg-white rounded-[24px] sm:rounded-[38px] border border-gray-50/50 shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden flex flex-col group hover:shadow-[0_12px_40px_rgb(0,0,0,0.08)] transition-all h-full ">
-      {/* Thumbnail */}
-      <div className="relative w-full aspect-[1.5/1] rounded-[24px] sm:rounded-[38px] overflow-hidden mb-5">
-        <Image
-          src={resource.thumbnailUrl}
-          alt={resource.name}
-          fill
-          className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-          unoptimized
+    <>
+      {showModal && (
+        <LeadDownloadModal
+          resource={resource}
+          onClose={() => setShowModal(false)}
         />
-        {/* White pill age badge */}
-        <span className="absolute top-3.5 left-3.5 bg-white text-gray-900 text-[11px] font-bold px-3 py-1.5 rounded-full shadow-sm">
-          {resource.age}
-        </span>
-      </div>
+      )}
 
-      {/* Content */}
-      <div className="px-5 sm:px-7 pb-5 sm:pb-7 flex flex-col flex-1">
-        <h3 className="text-[16px] sm:text-[17px] font-bold text-gray-900 leading-tight mb-2 line-clamp-2">
-          {resource.name}
-        </h3>
-        <p className="text-[11px] sm:text-[12px] text-gray-400 leading-relaxed line-clamp-2 mb-6 flex-1">
-          {resource.description}
-        </p>
+      <div className="bg-white rounded-[24px] sm:rounded-[38px] border border-gray-50/50 shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden flex flex-col group hover:shadow-[0_12px_40px_rgb(0,0,0,0.08)] transition-all h-full ">
+        {/* Thumbnail */}
+        {/* 900×600  */}
+        <div className="relative w-full aspect-[1.5/1] rounded-[24px] sm:rounded-[38px] overflow-hidden mb-5">
+          <Image
+            src={resource.thumbnailUrl}
+            alt={resource.name}
+            fill
+            className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+            unoptimized
+          />
+          {/* White pill age badge */}
+          <span className="absolute top-3.5 left-3.5 bg-white text-gray-900 text-[11px] font-bold px-3 py-1.5 rounded-full shadow-sm">
+            {resource.age}
+          </span>
+        </div>
 
-        <a
-          href={resource.documentUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-[14px] font-bold text-gray-900 hover:text-[#FF4D67] transition-colors group/link"
-        >
-          Download Pdf
-          <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
-        </a>
+        {/* Content */}
+        <div className="px-5 sm:px-7 pb-5 sm:pb-7 flex flex-col flex-1">
+          <h3 className="text-[16px] sm:text-[17px] font-bold text-gray-900 leading-tight mb-2 line-clamp-2">
+            {resource.name}
+          </h3>
+          <p className="text-[11px] sm:text-[12px] text-gray-400 leading-relaxed line-clamp-2 mb-6 flex-1">
+            {resource.description}
+          </p>
+
+          <button
+            onClick={handleDownloadClick}
+            className="inline-flex items-center gap-2 text-[14px] font-bold text-gray-900 hover:text-[#FF4D67] transition-colors group/link"
+          >
+            Download Pdf
+            <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
+          </button>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
+
 
 // ── Paginated carousel (dynamic items per page) ────────────
 interface Props {

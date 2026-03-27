@@ -4,28 +4,28 @@ import Image from "next/image";
 const DifferencesSection = () => {
   const differences = [
     {
-      icon: "/assets/png_1.png",
+      icon: "/assets/Frame1.png",
       text: "Built on UK Classroom Research",
-      width: 100,
-      height: 80,
+      width: 90,
+      height: 60,
     },
     {
-      icon: "/assets/png_2.png",
+      icon: "/assets/Frame2.png",
       text: "Solving NEP 2020 Skilled Teacher Shortage",
-      width: 100,
-      height: 80,
+      width: 90,
+      height: 60,
     },
     {
-      icon: "/assets/png_3.png",
+      icon: "/assets/Frame4.png",
       text: "Guided by Leaders of Indian Education",
-      width: 100,
-      height: 80,
+      width: 90,
+      height: 60,
     },
     {
-      icon: "/assets/png_4.png",
+      icon: "/assets/Frame3.png",
       text: "Building a Strong Teacher Network",
-      width: 100,
-      height: 80,
+      width: 90,
+      height: 60,
     },
   ];
 

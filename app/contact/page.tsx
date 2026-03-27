@@ -104,7 +104,8 @@ export default function ContactPage() {
                   px-4 py-3 
                   shadow-lg 
                   flex items-center gap-3 
-                  max-w-[200px]">
+                  max-w-[200px]
+                  animate-float">
                   <div className="w-3 h-2 rounded-full bg-green-500"></div>
                   <div>
                     <p className="font-bold text-[13px]">LIVE NOW</p>
