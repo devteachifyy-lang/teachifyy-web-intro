@@ -16,10 +16,10 @@ export default function ResourceHero() {
           Inspired Teaching Starts Here
         </div>
 
-        <h1 className="text-[2.8rem] md:text-[3.5rem] lg:text-[4rem] font-light text-gray-900 leading-[1.1] mb-5 max-w-full">
+        <h1 className="text-[2.2rem] sm:text-[2.8rem] md:text-[3.5rem] lg:text-[4rem] font-light text-gray-900 leading-[1.1] mb-5 max-w-full">
           <span className="text-[#FF4D67] font-bold">Free resources</span> for
           real
-          <br />
+          <br className="hidden sm:inline" />
           classrooms
         </h1>
 

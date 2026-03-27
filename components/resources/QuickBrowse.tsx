@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Filter, ChevronLeft, ChevronRight } from "lucide-react";
 import { Resource, ResourceCard } from "./ResourceCarousel";
 import TeachersSpotlight from "./TeachersSpotlight";
@@ -14,53 +14,35 @@ const CATEGORIES = [
   "Movement and Gross Motor",
 ];
 
-// One scrollable row per category with a right-arrow button
-function CategoryRow({ items }: { items: Resource[] }) {
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  const scroll = () => {
-    scrollRef.current?.scrollBy({ left: 260, behavior: "smooth" });
-  };
-
-  return (
-    <div className="relative">
-      {/* Fixed 4-card grid — hides overflow so no half-cards or scrollbar visible */}
-      <div
-        ref={scrollRef}
-        className="grid overflow-hidden"
-        style={{
-          gridTemplateColumns: "repeat(4, 1fr)",
-          gap: "1rem",
-          /* clip so cards never show partially */
-          overflow: "hidden",
-        }}
-      >
-        {/* Show only the current "page" — simple slice approach */}
-        {items.slice(0, 4).map((resource) => (
-          <ResourceCard key={resource.id} resource={resource} />
-        ))}
-      </div>
-
-      {/* Right arrow — only shown when there are more than 4 cards */}
-      {items.length > 4 && (
-        <button
-          onClick={scroll}
-          aria-label="Next"
-          className="absolute right-[-16px] top-[72px] -translate-y-1/2 w-8 h-8 bg-white rounded-full shadow-[0_2px_12px_rgba(0,0,0,0.14)] border border-gray-100 flex items-center justify-center text-gray-600 hover:text-[#FF4D67] hover:scale-110 transition-all z-10"
-        >
-          <ChevronRight className="w-4 h-4 stroke-[2.5]" />
-        </button>
-      )}
-    </div>
-  );
-}
-
-// Paginated row — shows 4 at a time, arrow advances to next 4
+// Paginated row — responsive number of items
 function PaginatedRow({ items }: { items: Resource[] }) {
   const [page, setPage] = useState(0);
-  const perPage = 4;
-  const totalPages = Math.ceil(items.length / perPage);
-  const visible = items.slice(page * perPage, page * perPage + perPage);
+  const [itemsPerPage, setItemsPerPage] = useState(4);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) setItemsPerPage(1);
+      else if (window.innerWidth < 1024) setItemsPerPage(2);
+      else if (window.innerWidth < 1280) setItemsPerPage(3);
+      else setItemsPerPage(4);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const totalPages = Math.ceil(items.length / itemsPerPage);
+  const visible = items.slice(
+    page * itemsPerPage,
+    page * itemsPerPage + itemsPerPage,
+  );
+
+  // If page becomes invalid after resize, reset it
+  useEffect(() => {
+    if (page >= totalPages && totalPages > 0) {
+      setPage(totalPages - 1);
+    }
+  }, [itemsPerPage, page, totalPages]);
 
   return (
     <div className="relative">
@@ -69,7 +51,7 @@ function PaginatedRow({ items }: { items: Resource[] }) {
         <button
           onClick={() => setPage((p) => p - 1)}
           aria-label="Previous"
-          className="absolute left-[-16px] top-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full shadow-[0_2px_12px_rgba(0,0,0,0.14)] border border-gray-100 flex items-center justify-center text-gray-600 hover:text-[#FF4D67] hover:scale-110 transition-all z-10"
+          className="absolute left-[-12px] sm:left-[-16px] top-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full shadow-[0_2px_12px_rgba(0,0,0,0.14)] border border-gray-100 flex items-center justify-center text-gray-600 hover:text-[#FF4D67] hover:scale-110 transition-all z-10"
         >
           <ChevronLeft className="w-4 h-4 stroke-[2.5]" />
         </button>
@@ -77,13 +59,16 @@ function PaginatedRow({ items }: { items: Resource[] }) {
 
       <div
         className="grid"
-        style={{ gridTemplateColumns: "repeat(4, 1fr)", gap: "1rem" }}
+        style={{
+          gridTemplateColumns: `repeat(${itemsPerPage}, 1fr)`,
+          gap: "1.25rem",
+        }}
       >
         {visible.map((resource) => (
           <ResourceCard key={resource.id} resource={resource} />
         ))}
-        {Array.from({ length: perPage - visible.length }).map((_, i) => (
-          <div key={`empty-${i}`} />
+        {Array.from({ length: itemsPerPage - visible.length }).map((_, i) => (
+          <div key={`empty-${i}`} className="hidden sm:block" />
         ))}
       </div>
 
@@ -92,7 +77,7 @@ function PaginatedRow({ items }: { items: Resource[] }) {
         <button
           onClick={() => setPage((p) => p + 1)}
           aria-label="Next"
-          className="absolute right-[-16px] top-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full shadow-[0_2px_12px_rgba(0,0,0,0.14)] border border-gray-100 flex items-center justify-center text-gray-600 hover:text-[#FF4D67] hover:scale-110 transition-all z-10"
+          className="absolute right-[-12px] sm:right-[-16px] top-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full shadow-[0_2px_12px_rgba(0,0,0,0.14)] border border-gray-100 flex items-center justify-center text-gray-600 hover:text-[#FF4D67] hover:scale-110 transition-all z-10"
         >
           <ChevronRight className="w-4 h-4 stroke-[2.5]" />
         </button>
@@ -101,6 +86,8 @@ function PaginatedRow({ items }: { items: Resource[] }) {
   );
 }
 
+import { useGetResourcesQuery } from "@/app/api/resource";
+
 interface Props {
   resources: Resource[];
 }
@@ -108,18 +95,30 @@ interface Props {
 export default function QuickBrowse({ resources }: Props) {
   const [active, setActive] = useState("All");
 
+  // Derive dynamic categories from the resources data
+  const dynamicCategories = [
+    "All",
+    ...Array.from(new Set(resources?.map((r) => r.category.trim()))).filter(
+      Boolean,
+    ),
+  ];
+
+  // Call the API with the active category (passing undefined for "All")
+  const { data: categoryData } = useGetResourcesQuery(
+    active === "All" ? undefined : active,
+  );
+
   const grouped =
     active === "All"
-      ? CATEGORIES.filter((c) => c !== "All").reduce<Record<string, Resource[]>>(
-          (acc, cat) => {
-            const items = resources.filter((r) => r.category === cat);
+      ? dynamicCategories
+          .filter((c) => c !== "All")
+          .reduce<Record<string, Resource[]>>((acc, cat) => {
+            const items = resources?.filter((r) => r.category.trim() === cat);
             if (items.length) acc[cat] = items;
             return acc;
-          },
-          {}
-        )
+          }, {})
       : {
-          [active]: resources.filter((r) => r.category === active),
+          [active]: resources?.filter((r) => r.category.trim() === active),
         };
 
   return (
@@ -128,16 +127,18 @@ export default function QuickBrowse({ resources }: Props) {
         {/* Header */}
         <div className="flex items-center gap-2 mb-4">
           <Filter className="w-4 h-4 text-gray-500 stroke-[1.8]" />
-          <span className="text-[15px] font-semibold text-gray-800">Quick Browse</span>
+          <span className="text-[14px] sm:text-[15px] font-semibold text-gray-800">
+            Quick Browse
+          </span>
         </div>
 
         {/* Filter pills */}
-        <div className="flex gap-2.5 overflow-x-auto hide-scrollbar pb-1 mb-8">
-          {CATEGORIES.map((cat) => (
+        <div className="flex gap-2.5 overflow-x-auto  pb-1 mb-8 -mx-6 px-6 sm:mx-0 sm:px-0">
+          {dynamicCategories.map((cat) => (
             <button
               key={cat}
               onClick={() => setActive(cat)}
-              className={`whitespace-nowrap px-5 py-2 rounded-full text-[13px] font-medium transition-colors flex-shrink-0 ${
+              className={`whitespace-nowrap px-4 sm:px-5 py-2 rounded-full text-[12px] sm:text-[13px] font-medium transition-colors flex-shrink-0 ${
                 active === cat
                   ? "bg-[#2E5478] text-white shadow-sm"
                   : "bg-[#DDE6F2] text-gray-700 hover:bg-[#ccd9eb]"
@@ -148,23 +149,30 @@ export default function QuickBrowse({ resources }: Props) {
           ))}
         </div>
 
-        {/* Resource sections — 4 cards per row, arrow to page through extras */}
-        {Object.entries(grouped).map(([cat, items], index) => (
-          <div key={cat}>
-            <div className="mb-10">
-              <h2 className="text-[1.35rem] font-bold text-gray-900 mb-5">{cat}</h2>
-              <PaginatedRow items={items} />
-            </div>
-            
-            {/* Show Spotlight after the first category when in "All" or if it's the middle of the list */}
-            {((active === "All" && index === 0) || 
-              (active !== "All" && items.length > 0 && index === 0)) && (
-              <div className="my-16">
-                <TeachersSpotlight />
+        {/* Resource sections — responsive row, arrow to page through extras */}
+        {Object.entries(grouped).map(([cat, items], index) => {
+          // Find if there's a spotlight resource in this first group or globally if active is All
+          const spotlightResource = resources?.find((r) => r.isSpotlight);
+
+          return (
+            <div key={cat}>
+              <div className="mb-10 sm:mb-14">
+                <h2 className="text-[1.1rem] sm:text-[1.35rem] font-bold text-gray-900 mb-4 sm:mb-5">
+                  {cat}
+                </h2>
+                <PaginatedRow items={items} />
               </div>
-            )}
-          </div>
-        ))}
+
+              {/* Show Spotlight after the first category when in "All" or if it's the middle of the list */}
+              {((active === "All" && index === 0) ||
+                (active !== "All" && items.length > 0 && index === 0)) && (
+                <div className="my-12 sm:my-20">
+                  <TeachersSpotlight resource={spotlightResource} />
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
     </section>
   );
