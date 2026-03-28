@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import LeadDownloadModal from "./LeadDownloadModal";
+import { useTrackDownloadMutation } from "@/app/api/contact";
 
 export interface Resource {
   id: string;
@@ -20,9 +21,28 @@ export interface Resource {
 // ── Single card ───────────────────────────────────────────────────────────────
 export function ResourceCard({ resource }: { resource: Resource }) {
   const [showModal, setShowModal] = useState(false);
+  const { mutate: trackDownload, isPending } = useTrackDownloadMutation();
 
   const handleDownloadClick = () => {
-    setShowModal(true);
+    const savedEmail = localStorage.getItem("downloadEmail");
+    if (savedEmail) {
+      trackDownload(
+        {
+          email: savedEmail,
+          resourceId: resource.id,
+        },
+        {
+          onSuccess: () => {
+            window.open(resource.documentUrl, "_blank", "noopener,noreferrer");
+          },
+          onError: () => {
+            setShowModal(true);
+          },
+        }
+      );
+    } else {
+      setShowModal(true);
+    }
   };
 
   return (
@@ -62,10 +82,11 @@ export function ResourceCard({ resource }: { resource: Resource }) {
 
           <button
             onClick={handleDownloadClick}
-            className="inline-flex items-center gap-2 text-[14px] font-bold text-gray-900 hover:text-[#FF4D67] transition-colors group/link"
+            disabled={isPending}
+            className="inline-flex items-center gap-2 text-[14px] font-bold text-gray-900 hover:text-[#FF4D67] transition-colors group/link disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Download Pdf
-            <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
+            {isPending ? "Downloading..." : "Download Pdf"}
+            {!isPending && <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />}
           </button>
         </div>
       </div>

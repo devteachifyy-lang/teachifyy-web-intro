@@ -11,9 +11,9 @@ export interface ContactFormPayload {
 }
 
 export interface TrackDownloadPayload {
-    fullName: string;
+    fullName?: string;
     email: string;
-    phone: string;
+    phone?: string;
     age?: string | null;
     city?: string | null;
     profession?: string | null;

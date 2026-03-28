@@ -111,15 +111,15 @@ export default function QuickBrowse({ resources }: Props) {
   const grouped =
     active === "All"
       ? dynamicCategories
-          .filter((c) => c !== "All")
-          .reduce<Record<string, Resource[]>>((acc, cat) => {
-            const items = resources?.filter((r) => r.category.trim() === cat);
-            if (items.length) acc[cat] = items;
-            return acc;
-          }, {})
+        .filter((c) => c !== "All")
+        .reduce<Record<string, Resource[]>>((acc, cat) => {
+          const items = resources?.filter((r) => r.category.trim() === cat);
+          if (items.length) acc[cat] = items;
+          return acc;
+        }, {})
       : {
-          [active]: resources?.filter((r) => r.category.trim() === active),
-        };
+        [active]: resources?.filter((r) => r.category.trim() === active),
+      };
 
   return (
     <section className="pt-8 pb-16">
@@ -138,11 +138,10 @@ export default function QuickBrowse({ resources }: Props) {
             <button
               key={cat}
               onClick={() => setActive(cat)}
-              className={`whitespace-nowrap px-4 sm:px-5 py-2 rounded-full text-[12px] sm:text-[13px] font-medium transition-colors flex-shrink-0 ${
-                active === cat
+              className={`whitespace-nowrap px-4 sm:px-5 py-2 rounded-full text-[12px] sm:text-[13px] font-medium transition-colors flex-shrink-0 ${active === cat
                   ? "bg-[#2E5478] text-white shadow-sm"
                   : "bg-[#DDE6F2] text-gray-700 hover:bg-[#ccd9eb]"
-              }`}
+                }`}
             >
               {cat}
             </button>
@@ -165,11 +164,12 @@ export default function QuickBrowse({ resources }: Props) {
 
               {/* Show Spotlight after the first category when in "All" or if it's the middle of the list */}
               {((active === "All" && index === 0) ||
-                (active !== "All" && items.length > 0 && index === 0)) && (
-                <div className="my-12 sm:my-20">
-                  <TeachersSpotlight resource={spotlightResource} />
-                </div>
-              )}
+                (active !== "All" && items.length > 0 && index === 0)) &&
+                spotlightResource && (
+                  <div className="my-12 sm:my-20">
+                    <TeachersSpotlight resource={spotlightResource} />
+                  </div>
+                )}
             </div>
           );
         })}

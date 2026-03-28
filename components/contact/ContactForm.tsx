@@ -54,7 +54,7 @@ export default function ContactForm() {
         onSuccess: () => {
           // Persist email so resource download popup is skipped for this user
           if (typeof window !== "undefined") {
-            localStorage.setItem("lead_email", formData.email);
+            localStorage.setItem("downloadEmail", formData.email);
           }
           setSuccessMessage("Thank you! Your information has been submitted successfully.");
           setFormData({

@@ -63,6 +63,7 @@ export default function LeadDownloadModal({ resource, onClose }: Props) {
       {
         onSuccess: () => {
           // Trigger the actual download
+          localStorage.setItem("downloadEmail", formData.email);
           window.open(resource.documentUrl, "_blank", "noopener,noreferrer");
           onClose();
         },
@@ -176,7 +177,6 @@ export default function LeadDownloadModal({ resource, onClose }: Props) {
                 name="age"
                 value={formData.age}
                 onChange={handleChange}
-                placeholder="e.g. 28"
                 className={inputClasses}
               />
               {errors.age && (
@@ -193,7 +193,6 @@ export default function LeadDownloadModal({ resource, onClose }: Props) {
                 name="city"
                 value={formData.city}
                 onChange={handleChange}
-                placeholder="e.g. Mumbai"
                 className={inputClasses}
               />
               {errors.city && (
@@ -221,14 +220,13 @@ export default function LeadDownloadModal({ resource, onClose }: Props) {
 
           {/* Qualifications — full width */}
           <div>
-            <label htmlFor="dl-qualifications" className={labelClasses}>Qualifications</label>
+            <label htmlFor="dl-qualifications" className={labelClasses}>Question</label>
             <input
               type="text"
               id="dl-qualifications"
               name="qualifications"
               value={formData.qualifications}
               onChange={handleChange}
-              placeholder="e.g. B.Ed, B.Tech, MCA"
               className={inputClasses}
             />
             {errors.qualifications && (
