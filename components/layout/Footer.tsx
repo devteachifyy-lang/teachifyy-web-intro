@@ -26,7 +26,7 @@ const Footer = () => {
           </p>
           <div className="flex items-center gap-3">
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/company/teachifyy"
               target="_blank"
               rel="noreferrer"
               className="w-[38px] h-[38px] rounded-full border-[1.5px] border-[#386b9b] flex items-center justify-center hover:bg-white/10 transition-colors"
@@ -37,7 +37,7 @@ const Footer = () => {
               />
             </a>
             <a
-              href="https://instagram.com"
+              href="https://www.instagram.com/teachifyy.india/"
               target="_blank"
               rel="noreferrer"
               className="w-[38px] h-[38px] rounded-full border-[1.5px] border-[#386b9b] flex items-center justify-center hover:bg-white/10 transition-colors"
@@ -48,7 +48,7 @@ const Footer = () => {
               />
             </a>
             <a
-              href="https://facebook.com"
+              href="https://www.facebook.com/people/Teachifyyindia/61583690497699/"
               target="_blank"
               rel="noreferrer"
               className="w-[38px] h-[38px] rounded-full border-[1.5px] border-[#386b9b] flex items-center justify-center hover:bg-white/10 transition-colors"
@@ -59,7 +59,7 @@ const Footer = () => {
               />
             </a>
             <a
-              href="https://youtube.com"
+              href="https://www.youtube.com/@teachifyy_india"
               target="_blank"
               rel="noreferrer"
               className="w-[38px] h-[38px] rounded-full border-[1.5px] border-[#386b9b] flex items-center justify-center hover:bg-white/10 transition-colors"
