@@ -167,11 +167,38 @@ const TermsAndConditionsPage = () => {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold text-dark-900 mb-4">15. Contact</h2>
+            <h2 className="text-2xl font-semibold text-dark-900 mb-4">
+              16. Account Deletion
+            </h2>
             <p>
-              For questions or legal correspondence, please contact:
+              Users can request account deletion at any time by visiting{" "}
+              <a
+                href="https://www.teachifyy.com/delete-account"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#ff4d67] underline"
+              >
+                https://www.teachifyy.com/delete-account
+              </a>
+              , after which their account and associated personal data will be permanently deleted upon verification.
             </p>
           </section>
+
+          <section>
+            <h2 className="text-2xl font-semibold text-dark-900 mb-4">
+              16. Contact
+            </h2>
+            <p>
+              For questions or legal correspondence, please contact:{" "}
+              <a
+                href="mailto:support@teachifyy.com"
+                className="text-[#ff4d67] underline"
+              >
+                support@teachifyy.com
+              </a>
+            </p>
+          </section>
+
         </div>
       </div>
     </div>

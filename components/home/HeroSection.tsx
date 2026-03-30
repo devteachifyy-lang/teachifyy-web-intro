@@ -128,9 +128,9 @@ const HeroSection = () => {
 
               {/* Buttons */}
               <div className="flex flex-col sm:flex-row w-full sm:w-auto gap-3 sm:gap-4">
-                <Link href="/courses" className="w-full sm:w-auto">
+                <Link href="/contact" className="w-full sm:w-auto">
                   <button className="w-full sm:w-auto flex items-center justify-center bg-[#FF4D67] text-white text-[14px] sm:text-[15px] py-3 px-6 rounded-full">
-                    Register for Webinar
+                    Talk to a Counsellor
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </button>
                 </Link>
@@ -144,7 +144,7 @@ const HeroSection = () => {
 
               {/* Logos */}
               <div className="flex flex-wrap items-center gap-4 mt-8">
-                {["herosmall1.png", "herosmall2.png", "herosmall3.png"].map(
+                {["herosmall1.png", "herosmall2.png", "herosmall4.png"].map(
                   (img, i) => (
                     <Image
                       key={i}

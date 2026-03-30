@@ -29,7 +29,7 @@ export default function ResourceHero() {
         </p>
 
         {/* CTA */}
-        <Link href="#">
+        <Link href="/courses">
           <button className="inline-flex items-center gap-2 bg-[#FF4D67] text-white font-semibold text-[15px] px-7 py-3.5 rounded-full hover:bg-[#e63d57] transition-all shadow-[0_6px_24px_rgba(255,77,103,0.35)] hover:shadow-[0_8px_28px_rgba(255,77,103,0.45)] hover:-translate-y-0.5">
             Premium Resources <ArrowRight className="w-4 h-4 stroke-[2.5]" />
           </button>
