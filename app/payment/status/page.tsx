@@ -41,9 +41,9 @@ function PaymentStatusContent() {
         <p className="text-gray-500 mb-8 max-w-md">
           We couldn&apos;t process your payment. You haven&apos;t been charged. If money was deducted, it will be refunded automatically.
         </p>
-        <Link href="/">
+        <Link href="/courses">
           <button className="bg-[#ff4f6a] hover:bg-[#e0435c] text-white font-medium px-8 py-3 rounded-full transition-colors">
-            Return to Home
+            Return to Courses
           </button>
         </Link>
       </div>

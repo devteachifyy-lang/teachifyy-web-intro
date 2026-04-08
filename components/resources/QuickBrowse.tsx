@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Filter, ChevronLeft, ChevronRight } from "lucide-react";
 import { Resource, ResourceCard } from "./ResourceCarousel";
 import TeachersSpotlight from "./TeachersSpotlight";
@@ -94,6 +94,39 @@ interface Props {
 
 export default function QuickBrowse({ resources }: Props) {
   const [active, setActive] = useState("All");
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [showLeftActive, setShowLeftActive] = useState(false);
+  const [showRightActive, setShowRightActive] = useState(true);
+
+  const handleScroll = () => {
+    if (scrollContainerRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+      setShowLeftActive(scrollLeft > 0);
+      setShowRightActive(Math.ceil(scrollLeft + clientWidth) < scrollWidth);
+    }
+  };
+
+  useEffect(() => {
+    // Initial check after render
+    const timeoutId = setTimeout(handleScroll, 100);
+    window.addEventListener("resize", handleScroll);
+    return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener("resize", handleScroll);
+    };
+  }, [resources]);
+
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: -200, behavior: "smooth" });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: 200, behavior: "smooth" });
+    }
+  };
 
   // Derive dynamic categories from the resources data
   const dynamicCategories = [
@@ -123,7 +156,7 @@ export default function QuickBrowse({ resources }: Props) {
 
   return (
     <section className="pt-8 pb-16">
-      <div className="max-w-[1248px] mx-auto px-6 lg:px-12">
+      <div className="max-w-[1248px] mx-auto px-6 lg:px-12 ">
         {/* Header */}
         <div className="flex items-center gap-2 mb-4">
           <Filter className="w-4 h-4 text-gray-500 stroke-[1.8]" />
@@ -133,19 +166,48 @@ export default function QuickBrowse({ resources }: Props) {
         </div>
 
         {/* Filter pills */}
-        <div className="flex gap-2.5 overflow-x-auto  pb-1 mb-8 -mx-6 px-6 sm:mx-0 sm:px-0">
-          {dynamicCategories.map((cat) => (
+        <div className="relative mb-8 group">
+          {/* Left Arrow */}
+          {showLeftActive && (
             <button
-              key={cat}
-              onClick={() => setActive(cat)}
-              className={`whitespace-nowrap px-4 sm:px-5 py-2 rounded-full text-[12px] sm:text-[13px] font-medium transition-colors flex-shrink-0 ${active === cat
-                  ? "bg-[#2E5478] text-white shadow-sm"
-                  : "bg-[#DDE6F2] text-gray-700 hover:bg-[#ccd9eb]"
-                }`}
+              onClick={scrollLeft}
+              className="hidden sm:flex absolute left-[-16px] top-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full shadow-[0_2px_12px_rgba(0,0,0,0.14)] border border-gray-100 items-center justify-center text-gray-600 hover:text-[#FF4D67] hover:scale-110 transition-all z-10"
+              aria-label="Scroll left"
             >
-              {cat}
+              <ChevronLeft className="w-4 h-4 stroke-[2.5]" />
             </button>
-          ))}
+          )}
+
+          <div
+            ref={scrollContainerRef}
+            onScroll={handleScroll}
+            className="flex gap-2.5 overflow-x-auto hide-scrollbar pb-1 -mx-6 px-6 sm:mx-0 sm:px-0"
+          >
+            {dynamicCategories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActive(cat)}
+                className={`whitespace-nowrap px-4 sm:px-5 py-2 rounded-full text-[12px] sm:text-[13px] font-medium transition-colors flex-shrink-0 ${
+                  active === cat
+                    ? "bg-[#2E5478] text-white shadow-sm"
+                    : "bg-[#DDE6F2] text-gray-700 hover:bg-[#ccd9eb]"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+
+          {/* Right Arrow */}
+          {showRightActive && (
+            <button
+              onClick={scrollRight}
+              className="hidden sm:flex absolute right-[-16px] top-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full shadow-[0_2px_12px_rgba(0,0,0,0.14)] border border-gray-100 items-center justify-center text-gray-600 hover:text-[#FF4D67] hover:scale-110 transition-all z-10"
+              aria-label="Scroll right"
+            >
+              <ChevronRight className="w-4 h-4 stroke-[2.5]" />
+            </button>
+          )}
         </div>
 
         {/* Resource sections — responsive row, arrow to page through extras */}

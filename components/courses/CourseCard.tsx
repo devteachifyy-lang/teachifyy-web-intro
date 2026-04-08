@@ -109,7 +109,7 @@ const CourseCard = ({
 
               <div className="flex flex-col">
                 <span className="text-xs text-gray-800 font-semibold whitespace-nowrap">
-                  With {course.instructor?.name || "Instructor"}
+                  {course.mentor?.name || "Instructor"}
                 </span>
                 <span className="text-[11px] text-gray-500 flex items-center gap-1 mt-0.5">
                   <Clock className="w-[11px] h-[11px]" />

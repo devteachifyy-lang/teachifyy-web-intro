@@ -211,3 +211,17 @@ html {
 .fade-slide {
   animation: fadeSlide 0.6s ease forwards;
 }
+
+/* Hide scrollbar for WebKit browsers */
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari */
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  /* IE, Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
