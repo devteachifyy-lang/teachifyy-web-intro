@@ -147,7 +147,7 @@ const Footer = () => {
       {/* Copyright */}
       <div className="max-w-[1248px] mx-auto px-6 lg:px-12 mt-16 pt-8 border-t border-[#386b9b] flex flex-col md:flex-row justify-center items-center text-center">
         <p className="text-[#cbd5e1] text-[14px]">
-          Copyright teachifyy &copy; {new Date().getFullYear()} All rights reserved.
+          Copyright 2026  &copy; Claremont Education LLP All rights reserved.
         </p>
       </div>
     </footer>
