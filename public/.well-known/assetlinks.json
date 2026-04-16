@@ -1,0 +1,14 @@
+[
+    {
+        "relation": [
+            "delegate_permission/common.handle_all_urls"
+        ],
+        "target": {
+            "namespace": "android_app",
+            "package_name": "com.teachifyy.app",
+            "sha256_cert_fingerprints": [
+                "14:07:88:8D:13:50:59:2D:AB:1E:F2:F7:ED:3B:0C:E5:D4:23:E7:70:E8:86:79:DA:97:29:9B:47:38:3A:90:14"
+            ]
+        }
+    }
+]
