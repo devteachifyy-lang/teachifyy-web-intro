@@ -17,7 +17,7 @@ export default function AboutPage() {
       <WhoWeAreSection />
       <WhyWeExistSection />
       <CoreValuesSection />
-      <TeamSection />
+      {/* <TeamSection /> */}
       <AboutBottomCta />
     </>
   );
