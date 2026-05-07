@@ -12,9 +12,9 @@ const testimonials = [
     content: (
       <>
         <span className="font-bold not-italic block mb-0.5">Before:</span>
-        <span className="block mb-2">"I had been teaching English for 6 years but never had a certificate to show for it. Every international school I applied to asked for a TEFL and I had nothing. I kept losing opportunities to younger teachers with less experience but more credentials."</span>
+        <span className="block mb-2">I had been teaching English for 6 years but never had a certificate to show for it. Every international school I applied to asked for a TEFL and I had nothing. I kept losing opportunities to younger teachers with less experience but more credentials.</span>
         <span className="font-bold not-italic block mb-0.5">After:</span>
-        <span className="block">"Three months after completing Teachify's TEFL/TESOL programme, I got shortlisted at two international curriculum schools. I now teach Cambridge English at a school in Noida — at a salary I couldn't have asked for before."</span>
+        <span className="block">Three months after completing Teachifyy&apos;s TEFL/TESOL programme, I got shortlisted at two international curriculum schools. I now teach Cambridge English at a school in Noida — at a salary I could not have asked for before.</span>
       </>
     ),
     initials: "PS",
@@ -27,9 +27,9 @@ const testimonials = [
     content: (
       <>
         <span className="font-bold not-italic block mb-0.5">Before:</span>
-        <span className="block mb-2">"My spoken English was fine but I had no structure to how I taught it. Parents would ask me about my qualifications and I would go quiet. I felt like a fraud even though I genuinely loved teaching."</span>
+        <span className="block mb-2">My spoken English was fine but I had no structure to how I taught it. Parents would ask me about my qualifications and I would go quiet. I felt like a fraud even though I genuinely loved teaching.</span>
         <span className="font-bold not-italic block mb-0.5">After:</span>
-        <span className="block">"Now I have a certified methodology behind everything I do in class. Parents see the certificate and ask fewer questions — but more importantly, I finally feel like I deserve to be in the room."</span>
+        <span className="block">Now I have a certified methodology behind everything I do in class. Parents see the certificate and ask fewer questions — but more importantly, I finally feel like I deserve to be in the room.</span>
       </>
     ),
     initials: "MR",
@@ -42,9 +42,9 @@ const testimonials = [
     content: (
       <>
         <span className="font-bold not-italic block mb-0.5">Before:</span>
-        <span className="block mb-2">"I was being considered for a coordinator role but kept getting passed over. My principal told me I needed to 'present myself better.' I didn't fully understand what that meant — I thought I was communicating fine."</span>
+        <span className="block mb-2">I was being considered for a coordinator role but kept getting passed over. My principal told me I needed to present myself better. I did not fully understand what that meant — I thought I was communicating fine.</span>
         <span className="font-bold not-italic block mb-0.5">After:</span>
-        <span className="block">"After Teachify's Professional Communication course, I led my first parent-teacher townhall without notes and received written appreciation from the school director. I got the coordinator title two months later."</span>
+        <span className="block">After Teachifyy&apos;s Professional Communication course, I led my first parent-teacher townhall without notes and received written appreciation from the school director. I got the coordinator title two months later.</span>
       </>
     ),
     initials: "AV",
