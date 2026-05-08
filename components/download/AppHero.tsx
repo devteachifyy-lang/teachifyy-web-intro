@@ -11,7 +11,7 @@ export default function AppHero() {
       </div>
 
       <div className="container-custom relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-2">
           {/* Left Content */}
           <div className="flex flex-col justify-center items-start max-w-xl pb-0 md:pb-20">
             {/* Badge */}
@@ -74,7 +74,7 @@ export default function AppHero() {
           </div>
 
           {/* Right Content — App Mockup */}
-          <div className="relative flex items-end justify-center md:justify-end h-full mt-4 md:mt-0">
+          <div className="relative flex items-end justify-center md:justify-end h-full mt-4 md:mt-0 md:mr-32">
             <div className="relative w-[280px] md:w-[320px]">
               <Image
                 src="/assets/teachifyyAppHero1.png"
