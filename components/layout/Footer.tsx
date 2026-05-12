@@ -71,10 +71,10 @@ const Footer = () => {
             </a>
           </div>
           <div className="flex gap-4 mt-8 items-center">
-            <Link href="https://play.google.com/store/apps/details?id=com.teachifyy.app" className="hover:opacity-80 transition-opacity ">
+            <Link href="https://play.google.com/store/apps/details?id=com.teachifyy.app" target="_blank" className="hover:opacity-80 transition-opacity ">
               <Image src="/assets/androidDownload.png" alt="Get it on Google Play" width={140} height={42} className="h-[42px] w-auto rounded-lg" />
             </Link>
-            <Link href="#" className="hover:opacity-80 transition-opacity">
+            <Link href="https://apps.apple.com/us/app/teachifyy/id6762552478" target="_blank" className="hover:opacity-80 transition-opacity">
               <Image src="/assets/IosDownload.png" alt="Download on the App Store" width={140} height={42} className="h-[42px] w-auto rounded-lg" />
             </Link>
           </div>

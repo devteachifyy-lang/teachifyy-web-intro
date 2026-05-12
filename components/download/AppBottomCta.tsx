@@ -16,7 +16,7 @@ export default function AppBottomCta() {
 
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link
-              href="https://apps.apple.com"
+              href="https://apps.apple.com/us/app/teachifyy/id6762552478"
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-2 border border-white text-white font-medium text-[15px] py-3 px-7 rounded-full hover:bg-white hover:text-[#2b5585] transition-all duration-200"

@@ -51,7 +51,7 @@ export default function AppHero() {
               </Link>
 
               <Link
-                href="https://apps.apple.com"
+                href="https://apps.apple.com/us/app/teachifyy/id6762552478"
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center"
