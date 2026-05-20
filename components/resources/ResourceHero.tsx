@@ -37,15 +37,15 @@ export default function ResourceHero() {
             </div>
 
             {/* Heading */}
-            <h1 className="text-2xl md:text-3xl lg:text-4xl font-light text-slate-900 mb-6 leading-[1.1]">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-light text-slate-900 mb-6 leading-[1.1] tracking-tighter">
               <span className="text-[#ff4d67] font-bold">THE INTERNATIONAL OLYMPIAD</span>
               <br />
-              Registration is open for standard 5-10th students across India
+              Registration is open
             </h1>
 
             {/* Subtext */}
             <p className="text-md md:text-lg text-slate-600 mb-8 max-w-md">
-              Your child can now get a chance to experience an educational trip to London
+              standard 5-10th students across India Your child can now get a chance to experience an educational trip to London
             </p>
 
             {/* CTA Button */}
